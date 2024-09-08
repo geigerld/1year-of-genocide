@@ -1,4 +1,4 @@
-# Nico's Project
+# Journalism for a genocide
 ## Next Steps
 - create corpus
 - create collocations + visualizations
