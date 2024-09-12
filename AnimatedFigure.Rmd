@@ -1,0 +1,65 @@
+---
+title: "AnimatedFigure"
+author: "Lorenz Dietmar Geiger"
+date: "2024-09-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+### Install and load packages
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+library(gganimate)
+library(tidyverse)
+```
+
+
+
+### import Data
+```{r}
+data <- data.frame(
+  publication_date = as.Date(c('2020-01-01', '2020-02-01', '2020-03-01', '2020-04-01')),
+  value = c(5, 10, 15, 20),
+  category = c('A', 'A', 'B', 'B')
+)
+```
+
+### Create a static plot with ggplot2
+```{r}
+p <- ggplot(data, aes(x = publication_date, y = value, color = category)) +
+  geom_line() + 
+  geom_point() +
+  labs(title = "Values Over Time", x = "Publication Date", y = "Value")
+```
+
+
+### Add animation with gganimate
+```{r}
+animated_plot <- p +
+  transition_time(publication_date) +     # Time variable for the animation
+  labs(title = 'Publication Date: {frame_time}') +  # Dynamic title with the time
+  ease_aes('linear')  # Smooth transitions
+animated_plot
+```
+
+
+# Render and display the animation
+```{r}
+animate(animated_plot, nframes = 100)
+```
+
+save the animation as a GIF file
+```{r}
+anim_save("animated_plot.gif", animation = last_animation())
+
+```
+
+
+
+  
