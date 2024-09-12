@@ -6,7 +6,7 @@
 4. 06.10 --> everything printed and laminated
 
 ## Next Steps
-- create corpus
+- create corpus [It do not seems to be needed]
 - create collocations + visualizations
 
 # Resourcers
@@ -16,6 +16,7 @@
 # Ideas
 + ocurrence for work collocation
 + Network and collocation analysis
-+ linguistic corpus
-+ tokenizer
++ linguistic corpus [It seems to not be needed for our project, is more used as a training dataset for ml models]
++ tokenizer [DONE]
 + network analyses
++ Restore puntuation of the video scripts [huggingface have the model "oliverguhr/fullstop-punctuation-multilingual"]
