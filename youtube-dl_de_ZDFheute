@@ -1,0 +1,3845 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 1: Install Required Libraries\n",
+    "First, you need to install the necessary Python libraries:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Defaulting to user installation because normal site-packages is not writeable\n",
+      "Requirement already satisfied: yt-dlp in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (2024.8.6)\n",
+      "Requirement already satisfied: pytube in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (15.0.0)\n",
+      "Requirement already satisfied: pandas in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (2.2.2)\n",
+      "Requirement already satisfied: webvtt-py in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (0.5.1)\n",
+      "Requirement already satisfied: requests in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (2.32.3)\n",
+      "Requirement already satisfied: brotli in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (1.1.0)\n",
+      "Requirement already satisfied: certifi in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (2024.8.30)\n",
+      "Requirement already satisfied: mutagen in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (1.47.0)\n",
+      "Requirement already satisfied: pycryptodomex in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (3.20.0)\n",
+      "Requirement already satisfied: urllib3<3,>=1.26.17 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (2.2.2)\n",
+      "Requirement already satisfied: websockets>=12.0 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (13.0.1)\n",
+      "Requirement already satisfied: numpy>=1.26.0 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2.1.1)\n",
+      "Requirement already satisfied: python-dateutil>=2.8.2 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2.9.0.post0)\n",
+      "Requirement already satisfied: pytz>=2020.1 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2024.1)\n",
+      "Requirement already satisfied: tzdata>=2022.7 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2024.1)\n",
+      "Requirement already satisfied: charset-normalizer<4,>=2 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from requests) (3.3.2)\n",
+      "Requirement already satisfied: idna<4,>=2.5 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from requests) (3.8)\n",
+      "Requirement already satisfied: six>=1.5 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0)\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install yt-dlp pytube pandas webvtt-py requests\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MxXR2UKgBug\n",
+      "[youtube] MxXR2UKgBug: Downloading webpage\n",
+      "[youtube] MxXR2UKgBug: Downloading ios player API JSON\n",
+      "[youtube] MxXR2UKgBug: Downloading web creator player API JSON\n",
+      "[youtube] MxXR2UKgBug: Downloading m3u8 information\n",
+      "[info] MxXR2UKgBug: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MxXR2UKgBug\n",
+      "[youtube] MxXR2UKgBug: Downloading webpage\n",
+      "[youtube] MxXR2UKgBug: Downloading ios player API JSON\n",
+      "[youtube] MxXR2UKgBug: Downloading web creator player API JSON\n",
+      "[youtube] MxXR2UKgBug: Downloading m3u8 information\n",
+      "[info] MxXR2UKgBug: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] MxXR2UKgBug: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nach Angriff auf Israel Biden unter Druck I auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nach Angriff auf Israel Biden unter Druck I auslandsjournal.de.vtt\n",
+      "[download] 100% of   74.69KiB in 00:00:00 at 630.44KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=gOapdY92IxE\n",
+      "[youtube] gOapdY92IxE: Downloading webpage\n",
+      "[youtube] gOapdY92IxE: Downloading ios player API JSON\n",
+      "[youtube] gOapdY92IxE: Downloading web creator player API JSON\n",
+      "[youtube] gOapdY92IxE: Downloading m3u8 information\n",
+      "[info] gOapdY92IxE: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=gOapdY92IxE\n",
+      "[youtube] gOapdY92IxE: Downloading webpage\n",
+      "[youtube] gOapdY92IxE: Downloading ios player API JSON\n",
+      "[youtube] gOapdY92IxE: Downloading web creator player API JSON\n",
+      "[youtube] gOapdY92IxE: Downloading m3u8 information\n",
+      "[info] gOapdY92IxE: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] gOapdY92IxE: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Terror-Angriff auf Israel – uneingeschränkte Solidarität  maybrit illner vom 12.10.2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Terror-Angriff auf Israel – uneingeschränkte Solidarität  maybrit illner vom 12.10.2023.de.vtt\n",
+      "[download] 100% of  490.10KiB in 00:00:00 at 1.01MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=JmfJ1NLAENA\n",
+      "[youtube] JmfJ1NLAENA: Downloading webpage\n",
+      "[youtube] JmfJ1NLAENA: Downloading ios player API JSON\n",
+      "[youtube] JmfJ1NLAENA: Downloading web creator player API JSON\n",
+      "[youtube] JmfJ1NLAENA: Downloading m3u8 information\n",
+      "[info] JmfJ1NLAENA: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=JmfJ1NLAENA\n",
+      "[youtube] JmfJ1NLAENA: Downloading webpage\n",
+      "[youtube] JmfJ1NLAENA: Downloading ios player API JSON\n",
+      "[youtube] JmfJ1NLAENA: Downloading web creator player API JSON\n",
+      "[youtube] JmfJ1NLAENA: Downloading m3u8 information\n",
+      "[info] JmfJ1NLAENA: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] JmfJ1NLAENA: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Hamas greift Israel an Was wir bislang wissen  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Hamas greift Israel an Was wir bislang wissen  ZDFheute live.de.vtt\n",
+      "[download] 100% of  209.53KiB in 00:00:00 at 844.51KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1MAi8rkyZMA\n",
+      "[youtube] 1MAi8rkyZMA: Downloading webpage\n",
+      "[youtube] 1MAi8rkyZMA: Downloading ios player API JSON\n",
+      "[youtube] 1MAi8rkyZMA: Downloading web creator player API JSON\n",
+      "[youtube] 1MAi8rkyZMA: Downloading m3u8 information\n",
+      "[info] 1MAi8rkyZMA: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1MAi8rkyZMA\n",
+      "[youtube] 1MAi8rkyZMA: Downloading webpage\n",
+      "[youtube] 1MAi8rkyZMA: Downloading ios player API JSON\n",
+      "[youtube] 1MAi8rkyZMA: Downloading web creator player API JSON\n",
+      "[youtube] 1MAi8rkyZMA: Downloading m3u8 information\n",
+      "[info] 1MAi8rkyZMA: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 1MAi8rkyZMA: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Von Hamas entführt Wie können die Verschleppten befreit werden  Armeesprecher bei ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Von Hamas entführt Wie können die Verschleppten befreit werden  Armeesprecher bei ZDFheute live.de.vtt\n",
+      "[download] 100% of  302.32KiB in 00:00:00 at 1.04MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=sIS1axtHoxk\n",
+      "[youtube] sIS1axtHoxk: Downloading webpage\n",
+      "[youtube] sIS1axtHoxk: Downloading ios player API JSON\n",
+      "[youtube] sIS1axtHoxk: Downloading web creator player API JSON\n",
+      "[youtube] sIS1axtHoxk: Downloading m3u8 information\n",
+      "[info] sIS1axtHoxk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=sIS1axtHoxk\n",
+      "[youtube] sIS1axtHoxk: Downloading webpage\n",
+      "[youtube] sIS1axtHoxk: Downloading ios player API JSON\n",
+      "[youtube] sIS1axtHoxk: Downloading web creator player API JSON\n",
+      "[youtube] sIS1axtHoxk: Downloading m3u8 information\n",
+      "[info] sIS1axtHoxk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] sIS1axtHoxk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Mögliche Bodenoffensive gegen die Hamas Was Israels Armee im Gazastreifen erwartet  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Mögliche Bodenoffensive gegen die Hamas Was Israels Armee im Gazastreifen erwartet  ZDFheute live.de.vtt\n",
+      "[download] 100% of  267.54KiB in 00:00:00 at 986.82KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=4CQ1M3G6-Ok\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading webpage\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading ios player API JSON\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading web creator player API JSON\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading m3u8 information\n",
+      "[info] 4CQ1M3G6-Ok: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=4CQ1M3G6-Ok\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading webpage\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading ios player API JSON\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading web creator player API JSON\n",
+      "[youtube] 4CQ1M3G6-Ok: Downloading m3u8 information\n",
+      "[info] 4CQ1M3G6-Ok: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 4CQ1M3G6-Ok: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nach Hamas-Terror Wie Israel den Gegenschlag vorbereitet  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nach Hamas-Terror Wie Israel den Gegenschlag vorbereitet  ZDFheute live.de.vtt\n",
+      "[download] 100% of  214.13KiB in 00:00:00 at 779.23KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=SD31pnFiZCA\n",
+      "[youtube] SD31pnFiZCA: Downloading webpage\n",
+      "[youtube] SD31pnFiZCA: Downloading ios player API JSON\n",
+      "[youtube] SD31pnFiZCA: Downloading web creator player API JSON\n",
+      "[youtube] SD31pnFiZCA: Downloading m3u8 information\n",
+      "[info] SD31pnFiZCA: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=SD31pnFiZCA\n",
+      "[youtube] SD31pnFiZCA: Downloading webpage\n",
+      "[youtube] SD31pnFiZCA: Downloading ios player API JSON\n",
+      "[youtube] SD31pnFiZCA: Downloading web creator player API JSON\n",
+      "[youtube] SD31pnFiZCA: Downloading m3u8 information\n",
+      "[info] SD31pnFiZCA: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] SD31pnFiZCA: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nahost-Krieg Oberst Reisner zu Auswirkungen auf die Ukraine  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nahost-Krieg Oberst Reisner zu Auswirkungen auf die Ukraine  ZDFheute live.de.vtt\n",
+      "[download] 100% of  308.44KiB in 00:00:00 at 936.50KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=qC3zzogREd0\n",
+      "[youtube] qC3zzogREd0: Downloading webpage\n",
+      "[youtube] qC3zzogREd0: Downloading ios player API JSON\n",
+      "[youtube] qC3zzogREd0: Downloading web creator player API JSON\n",
+      "[youtube] qC3zzogREd0: Downloading m3u8 information\n",
+      "[info] qC3zzogREd0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=qC3zzogREd0\n",
+      "[youtube] qC3zzogREd0: Downloading webpage\n",
+      "[youtube] qC3zzogREd0: Downloading ios player API JSON\n",
+      "[youtube] qC3zzogREd0: Downloading web creator player API JSON\n",
+      "[youtube] qC3zzogREd0: Downloading m3u8 information\n",
+      "[info] qC3zzogREd0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] qC3zzogREd0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Podcast Lanz & Precht sprechen über Israel und den Gazastreifen.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Podcast Lanz & Precht sprechen über Israel und den Gazastreifen.de.vtt\n",
+      "[download] 100% of  551.96KiB in 00:00:00 at 1.14MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Jq9qOIivikU\n",
+      "[youtube] Jq9qOIivikU: Downloading webpage\n",
+      "[youtube] Jq9qOIivikU: Downloading ios player API JSON\n",
+      "[youtube] Jq9qOIivikU: Downloading web creator player API JSON\n",
+      "[youtube] Jq9qOIivikU: Downloading m3u8 information\n",
+      "[info] Jq9qOIivikU: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Jq9qOIivikU\n",
+      "[youtube] Jq9qOIivikU: Downloading webpage\n",
+      "[youtube] Jq9qOIivikU: Downloading ios player API JSON\n",
+      "[youtube] Jq9qOIivikU: Downloading web creator player API JSON\n",
+      "[youtube] Jq9qOIivikU: Downloading m3u8 information\n",
+      "[info] Jq9qOIivikU: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] Jq9qOIivikU: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Vermisste in Israel - Wut und Angst der Angehörigen  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Vermisste in Israel - Wut und Angst der Angehörigen  auslandsjournal.de.vtt\n",
+      "[download] 100% of   40.21KiB in 00:00:00 at 261.77KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pswkZhFy054\n",
+      "[youtube] pswkZhFy054: Downloading webpage\n",
+      "[youtube] pswkZhFy054: Downloading ios player API JSON\n",
+      "[youtube] pswkZhFy054: Downloading web creator player API JSON\n",
+      "[youtube] pswkZhFy054: Downloading m3u8 information\n",
+      "[info] pswkZhFy054: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pswkZhFy054\n",
+      "[youtube] pswkZhFy054: Downloading webpage\n",
+      "[youtube] pswkZhFy054: Downloading ios player API JSON\n",
+      "[youtube] pswkZhFy054: Downloading web creator player API JSON\n",
+      "[youtube] pswkZhFy054: Downloading m3u8 information\n",
+      "[info] pswkZhFy054: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] pswkZhFy054: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israel Debatte über mögliche Bodenoffensive in Gaza  Markus Lanz vom 11. Oktober 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israel Debatte über mögliche Bodenoffensive in Gaza  Markus Lanz vom 11. Oktober 2023.de.vtt\n",
+      "[download] 100% of  270.39KiB in 00:00:00 at 912.96KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=vneqU8vymJM\n",
+      "[youtube] vneqU8vymJM: Downloading webpage\n",
+      "[youtube] vneqU8vymJM: Downloading ios player API JSON\n",
+      "[youtube] vneqU8vymJM: Downloading web creator player API JSON\n",
+      "[youtube] vneqU8vymJM: Downloading m3u8 information\n",
+      "[info] vneqU8vymJM: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=vneqU8vymJM\n",
+      "[youtube] vneqU8vymJM: Downloading webpage\n",
+      "[youtube] vneqU8vymJM: Downloading ios player API JSON\n",
+      "[youtube] vneqU8vymJM: Downloading web creator player API JSON\n",
+      "[youtube] vneqU8vymJM: Downloading m3u8 information\n",
+      "[info] vneqU8vymJM: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] vneqU8vymJM: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nach Angriffen in Israel Nahostexperte über die aktuellen Lage vor Ort  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nach Angriffen in Israel Nahostexperte über die aktuellen Lage vor Ort  ZDFheute live.de.vtt\n",
+      "[download] 100% of   95.95KiB in 00:00:00 at 534.47KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=DwF1OfNIAP4\n",
+      "[youtube] DwF1OfNIAP4: Downloading webpage\n",
+      "[youtube] DwF1OfNIAP4: Downloading ios player API JSON\n",
+      "[youtube] DwF1OfNIAP4: Downloading web creator player API JSON\n",
+      "[youtube] DwF1OfNIAP4: Downloading m3u8 information\n",
+      "[info] DwF1OfNIAP4: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=DwF1OfNIAP4\n",
+      "[youtube] DwF1OfNIAP4: Downloading webpage\n",
+      "[youtube] DwF1OfNIAP4: Downloading ios player API JSON\n",
+      "[youtube] DwF1OfNIAP4: Downloading web creator player API JSON\n",
+      "[youtube] DwF1OfNIAP4: Downloading m3u8 information\n",
+      "[info] DwF1OfNIAP4: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] DwF1OfNIAP4: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Angriff auf Israel – Wie reagieren die arabischen Nachbarn  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Angriff auf Israel – Wie reagieren die arabischen Nachbarn  auslandsjournal.de.vtt\n",
+      "[download] 100% of   37.69KiB in 00:00:00 at 285.73KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=JwzxGpWEWyM\n",
+      "[youtube] JwzxGpWEWyM: Downloading webpage\n",
+      "[youtube] JwzxGpWEWyM: Downloading ios player API JSON\n",
+      "[youtube] JwzxGpWEWyM: Downloading web creator player API JSON\n",
+      "[youtube] JwzxGpWEWyM: Downloading m3u8 information\n",
+      "[info] JwzxGpWEWyM: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=JwzxGpWEWyM\n",
+      "[youtube] JwzxGpWEWyM: Downloading webpage\n",
+      "[youtube] JwzxGpWEWyM: Downloading ios player API JSON\n",
+      "[youtube] JwzxGpWEWyM: Downloading web creator player API JSON\n",
+      "[youtube] JwzxGpWEWyM: Downloading m3u8 information\n",
+      "[info] JwzxGpWEWyM: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] JwzxGpWEWyM: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Zivilisten sollen Nord-Gaza verlassen - Hamas behindert wohl Flucht  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Zivilisten sollen Nord-Gaza verlassen - Hamas behindert wohl Flucht  ZDFheute live.de.vtt\n",
+      "[download] 100% of  176.26KiB in 00:00:00 at 741.49KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=06l2yefXsoA\n",
+      "[youtube] 06l2yefXsoA: Downloading webpage\n",
+      "[youtube] 06l2yefXsoA: Downloading ios player API JSON\n",
+      "[youtube] 06l2yefXsoA: Downloading web creator player API JSON\n",
+      "[youtube] 06l2yefXsoA: Downloading m3u8 information\n",
+      "[info] 06l2yefXsoA: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=06l2yefXsoA\n",
+      "[youtube] 06l2yefXsoA: Downloading webpage\n",
+      "[youtube] 06l2yefXsoA: Downloading ios player API JSON\n",
+      "[youtube] 06l2yefXsoA: Downloading web creator player API JSON\n",
+      "[youtube] 06l2yefXsoA: Downloading m3u8 information\n",
+      "[info] 06l2yefXsoA: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 06l2yefXsoA: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israels Ex-Premier Barak Bodentruppen nötig, um Hamas auszulöschen.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israels Ex-Premier Barak Bodentruppen nötig, um Hamas auszulöschen.de.vtt\n",
+      "[download] 100% of   35.06KiB in 00:00:00 at 217.22KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=inDA_z_XHso\n",
+      "[youtube] inDA_z_XHso: Downloading webpage\n",
+      "[youtube] inDA_z_XHso: Downloading ios player API JSON\n",
+      "[youtube] inDA_z_XHso: Downloading web creator player API JSON\n",
+      "[youtube] inDA_z_XHso: Downloading m3u8 information\n",
+      "[info] inDA_z_XHso: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=inDA_z_XHso\n",
+      "[youtube] inDA_z_XHso: Downloading webpage\n",
+      "[youtube] inDA_z_XHso: Downloading ios player API JSON\n",
+      "[youtube] inDA_z_XHso: Downloading web creator player API JSON\n",
+      "[youtube] inDA_z_XHso: Downloading m3u8 information\n",
+      "[info] inDA_z_XHso: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] inDA_z_XHso: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Gazastreifen - die Backstory Steht der Nahe Osten vor einem Flächenbrand I Global PolitiX.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Gazastreifen - die Backstory Steht der Nahe Osten vor einem Flächenbrand I Global PolitiX.de.vtt\n",
+      "[download] 100% of  107.73KiB in 00:00:00 at 587.23KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=3nNGm7tVtfU\n",
+      "[youtube] 3nNGm7tVtfU: Downloading webpage\n",
+      "[youtube] 3nNGm7tVtfU: Downloading ios player API JSON\n",
+      "[youtube] 3nNGm7tVtfU: Downloading web creator player API JSON\n",
+      "[youtube] 3nNGm7tVtfU: Downloading m3u8 information\n",
+      "[info] 3nNGm7tVtfU: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=3nNGm7tVtfU\n",
+      "[youtube] 3nNGm7tVtfU: Downloading webpage\n",
+      "[youtube] 3nNGm7tVtfU: Downloading ios player API JSON\n",
+      "[youtube] 3nNGm7tVtfU: Downloading web creator player API JSON\n",
+      "[youtube] 3nNGm7tVtfU: Downloading m3u8 information\n",
+      "[info] 3nNGm7tVtfU: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 3nNGm7tVtfU: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Bodenoffensive gegen Hamas verzögert sich  ZDF spezial.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Bodenoffensive gegen Hamas verzögert sich  ZDF spezial.de.vtt\n",
+      "[download] 100% of  109.96KiB in 00:00:00 at 537.17KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=HvP8tjPZkGc\n",
+      "[youtube] HvP8tjPZkGc: Downloading webpage\n",
+      "[youtube] HvP8tjPZkGc: Downloading ios player API JSON\n",
+      "[youtube] HvP8tjPZkGc: Downloading web creator player API JSON\n",
+      "[youtube] HvP8tjPZkGc: Downloading m3u8 information\n",
+      "[info] HvP8tjPZkGc: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=HvP8tjPZkGc\n",
+      "[youtube] HvP8tjPZkGc: Downloading webpage\n",
+      "[youtube] HvP8tjPZkGc: Downloading ios player API JSON\n",
+      "[youtube] HvP8tjPZkGc: Downloading web creator player API JSON\n",
+      "[youtube] HvP8tjPZkGc: Downloading m3u8 information\n",
+      "[info] HvP8tjPZkGc: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] HvP8tjPZkGc: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Krisendiplomatie in Nahost Scholz zu Solidaritätsbesuch in Israel  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Krisendiplomatie in Nahost Scholz zu Solidaritätsbesuch in Israel  ZDFheute live.de.vtt\n",
+      "[download] 100% of  350.43KiB in 00:00:00 at 1.12MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=jH_y4F528u8\n",
+      "[youtube] jH_y4F528u8: Downloading webpage\n",
+      "[youtube] jH_y4F528u8: Downloading ios player API JSON\n",
+      "[youtube] jH_y4F528u8: Downloading web creator player API JSON\n",
+      "[youtube] jH_y4F528u8: Downloading m3u8 information\n",
+      "[info] jH_y4F528u8: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=jH_y4F528u8\n",
+      "[youtube] jH_y4F528u8: Downloading webpage\n",
+      "[youtube] jH_y4F528u8: Downloading ios player API JSON\n",
+      "[youtube] jH_y4F528u8: Downloading web creator player API JSON\n",
+      "[youtube] jH_y4F528u8: Downloading m3u8 information\n",
+      "[info] jH_y4F528u8: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] jH_y4F528u8: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Heusgen zu Raketeneinschlag in Klinik in Gaza Spielt in die Karten der Hamas.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Heusgen zu Raketeneinschlag in Klinik in Gaza Spielt in die Karten der Hamas.de.vtt\n",
+      "[download] 100% of   42.99KiB in 00:00:00 at 286.86KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ME4CM-vFIJk\n",
+      "[youtube] ME4CM-vFIJk: Downloading webpage\n",
+      "[youtube] ME4CM-vFIJk: Downloading ios player API JSON\n",
+      "[youtube] ME4CM-vFIJk: Downloading web creator player API JSON\n",
+      "[youtube] ME4CM-vFIJk: Downloading m3u8 information\n",
+      "[info] ME4CM-vFIJk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ME4CM-vFIJk\n",
+      "[youtube] ME4CM-vFIJk: Downloading webpage\n",
+      "[youtube] ME4CM-vFIJk: Downloading ios player API JSON\n",
+      "[youtube] ME4CM-vFIJk: Downloading web creator player API JSON\n",
+      "[youtube] ME4CM-vFIJk: Downloading m3u8 information\n",
+      "[info] ME4CM-vFIJk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] ME4CM-vFIJk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Regierender Bürgermeister Berlins entsetzt über antiisraelische Demos  Markus Lanz vom 17.10.2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Regierender Bürgermeister Berlins entsetzt über antiisraelische Demos  Markus Lanz vom 17.10.2023.de.vtt\n",
+      "[download] 100% of  255.45KiB in 00:00:00 at 1.16MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zHdEE2M4Leg\n",
+      "[youtube] zHdEE2M4Leg: Downloading webpage\n",
+      "[youtube] zHdEE2M4Leg: Downloading ios player API JSON\n",
+      "[youtube] zHdEE2M4Leg: Downloading web creator player API JSON\n",
+      "[youtube] zHdEE2M4Leg: Downloading m3u8 information\n",
+      "[info] zHdEE2M4Leg: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zHdEE2M4Leg\n",
+      "[youtube] zHdEE2M4Leg: Downloading webpage\n",
+      "[youtube] zHdEE2M4Leg: Downloading ios player API JSON\n",
+      "[youtube] zHdEE2M4Leg: Downloading web creator player API JSON\n",
+      "[youtube] zHdEE2M4Leg: Downloading m3u8 information\n",
+      "[info] zHdEE2M4Leg: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] zHdEE2M4Leg: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Explosion bei Krankenhaus in Gaza I ZDF spezial.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Explosion bei Krankenhaus in Gaza I ZDF spezial.de.vtt\n",
+      "[download] 100% of   94.78KiB in 00:00:00 at 528.57KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=VHMdA7WQe4w\n",
+      "[youtube] VHMdA7WQe4w: Downloading webpage\n",
+      "[youtube] VHMdA7WQe4w: Downloading ios player API JSON\n",
+      "[youtube] VHMdA7WQe4w: Downloading web creator player API JSON\n",
+      "[youtube] VHMdA7WQe4w: Downloading m3u8 information\n",
+      "[info] VHMdA7WQe4w: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=VHMdA7WQe4w\n",
+      "[youtube] VHMdA7WQe4w: Downloading webpage\n",
+      "[youtube] VHMdA7WQe4w: Downloading ios player API JSON\n",
+      "[youtube] VHMdA7WQe4w: Downloading web creator player API JSON\n",
+      "[youtube] VHMdA7WQe4w: Downloading m3u8 information\n",
+      "[info] VHMdA7WQe4w: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] VHMdA7WQe4w: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Diskussion über muslimischen Antisemitismus in Deutschland  Markus Lanz vom 18. Oktober 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Diskussion über muslimischen Antisemitismus in Deutschland  Markus Lanz vom 18. Oktober 2023.de.vtt\n",
+      "[download] 100% of  268.71KiB in 00:00:00 at 1.17MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=gCRXao1NjZs\n",
+      "[youtube] gCRXao1NjZs: Downloading webpage\n",
+      "[youtube] gCRXao1NjZs: Downloading ios player API JSON\n",
+      "[youtube] gCRXao1NjZs: Downloading web creator player API JSON\n",
+      "[youtube] gCRXao1NjZs: Downloading m3u8 information\n",
+      "[info] gCRXao1NjZs: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=gCRXao1NjZs\n",
+      "[youtube] gCRXao1NjZs: Downloading webpage\n",
+      "[youtube] gCRXao1NjZs: Downloading ios player API JSON\n",
+      "[youtube] gCRXao1NjZs: Downloading web creator player API JSON\n",
+      "[youtube] gCRXao1NjZs: Downloading m3u8 information\n",
+      "[info] gCRXao1NjZs: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] gCRXao1NjZs: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Röttgen über die Teuflische Zwickmühle im Nahost-Konflikt  ZDF-Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Röttgen über die Teuflische Zwickmühle im Nahost-Konflikt  ZDF-Morgenmagazin.de.vtt\n",
+      "[download] 100% of   53.05KiB in 00:00:00 at 219.86KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=WGaZ6rDRdeY\n",
+      "[youtube] WGaZ6rDRdeY: Downloading webpage\n",
+      "[youtube] WGaZ6rDRdeY: Downloading ios player API JSON\n",
+      "[youtube] WGaZ6rDRdeY: Downloading web creator player API JSON\n",
+      "[youtube] WGaZ6rDRdeY: Downloading m3u8 information\n",
+      "[info] WGaZ6rDRdeY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=WGaZ6rDRdeY\n",
+      "[youtube] WGaZ6rDRdeY: Downloading webpage\n",
+      "[youtube] WGaZ6rDRdeY: Downloading ios player API JSON\n",
+      "[youtube] WGaZ6rDRdeY: Downloading web creator player API JSON\n",
+      "[youtube] WGaZ6rDRdeY: Downloading m3u8 information\n",
+      "[info] WGaZ6rDRdeY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] WGaZ6rDRdeY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Pulverfass Westjordanland - droht ein zweiter Konfliktherd  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Pulverfass Westjordanland - droht ein zweiter Konfliktherd  auslandsjournal.de.vtt\n",
+      "[download] 100% of   35.22KiB in 00:00:00 at 249.11KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=EIVDzOsof7g\n",
+      "[youtube] EIVDzOsof7g: Downloading webpage\n",
+      "[youtube] EIVDzOsof7g: Downloading ios player API JSON\n",
+      "[youtube] EIVDzOsof7g: Downloading web creator player API JSON\n",
+      "[youtube] EIVDzOsof7g: Downloading m3u8 information\n",
+      "[info] EIVDzOsof7g: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=EIVDzOsof7g\n",
+      "[youtube] EIVDzOsof7g: Downloading webpage\n",
+      "[youtube] EIVDzOsof7g: Downloading ios player API JSON\n",
+      "[youtube] EIVDzOsof7g: Downloading web creator player API JSON\n",
+      "[youtube] EIVDzOsof7g: Downloading m3u8 information\n",
+      "[info] EIVDzOsof7g: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] EIVDzOsof7g: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Hamas zerstören, Zivilisten schützen - Flächenbrand vermeidbar  maybrit illner vom 19.10.2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Hamas zerstören, Zivilisten schützen - Flächenbrand vermeidbar  maybrit illner vom 19.10.2023.de.vtt\n",
+      "[download] 100% of  501.86KiB in 00:00:00 at 1.42MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=-F9819YKVfQ\n",
+      "[youtube] -F9819YKVfQ: Downloading webpage\n",
+      "[youtube] -F9819YKVfQ: Downloading ios player API JSON\n",
+      "[youtube] -F9819YKVfQ: Downloading web creator player API JSON\n",
+      "[youtube] -F9819YKVfQ: Downloading m3u8 information\n",
+      "[info] -F9819YKVfQ: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=-F9819YKVfQ\n",
+      "[youtube] -F9819YKVfQ: Downloading webpage\n",
+      "[youtube] -F9819YKVfQ: Downloading ios player API JSON\n",
+      "[youtube] -F9819YKVfQ: Downloading web creator player API JSON\n",
+      "[youtube] -F9819YKVfQ: Downloading m3u8 information\n",
+      "[info] -F9819YKVfQ: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] -F9819YKVfQ: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Hamas, Israel, Ukraine Worauf sich Europa wirklich konzentrieren sollte  Markus Lanz vom 19.10.23.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Hamas, Israel, Ukraine Worauf sich Europa wirklich konzentrieren sollte  Markus Lanz vom 19.10.23.de.vtt\n",
+      "[download] 100% of  249.06KiB in 00:00:00 at 879.09KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=u4VZY1MQ7s0\n",
+      "[youtube] u4VZY1MQ7s0: Downloading webpage\n",
+      "[youtube] u4VZY1MQ7s0: Downloading ios player API JSON\n",
+      "[youtube] u4VZY1MQ7s0: Downloading web creator player API JSON\n",
+      "[youtube] u4VZY1MQ7s0: Downloading m3u8 information\n",
+      "[info] u4VZY1MQ7s0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=u4VZY1MQ7s0\n",
+      "[youtube] u4VZY1MQ7s0: Downloading webpage\n",
+      "[youtube] u4VZY1MQ7s0: Downloading ios player API JSON\n",
+      "[youtube] u4VZY1MQ7s0: Downloading web creator player API JSON\n",
+      "[youtube] u4VZY1MQ7s0: Downloading m3u8 information\n",
+      "[info] u4VZY1MQ7s0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] u4VZY1MQ7s0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Lars Klingbeil Solidarität zu Israel in Deutschland  maybrit illner #shorts.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Lars Klingbeil Solidarität zu Israel in Deutschland  maybrit illner #shorts.de.vtt\n",
+      "[download] 100% of    9.22KiB in 00:00:00 at 73.99KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1d_lACAcrDE\n",
+      "[youtube] 1d_lACAcrDE: Downloading webpage\n",
+      "[youtube] 1d_lACAcrDE: Downloading ios player API JSON\n",
+      "[youtube] 1d_lACAcrDE: Downloading web creator player API JSON\n",
+      "[youtube] 1d_lACAcrDE: Downloading m3u8 information\n",
+      "[info] 1d_lACAcrDE: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1d_lACAcrDE\n",
+      "[youtube] 1d_lACAcrDE: Downloading webpage\n",
+      "[youtube] 1d_lACAcrDE: Downloading ios player API JSON\n",
+      "[youtube] 1d_lACAcrDE: Downloading web creator player API JSON\n",
+      "[youtube] 1d_lACAcrDE: Downloading m3u8 information\n",
+      "[info] 1d_lACAcrDE: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 1d_lACAcrDE: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Angriff auf Israel Was am Tag des Terrors wirklich passiert ist  ZDFzeit.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Angriff auf Israel Was am Tag des Terrors wirklich passiert ist  ZDFzeit.de.vtt\n",
+      "[download] 100% of  246.45KiB in 00:00:00 at 881.39KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=DQeF2clqHRY\n",
+      "[youtube] DQeF2clqHRY: Downloading webpage\n",
+      "[youtube] DQeF2clqHRY: Downloading ios player API JSON\n",
+      "[youtube] DQeF2clqHRY: Downloading web creator player API JSON\n",
+      "[youtube] DQeF2clqHRY: Downloading m3u8 information\n",
+      "[info] DQeF2clqHRY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=DQeF2clqHRY\n",
+      "[youtube] DQeF2clqHRY: Downloading webpage\n",
+      "[youtube] DQeF2clqHRY: Downloading ios player API JSON\n",
+      "[youtube] DQeF2clqHRY: Downloading web creator player API JSON\n",
+      "[youtube] DQeF2clqHRY: Downloading m3u8 information\n",
+      "[info] DQeF2clqHRY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] DQeF2clqHRY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Krieg in Nahost Die unterirdische Welt der Hamas  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Krieg in Nahost Die unterirdische Welt der Hamas  ZDFheute live.de.vtt\n",
+      "[download] 100% of   18.63KiB in 00:00:00 at 143.32KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=C61Smuhiis0\n",
+      "[youtube] C61Smuhiis0: Downloading webpage\n",
+      "[youtube] C61Smuhiis0: Downloading ios player API JSON\n",
+      "[youtube] C61Smuhiis0: Downloading web creator player API JSON\n",
+      "[youtube] C61Smuhiis0: Downloading m3u8 information\n",
+      "[info] C61Smuhiis0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=C61Smuhiis0\n",
+      "[youtube] C61Smuhiis0: Downloading webpage\n",
+      "[youtube] C61Smuhiis0: Downloading ios player API JSON\n",
+      "[youtube] C61Smuhiis0: Downloading web creator player API JSON\n",
+      "[youtube] C61Smuhiis0: Downloading m3u8 information\n",
+      "[info] C61Smuhiis0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] C61Smuhiis0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Erhöhte Terror-Gefahr So reagiert Deutschland auf die Eskalation in Nahost  frontal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Erhöhte Terror-Gefahr So reagiert Deutschland auf die Eskalation in Nahost  frontal.de.vtt\n",
+      "[download] 100% of   57.92KiB in 00:00:00 at 402.87KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=VwRgOlXLOpQ\n",
+      "[youtube] VwRgOlXLOpQ: Downloading webpage\n",
+      "[youtube] VwRgOlXLOpQ: Downloading ios player API JSON\n",
+      "[youtube] VwRgOlXLOpQ: Downloading web creator player API JSON\n",
+      "[youtube] VwRgOlXLOpQ: Downloading m3u8 information\n",
+      "[info] VwRgOlXLOpQ: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=VwRgOlXLOpQ\n",
+      "[youtube] VwRgOlXLOpQ: Downloading webpage\n",
+      "[youtube] VwRgOlXLOpQ: Downloading ios player API JSON\n",
+      "[youtube] VwRgOlXLOpQ: Downloading web creator player API JSON\n",
+      "[youtube] VwRgOlXLOpQ: Downloading m3u8 information\n",
+      "[info] VwRgOlXLOpQ: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] VwRgOlXLOpQ: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Wie Islamisten den Nahost-Konflikt ausnutzen - und Hass in Deutschland schüren.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Wie Islamisten den Nahost-Konflikt ausnutzen - und Hass in Deutschland schüren.de.vtt\n",
+      "[download] 100% of   92.36KiB in 00:00:00 at 625.15KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=2ad_PSmMr38\n",
+      "[youtube] 2ad_PSmMr38: Downloading webpage\n",
+      "[youtube] 2ad_PSmMr38: Downloading ios player API JSON\n",
+      "[youtube] 2ad_PSmMr38: Downloading web creator player API JSON\n",
+      "[youtube] 2ad_PSmMr38: Downloading m3u8 information\n",
+      "[info] 2ad_PSmMr38: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=2ad_PSmMr38\n",
+      "[youtube] 2ad_PSmMr38: Downloading webpage\n",
+      "[youtube] 2ad_PSmMr38: Downloading ios player API JSON\n",
+      "[youtube] 2ad_PSmMr38: Downloading web creator player API JSON\n",
+      "[youtube] 2ad_PSmMr38: Downloading m3u8 information\n",
+      "[info] 2ad_PSmMr38: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 2ad_PSmMr38: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Wachsende Angst um Hamas-Geiseln  ZDF spezial.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Wachsende Angst um Hamas-Geiseln  ZDF spezial.de.vtt\n",
+      "[download] 100% of   99.44KiB in 00:00:00 at 464.57KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=xxE6yDYtCOo\n",
+      "[youtube] xxE6yDYtCOo: Downloading webpage\n",
+      "[youtube] xxE6yDYtCOo: Downloading ios player API JSON\n",
+      "[youtube] xxE6yDYtCOo: Downloading web creator player API JSON\n",
+      "[youtube] xxE6yDYtCOo: Downloading m3u8 information\n",
+      "[info] xxE6yDYtCOo: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=xxE6yDYtCOo\n",
+      "[youtube] xxE6yDYtCOo: Downloading webpage\n",
+      "[youtube] xxE6yDYtCOo: Downloading ios player API JSON\n",
+      "[youtube] xxE6yDYtCOo: Downloading web creator player API JSON\n",
+      "[youtube] xxE6yDYtCOo: Downloading m3u8 information\n",
+      "[info] xxE6yDYtCOo: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] xxE6yDYtCOo: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israel gegen Hamas Welche Zukunft hat Gaza  Nahost-Expertin bei ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israel gegen Hamas Welche Zukunft hat Gaza  Nahost-Expertin bei ZDFheute live.de.vtt\n",
+      "[download] 100% of  210.18KiB in 00:00:00 at 978.86KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=z4FilHsDTOY\n",
+      "[youtube] z4FilHsDTOY: Downloading webpage\n",
+      "[youtube] z4FilHsDTOY: Downloading ios player API JSON\n",
+      "[youtube] z4FilHsDTOY: Downloading web creator player API JSON\n",
+      "[youtube] z4FilHsDTOY: Downloading m3u8 information\n",
+      "[info] z4FilHsDTOY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=z4FilHsDTOY\n",
+      "[youtube] z4FilHsDTOY: Downloading webpage\n",
+      "[youtube] z4FilHsDTOY: Downloading ios player API JSON\n",
+      "[youtube] z4FilHsDTOY: Downloading web creator player API JSON\n",
+      "[youtube] z4FilHsDTOY: Downloading m3u8 information\n",
+      "[info] z4FilHsDTOY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] z4FilHsDTOY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Debatte um Antisemitismus in Deutschland  Markus Lanz vom 31. Oktober 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Debatte um Antisemitismus in Deutschland  Markus Lanz vom 31. Oktober 2023.de.vtt\n",
+      "[download] 100% of  290.01KiB in 00:00:00 at 1006.92KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=yblJzvEw2Go\n",
+      "[youtube] yblJzvEw2Go: Downloading webpage\n",
+      "[youtube] yblJzvEw2Go: Downloading ios player API JSON\n",
+      "[youtube] yblJzvEw2Go: Downloading web creator player API JSON\n",
+      "[youtube] yblJzvEw2Go: Downloading m3u8 information\n",
+      "[info] yblJzvEw2Go: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=yblJzvEw2Go\n",
+      "[youtube] yblJzvEw2Go: Downloading webpage\n",
+      "[youtube] yblJzvEw2Go: Downloading ios player API JSON\n",
+      "[youtube] yblJzvEw2Go: Downloading web creator player API JSON\n",
+      "[youtube] yblJzvEw2Go: Downloading m3u8 information\n",
+      "[info] yblJzvEw2Go: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] yblJzvEw2Go: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Jüdin kritisiert mangelnden Schutz in Deutschland   Markus Lanz vom 1. November 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Jüdin kritisiert mangelnden Schutz in Deutschland   Markus Lanz vom 1. November 2023.de.vtt\n",
+      "[download] 100% of  226.44KiB in 00:00:00 at 884.69KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=lhwOy0mdK8Q\n",
+      "[youtube] lhwOy0mdK8Q: Downloading webpage\n",
+      "[youtube] lhwOy0mdK8Q: Downloading ios player API JSON\n",
+      "[youtube] lhwOy0mdK8Q: Downloading web creator player API JSON\n",
+      "[youtube] lhwOy0mdK8Q: Downloading m3u8 information\n",
+      "[info] lhwOy0mdK8Q: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=lhwOy0mdK8Q\n",
+      "[youtube] lhwOy0mdK8Q: Downloading webpage\n",
+      "[youtube] lhwOy0mdK8Q: Downloading ios player API JSON\n",
+      "[youtube] lhwOy0mdK8Q: Downloading web creator player API JSON\n",
+      "[youtube] lhwOy0mdK8Q: Downloading m3u8 information\n",
+      "[info] lhwOy0mdK8Q: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] lhwOy0mdK8Q: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Arzt berichtet aus Untergrund-Krankenhaus in Israel  ZDF-Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Arzt berichtet aus Untergrund-Krankenhaus in Israel  ZDF-Morgenmagazin.de.vtt\n",
+      "[download] 100% of   48.22KiB in 00:00:00 at 213.95KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=wBt3UOJWW7g\n",
+      "[youtube] wBt3UOJWW7g: Downloading webpage\n",
+      "[youtube] wBt3UOJWW7g: Downloading ios player API JSON\n",
+      "[youtube] wBt3UOJWW7g: Downloading web creator player API JSON\n",
+      "[youtube] wBt3UOJWW7g: Downloading m3u8 information\n",
+      "[info] wBt3UOJWW7g: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=wBt3UOJWW7g\n",
+      "[youtube] wBt3UOJWW7g: Downloading webpage\n",
+      "[youtube] wBt3UOJWW7g: Downloading ios player API JSON\n",
+      "[youtube] wBt3UOJWW7g: Downloading web creator player API JSON\n",
+      "[youtube] wBt3UOJWW7g: Downloading m3u8 information\n",
+      "[info] wBt3UOJWW7g: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] wBt3UOJWW7g: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Deutscher Frontkämpfer packt aus So läuft Israels Bodenoffensive  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Deutscher Frontkämpfer packt aus So läuft Israels Bodenoffensive  auslandsjournal.de.vtt\n",
+      "[download] 100% of   89.57KiB in 00:00:00 at 648.50KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=hnSRhpVLGjo\n",
+      "[youtube] hnSRhpVLGjo: Downloading webpage\n",
+      "[youtube] hnSRhpVLGjo: Downloading ios player API JSON\n",
+      "[youtube] hnSRhpVLGjo: Downloading web creator player API JSON\n",
+      "[youtube] hnSRhpVLGjo: Downloading m3u8 information\n",
+      "[info] hnSRhpVLGjo: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=hnSRhpVLGjo\n",
+      "[youtube] hnSRhpVLGjo: Downloading webpage\n",
+      "[youtube] hnSRhpVLGjo: Downloading ios player API JSON\n",
+      "[youtube] hnSRhpVLGjo: Downloading web creator player API JSON\n",
+      "[youtube] hnSRhpVLGjo: Downloading m3u8 information\n",
+      "[info] hnSRhpVLGjo: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] hnSRhpVLGjo: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Krieg in Nahost Wie gefährlich ist der Iran  Markus Lanz vom 2. November 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Krieg in Nahost Wie gefährlich ist der Iran  Markus Lanz vom 2. November 2023.de.vtt\n",
+      "[download] 100% of  175.46KiB in 00:00:00 at 720.41KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zVzAtHe52FQ\n",
+      "[youtube] zVzAtHe52FQ: Downloading webpage\n",
+      "[youtube] zVzAtHe52FQ: Downloading ios player API JSON\n",
+      "[youtube] zVzAtHe52FQ: Downloading web creator player API JSON\n",
+      "[youtube] zVzAtHe52FQ: Downloading m3u8 information\n",
+      "[info] zVzAtHe52FQ: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zVzAtHe52FQ\n",
+      "[youtube] zVzAtHe52FQ: Downloading webpage\n",
+      "[youtube] zVzAtHe52FQ: Downloading ios player API JSON\n",
+      "[youtube] zVzAtHe52FQ: Downloading web creator player API JSON\n",
+      "[youtube] zVzAtHe52FQ: Downloading m3u8 information\n",
+      "[info] zVzAtHe52FQ: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] zVzAtHe52FQ: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Ukraine und Israel - zwei gefährliche Kriege für die Welt   maybrit illner vom 02.11.2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Ukraine und Israel - zwei gefährliche Kriege für die Welt   maybrit illner vom 02.11.2023.de.vtt\n",
+      "[download] 100% of  484.29KiB in 00:00:00 at 1.45MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=cDhMi2kj-Jw\n",
+      "[youtube] cDhMi2kj-Jw: Downloading webpage\n",
+      "[youtube] cDhMi2kj-Jw: Downloading ios player API JSON\n",
+      "[youtube] cDhMi2kj-Jw: Downloading web creator player API JSON\n",
+      "[youtube] cDhMi2kj-Jw: Downloading m3u8 information\n",
+      "[info] cDhMi2kj-Jw: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=cDhMi2kj-Jw\n",
+      "[youtube] cDhMi2kj-Jw: Downloading webpage\n",
+      "[youtube] cDhMi2kj-Jw: Downloading ios player API JSON\n",
+      "[youtube] cDhMi2kj-Jw: Downloading web creator player API JSON\n",
+      "[youtube] cDhMi2kj-Jw: Downloading m3u8 information\n",
+      "[info] cDhMi2kj-Jw: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] cDhMi2kj-Jw: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Weitere Eskalation in Nahost Die Pläne der Hisbollah gegen Israel  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Weitere Eskalation in Nahost Die Pläne der Hisbollah gegen Israel  ZDFheute live.de.vtt\n",
+      "[download] 100% of  232.89KiB in 00:00:00 at 714.30KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=cM6KqY2LTE0\n",
+      "[youtube] cM6KqY2LTE0: Downloading webpage\n",
+      "[youtube] cM6KqY2LTE0: Downloading ios player API JSON\n",
+      "[youtube] cM6KqY2LTE0: Downloading web creator player API JSON\n",
+      "[youtube] cM6KqY2LTE0: Downloading m3u8 information\n",
+      "[info] cM6KqY2LTE0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=cM6KqY2LTE0\n",
+      "[youtube] cM6KqY2LTE0: Downloading webpage\n",
+      "[youtube] cM6KqY2LTE0: Downloading ios player API JSON\n",
+      "[youtube] cM6KqY2LTE0: Downloading web creator player API JSON\n",
+      "[youtube] cM6KqY2LTE0: Downloading m3u8 information\n",
+      "[info] cM6KqY2LTE0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] cM6KqY2LTE0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Wie Islamisten Pro-Palästina-Demos in Deutschland ausnutzen.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Wie Islamisten Pro-Palästina-Demos in Deutschland ausnutzen.de.vtt\n",
+      "[download] 100% of   25.68KiB in 00:00:00 at 206.01KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=sU96y436uk4\n",
+      "[youtube] sU96y436uk4: Downloading webpage\n",
+      "[youtube] sU96y436uk4: Downloading ios player API JSON\n",
+      "[youtube] sU96y436uk4: Downloading web creator player API JSON\n",
+      "[youtube] sU96y436uk4: Downloading m3u8 information\n",
+      "[info] sU96y436uk4: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=sU96y436uk4\n",
+      "[youtube] sU96y436uk4: Downloading webpage\n",
+      "[youtube] sU96y436uk4: Downloading ios player API JSON\n",
+      "[youtube] sU96y436uk4: Downloading web creator player API JSON\n",
+      "[youtube] sU96y436uk4: Downloading m3u8 information\n",
+      "[info] sU96y436uk4: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] sU96y436uk4: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Wo ist der Aufschrei deutscher Muslime Eren Güvercin bei Lanz  #shorts #lanz #nachrichten.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Wo ist der Aufschrei deutscher Muslime Eren Güvercin bei Lanz  #shorts #lanz #nachrichten.de.vtt\n",
+      "[download] 100% of    7.51KiB in 00:00:00 at 104.65KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=RzZvIkPTYjI\n",
+      "[youtube] RzZvIkPTYjI: Downloading webpage\n",
+      "[youtube] RzZvIkPTYjI: Downloading ios player API JSON\n",
+      "[youtube] RzZvIkPTYjI: Downloading web creator player API JSON\n",
+      "[youtube] RzZvIkPTYjI: Downloading m3u8 information\n",
+      "[info] RzZvIkPTYjI: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=RzZvIkPTYjI\n",
+      "[youtube] RzZvIkPTYjI: Downloading webpage\n",
+      "[youtube] RzZvIkPTYjI: Downloading ios player API JSON\n",
+      "[youtube] RzZvIkPTYjI: Downloading web creator player API JSON\n",
+      "[youtube] RzZvIkPTYjI: Downloading m3u8 information\n",
+      "[info] RzZvIkPTYjI: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] RzZvIkPTYjI: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Krieg in Gaza polarisiert - unterwegs auf den Straßen Berlins  Länderspiegel.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Krieg in Gaza polarisiert - unterwegs auf den Straßen Berlins  Länderspiegel.de.vtt\n",
+      "[download] 100% of   79.12KiB in 00:00:00 at 486.34KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=DqzyuV2LWLU\n",
+      "[youtube] DqzyuV2LWLU: Downloading webpage\n",
+      "[youtube] DqzyuV2LWLU: Downloading ios player API JSON\n",
+      "[youtube] DqzyuV2LWLU: Downloading web creator player API JSON\n",
+      "[youtube] DqzyuV2LWLU: Downloading m3u8 information\n",
+      "[info] DqzyuV2LWLU: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=DqzyuV2LWLU\n",
+      "[youtube] DqzyuV2LWLU: Downloading webpage\n",
+      "[youtube] DqzyuV2LWLU: Downloading ios player API JSON\n",
+      "[youtube] DqzyuV2LWLU: Downloading web creator player API JSON\n",
+      "[youtube] DqzyuV2LWLU: Downloading m3u8 information\n",
+      "[info] DqzyuV2LWLU: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] DqzyuV2LWLU: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Doku Zwischen Israels Geisel-Trauma und dem Leid in Gaza  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Doku Zwischen Israels Geisel-Trauma und dem Leid in Gaza  auslandsjournal.de.vtt\n",
+      "[download] 100% of  251.76KiB in 00:00:00 at 1.19MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=B0XlB8tfLS0\n",
+      "[youtube] B0XlB8tfLS0: Downloading webpage\n",
+      "[youtube] B0XlB8tfLS0: Downloading ios player API JSON\n",
+      "[youtube] B0XlB8tfLS0: Downloading web creator player API JSON\n",
+      "[youtube] B0XlB8tfLS0: Downloading m3u8 information\n",
+      "[info] B0XlB8tfLS0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=B0XlB8tfLS0\n",
+      "[youtube] B0XlB8tfLS0: Downloading webpage\n",
+      "[youtube] B0XlB8tfLS0: Downloading ios player API JSON\n",
+      "[youtube] B0XlB8tfLS0: Downloading web creator player API JSON\n",
+      "[youtube] B0XlB8tfLS0: Downloading m3u8 information\n",
+      "[info] B0XlB8tfLS0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] B0XlB8tfLS0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Solidarität mit Palästina Blick aus dem Globalen Süden  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Solidarität mit Palästina Blick aus dem Globalen Süden  auslandsjournal.de.vtt\n",
+      "[download] 100% of   49.28KiB in 00:00:00 at 283.63KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=2nwcuZl2Eyg\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading webpage\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading ios player API JSON\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading web creator player API JSON\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading m3u8 information\n",
+      "[info] 2nwcuZl2Eyg: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=2nwcuZl2Eyg\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading webpage\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading ios player API JSON\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading web creator player API JSON\n",
+      "[youtube] 2nwcuZl2Eyg: Downloading m3u8 information\n",
+      "[info] 2nwcuZl2Eyg: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 2nwcuZl2Eyg: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Finanzwelt der Terroristen Wie die Hamas ihren Luxus und Terror finanziert.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Finanzwelt der Terroristen Wie die Hamas ihren Luxus und Terror finanziert.de.vtt\n",
+      "[download] 100% of   85.54KiB in 00:00:00 at 462.49KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=BHMZc4yCURg\n",
+      "[youtube] BHMZc4yCURg: Downloading webpage\n",
+      "[youtube] BHMZc4yCURg: Downloading ios player API JSON\n",
+      "[youtube] BHMZc4yCURg: Downloading web creator player API JSON\n",
+      "[youtube] BHMZc4yCURg: Downloading m3u8 information\n",
+      "[info] BHMZc4yCURg: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=BHMZc4yCURg\n",
+      "[youtube] BHMZc4yCURg: Downloading webpage\n",
+      "[youtube] BHMZc4yCURg: Downloading ios player API JSON\n",
+      "[youtube] BHMZc4yCURg: Downloading web creator player API JSON\n",
+      "[youtube] BHMZc4yCURg: Downloading m3u8 information\n",
+      "[info] BHMZc4yCURg: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] BHMZc4yCURg: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nahost-Krieg Gefährliche Desinformations-Welle über Israel und Hamas  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nahost-Krieg Gefährliche Desinformations-Welle über Israel und Hamas  ZDFheute live.de.vtt\n",
+      "[download] 100% of  119.70KiB in 00:00:00 at 744.91KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=HxUxbjo2CK0\n",
+      "[youtube] HxUxbjo2CK0: Downloading webpage\n",
+      "[youtube] HxUxbjo2CK0: Downloading ios player API JSON\n",
+      "[youtube] HxUxbjo2CK0: Downloading web creator player API JSON\n",
+      "[youtube] HxUxbjo2CK0: Downloading m3u8 information\n",
+      "[info] HxUxbjo2CK0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=HxUxbjo2CK0\n",
+      "[youtube] HxUxbjo2CK0: Downloading webpage\n",
+      "[youtube] HxUxbjo2CK0: Downloading ios player API JSON\n",
+      "[youtube] HxUxbjo2CK0: Downloading web creator player API JSON\n",
+      "[youtube] HxUxbjo2CK0: Downloading m3u8 information\n",
+      "[info] HxUxbjo2CK0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] HxUxbjo2CK0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israel dringt in Gaza-Klinik ein So ist die Lage vor Ort  ZDF-Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israel dringt in Gaza-Klinik ein So ist die Lage vor Ort  ZDF-Morgenmagazin.de.vtt\n",
+      "[download] 100% of   33.53KiB in 00:00:00 at 344.62KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=2ZPjW2qXG3o\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading webpage\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading ios player API JSON\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading web creator player API JSON\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading m3u8 information\n",
+      "[info] 2ZPjW2qXG3o: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=2ZPjW2qXG3o\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading webpage\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading ios player API JSON\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading web creator player API JSON\n",
+      "[youtube] 2ZPjW2qXG3o: Downloading m3u8 information\n",
+      "[info] 2ZPjW2qXG3o: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 2ZPjW2qXG3o: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Ist Israels Bodenoffensive noch verhältnismäßig  Markus Lanz vom 14. November 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Ist Israels Bodenoffensive noch verhältnismäßig  Markus Lanz vom 14. November 2023.de.vtt\n",
+      "[download] 100% of  192.58KiB in 00:00:00 at 753.49KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=gmscKMho07c\n",
+      "[youtube] gmscKMho07c: Downloading webpage\n",
+      "[youtube] gmscKMho07c: Downloading ios player API JSON\n",
+      "[youtube] gmscKMho07c: Downloading web creator player API JSON\n",
+      "[youtube] gmscKMho07c: Downloading m3u8 information\n",
+      "[info] gmscKMho07c: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=gmscKMho07c\n",
+      "[youtube] gmscKMho07c: Downloading webpage\n",
+      "[youtube] gmscKMho07c: Downloading ios player API JSON\n",
+      "[youtube] gmscKMho07c: Downloading web creator player API JSON\n",
+      "[youtube] gmscKMho07c: Downloading m3u8 information\n",
+      "[info] gmscKMho07c: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] gmscKMho07c: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nahost-Krieg Völkerrecht wird verletzt, und wir gucken zu   Markus Lanz vom 15. November 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nahost-Krieg Völkerrecht wird verletzt, und wir gucken zu   Markus Lanz vom 15. November 2023.de.vtt\n",
+      "[download] 100% of  342.64KiB in 00:00:00 at 1.16MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pqw_nabSfkY\n",
+      "[youtube] pqw_nabSfkY: Downloading webpage\n",
+      "[youtube] pqw_nabSfkY: Downloading ios player API JSON\n",
+      "[youtube] pqw_nabSfkY: Downloading web creator player API JSON\n",
+      "[youtube] pqw_nabSfkY: Downloading m3u8 information\n",
+      "[info] pqw_nabSfkY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pqw_nabSfkY\n",
+      "[youtube] pqw_nabSfkY: Downloading webpage\n",
+      "[youtube] pqw_nabSfkY: Downloading ios player API JSON\n",
+      "[youtube] pqw_nabSfkY: Downloading web creator player API JSON\n",
+      "[youtube] pqw_nabSfkY: Downloading m3u8 information\n",
+      "[info] pqw_nabSfkY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] pqw_nabSfkY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Angry Arabs Boykott gegen den Westen I auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Angry Arabs Boykott gegen den Westen I auslandsjournal.de.vtt\n",
+      "[download] 100% of   41.29KiB in 00:00:00 at 422.63KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=WG2w9JXIvas\n",
+      "[youtube] WG2w9JXIvas: Downloading webpage\n",
+      "[youtube] WG2w9JXIvas: Downloading ios player API JSON\n",
+      "[youtube] WG2w9JXIvas: Downloading web creator player API JSON\n",
+      "[youtube] WG2w9JXIvas: Downloading m3u8 information\n",
+      "[info] WG2w9JXIvas: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=WG2w9JXIvas\n",
+      "[youtube] WG2w9JXIvas: Downloading webpage\n",
+      "[youtube] WG2w9JXIvas: Downloading ios player API JSON\n",
+      "[youtube] WG2w9JXIvas: Downloading web creator player API JSON\n",
+      "[youtube] WG2w9JXIvas: Downloading m3u8 information\n",
+      "[info] WG2w9JXIvas: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] WG2w9JXIvas: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Krieg in Nahost Immer mehr Judenhass in Deutschland  maybrit illner vom 16.11.2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Krieg in Nahost Immer mehr Judenhass in Deutschland  maybrit illner vom 16.11.2023.de.vtt\n",
+      "[download] 100% of  621.15KiB in 00:00:00 at 1.44MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=G_YQZqQhXZY\n",
+      "[youtube] G_YQZqQhXZY: Downloading webpage\n",
+      "[youtube] G_YQZqQhXZY: Downloading ios player API JSON\n",
+      "[youtube] G_YQZqQhXZY: Downloading web creator player API JSON\n",
+      "[youtube] G_YQZqQhXZY: Downloading m3u8 information\n",
+      "[info] G_YQZqQhXZY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=G_YQZqQhXZY\n",
+      "[youtube] G_YQZqQhXZY: Downloading webpage\n",
+      "[youtube] G_YQZqQhXZY: Downloading ios player API JSON\n",
+      "[youtube] G_YQZqQhXZY: Downloading web creator player API JSON\n",
+      "[youtube] G_YQZqQhXZY: Downloading m3u8 information\n",
+      "[info] G_YQZqQhXZY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] G_YQZqQhXZY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Jüdin warnt vor Einfluss von Pro-Palästina-Influencern  Markus Lanz vom 16. November 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Jüdin warnt vor Einfluss von Pro-Palästina-Influencern  Markus Lanz vom 16. November 2023.de.vtt\n",
+      "[download] 100% of  282.94KiB in 00:00:00 at 813.99KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Ph6yq34lJ6w\n",
+      "[youtube] Ph6yq34lJ6w: Downloading webpage\n",
+      "[youtube] Ph6yq34lJ6w: Downloading ios player API JSON\n",
+      "[youtube] Ph6yq34lJ6w: Downloading web creator player API JSON\n",
+      "[youtube] Ph6yq34lJ6w: Downloading m3u8 information\n",
+      "[info] Ph6yq34lJ6w: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Ph6yq34lJ6w\n",
+      "[youtube] Ph6yq34lJ6w: Downloading webpage\n",
+      "[youtube] Ph6yq34lJ6w: Downloading ios player API JSON\n",
+      "[youtube] Ph6yq34lJ6w: Downloading web creator player API JSON\n",
+      "[youtube] Ph6yq34lJ6w: Downloading m3u8 information\n",
+      "[info] Ph6yq34lJ6w: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] Ph6yq34lJ6w: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Islamhass vs. Antisemitismus So vergiftet ist die Debatte über den Nahost-Konflikt.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Islamhass vs. Antisemitismus So vergiftet ist die Debatte über den Nahost-Konflikt.de.vtt\n",
+      "[download] 100% of   74.53KiB in 00:00:00 at 609.43KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=GiB59zkI7pc\n",
+      "[youtube] GiB59zkI7pc: Downloading webpage\n",
+      "[youtube] GiB59zkI7pc: Downloading ios player API JSON\n",
+      "[youtube] GiB59zkI7pc: Downloading web creator player API JSON\n",
+      "[youtube] GiB59zkI7pc: Downloading m3u8 information\n",
+      "[info] GiB59zkI7pc: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=GiB59zkI7pc\n",
+      "[youtube] GiB59zkI7pc: Downloading webpage\n",
+      "[youtube] GiB59zkI7pc: Downloading ios player API JSON\n",
+      "[youtube] GiB59zkI7pc: Downloading web creator player API JSON\n",
+      "[youtube] GiB59zkI7pc: Downloading m3u8 information\n",
+      "[info] GiB59zkI7pc: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] GiB59zkI7pc: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\USA Zerfall einer Weltmacht I auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\USA Zerfall einer Weltmacht I auslandsjournal.de.vtt\n",
+      "[download] 100% of   41.43KiB in 00:00:00 at 419.22KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=FArid2qEQnI\n",
+      "[youtube] FArid2qEQnI: Downloading webpage\n",
+      "[youtube] FArid2qEQnI: Downloading ios player API JSON\n",
+      "[youtube] FArid2qEQnI: Downloading web creator player API JSON\n",
+      "[youtube] FArid2qEQnI: Downloading m3u8 information\n",
+      "[info] FArid2qEQnI: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=FArid2qEQnI\n",
+      "[youtube] FArid2qEQnI: Downloading webpage\n",
+      "[youtube] FArid2qEQnI: Downloading ios player API JSON\n",
+      "[youtube] FArid2qEQnI: Downloading web creator player API JSON\n",
+      "[youtube] FArid2qEQnI: Downloading m3u8 information\n",
+      "[info] FArid2qEQnI: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] FArid2qEQnI: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Annäherung im Israel-Gaza-Krieg Militärexperte über Geisel-Verhandlungen  heute journal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Annäherung im Israel-Gaza-Krieg Militärexperte über Geisel-Verhandlungen  heute journal.de.vtt\n",
+      "[download] 100% of   70.98KiB in 00:00:00 at 402.35KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=_YK_vNXFHBA\n",
+      "[youtube] _YK_vNXFHBA: Downloading webpage\n",
+      "[youtube] _YK_vNXFHBA: Downloading ios player API JSON\n",
+      "[youtube] _YK_vNXFHBA: Downloading web creator player API JSON\n",
+      "[youtube] _YK_vNXFHBA: Downloading m3u8 information\n",
+      "[info] _YK_vNXFHBA: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=_YK_vNXFHBA\n",
+      "[youtube] _YK_vNXFHBA: Downloading webpage\n",
+      "[youtube] _YK_vNXFHBA: Downloading ios player API JSON\n",
+      "[youtube] _YK_vNXFHBA: Downloading web creator player API JSON\n",
+      "[youtube] _YK_vNXFHBA: Downloading m3u8 information\n",
+      "[info] _YK_vNXFHBA: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] _YK_vNXFHBA: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Fortschritt bei Verhandlungen Israel stimmt Geisel-Abkommen mit der Hamas zu.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Fortschritt bei Verhandlungen Israel stimmt Geisel-Abkommen mit der Hamas zu.de.vtt\n",
+      "[download] 100% of   17.51KiB in 00:00:00 at 97.95KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=eo4v4OlyJoc\n",
+      "[youtube] eo4v4OlyJoc: Downloading webpage\n",
+      "[youtube] eo4v4OlyJoc: Downloading ios player API JSON\n",
+      "[youtube] eo4v4OlyJoc: Downloading web creator player API JSON\n",
+      "[youtube] eo4v4OlyJoc: Downloading m3u8 information\n",
+      "[info] eo4v4OlyJoc: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=eo4v4OlyJoc\n",
+      "[youtube] eo4v4OlyJoc: Downloading webpage\n",
+      "[youtube] eo4v4OlyJoc: Downloading ios player API JSON\n",
+      "[youtube] eo4v4OlyJoc: Downloading web creator player API JSON\n",
+      "[youtube] eo4v4OlyJoc: Downloading m3u8 information\n",
+      "[info] eo4v4OlyJoc: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] eo4v4OlyJoc: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Sicherheitsexperte Conrad zum Geiselabkommen  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Sicherheitsexperte Conrad zum Geiselabkommen  ZDFheute live.de.vtt\n",
+      "[download] 100% of   91.87KiB in 00:00:00 at 564.84KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0YR3OULpheE\n",
+      "[youtube] 0YR3OULpheE: Downloading webpage\n",
+      "[youtube] 0YR3OULpheE: Downloading ios player API JSON\n",
+      "[youtube] 0YR3OULpheE: Downloading web creator player API JSON\n",
+      "[youtube] 0YR3OULpheE: Downloading m3u8 information\n",
+      "[info] 0YR3OULpheE: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0YR3OULpheE\n",
+      "[youtube] 0YR3OULpheE: Downloading webpage\n",
+      "[youtube] 0YR3OULpheE: Downloading ios player API JSON\n",
+      "[youtube] 0YR3OULpheE: Downloading web creator player API JSON\n",
+      "[youtube] 0YR3OULpheE: Downloading m3u8 information\n",
+      "[info] 0YR3OULpheE: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 0YR3OULpheE: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Feuerpause in Nahost – Erste israelische Geiseln frei  ZDF spezial.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Feuerpause in Nahost – Erste israelische Geiseln frei  ZDF spezial.de.vtt\n",
+      "[download] 100% of   94.57KiB in 00:00:00 at 737.55KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zRFkkXOopEk\n",
+      "[youtube] zRFkkXOopEk: Downloading webpage\n",
+      "[youtube] zRFkkXOopEk: Downloading ios player API JSON\n",
+      "[youtube] zRFkkXOopEk: Downloading web creator player API JSON\n",
+      "[youtube] zRFkkXOopEk: Downloading m3u8 information\n",
+      "[info] zRFkkXOopEk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zRFkkXOopEk\n",
+      "[youtube] zRFkkXOopEk: Downloading webpage\n",
+      "[youtube] zRFkkXOopEk: Downloading ios player API JSON\n",
+      "[youtube] zRFkkXOopEk: Downloading web creator player API JSON\n",
+      "[youtube] zRFkkXOopEk: Downloading m3u8 information\n",
+      "[info] zRFkkXOopEk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] zRFkkXOopEk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Wird Hamas die Feuerpause ausnutzen Militäranalyst zur Lage im Nahost-Krieg  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Wird Hamas die Feuerpause ausnutzen Militäranalyst zur Lage im Nahost-Krieg  ZDFheute live.de.vtt\n",
+      "[download] 100% of  183.52KiB in 00:00:00 at 751.20KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=wr3n5glUDwk\n",
+      "[youtube] wr3n5glUDwk: Downloading webpage\n",
+      "[youtube] wr3n5glUDwk: Downloading ios player API JSON\n",
+      "[youtube] wr3n5glUDwk: Downloading web creator player API JSON\n",
+      "[youtube] wr3n5glUDwk: Downloading m3u8 information\n",
+      "[info] wr3n5glUDwk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=wr3n5glUDwk\n",
+      "[youtube] wr3n5glUDwk: Downloading webpage\n",
+      "[youtube] wr3n5glUDwk: Downloading ios player API JSON\n",
+      "[youtube] wr3n5glUDwk: Downloading web creator player API JSON\n",
+      "[youtube] wr3n5glUDwk: Downloading m3u8 information\n",
+      "[info] wr3n5glUDwk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] wr3n5glUDwk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Hamas-Attacke auf Festival Wie alles begann  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Hamas-Attacke auf Festival Wie alles begann  auslandsjournal.de.vtt\n",
+      "[download] 100% of  153.23KiB in 00:00:00 at 1.07MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=HsshhVsAY-g\n",
+      "[youtube] HsshhVsAY-g: Downloading webpage\n",
+      "[youtube] HsshhVsAY-g: Downloading ios player API JSON\n",
+      "[youtube] HsshhVsAY-g: Downloading web creator player API JSON\n",
+      "[youtube] HsshhVsAY-g: Downloading m3u8 information\n",
+      "[info] HsshhVsAY-g: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=HsshhVsAY-g\n",
+      "[youtube] HsshhVsAY-g: Downloading webpage\n",
+      "[youtube] HsshhVsAY-g: Downloading ios player API JSON\n",
+      "[youtube] HsshhVsAY-g: Downloading web creator player API JSON\n",
+      "[youtube] HsshhVsAY-g: Downloading m3u8 information\n",
+      "[info] HsshhVsAY-g: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] HsshhVsAY-g: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Feuerpause im Gaza-Krieg vorbei Kämpfe laut Israel wieder aufgenommen  Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Feuerpause im Gaza-Krieg vorbei Kämpfe laut Israel wieder aufgenommen  Morgenmagazin.de.vtt\n",
+      "[download] 100% of   22.56KiB in 00:00:00 at 216.20KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MeZi5N-R6Vk\n",
+      "[youtube] MeZi5N-R6Vk: Downloading webpage\n",
+      "[youtube] MeZi5N-R6Vk: Downloading ios player API JSON\n",
+      "[youtube] MeZi5N-R6Vk: Downloading web creator player API JSON\n",
+      "[youtube] MeZi5N-R6Vk: Downloading m3u8 information\n",
+      "[info] MeZi5N-R6Vk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MeZi5N-R6Vk\n",
+      "[youtube] MeZi5N-R6Vk: Downloading webpage\n",
+      "[youtube] MeZi5N-R6Vk: Downloading ios player API JSON\n",
+      "[youtube] MeZi5N-R6Vk: Downloading web creator player API JSON\n",
+      "[youtube] MeZi5N-R6Vk: Downloading m3u8 information\n",
+      "[info] MeZi5N-R6Vk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] MeZi5N-R6Vk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Erhöhte Terrorgefahr Warum Islamisten jetzt Anschläge in Europa planen.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Erhöhte Terrorgefahr Warum Islamisten jetzt Anschläge in Europa planen.de.vtt\n",
+      "[download] 100% of   79.70KiB in 00:00:00 at 429.38KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=uRx0RIIU1CY\n",
+      "[youtube] uRx0RIIU1CY: Downloading webpage\n",
+      "[youtube] uRx0RIIU1CY: Downloading ios player API JSON\n",
+      "[youtube] uRx0RIIU1CY: Downloading web creator player API JSON\n",
+      "[youtube] uRx0RIIU1CY: Downloading m3u8 information\n",
+      "[info] uRx0RIIU1CY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=uRx0RIIU1CY\n",
+      "[youtube] uRx0RIIU1CY: Downloading webpage\n",
+      "[youtube] uRx0RIIU1CY: Downloading ios player API JSON\n",
+      "[youtube] uRx0RIIU1CY: Downloading web creator player API JSON\n",
+      "[youtube] uRx0RIIU1CY: Downloading m3u8 information\n",
+      "[info] uRx0RIIU1CY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] uRx0RIIU1CY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Bruder von Hamas-Geisel schildert dramatische Geschichte  Markus Lanz vom 06. Dezember 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Bruder von Hamas-Geisel schildert dramatische Geschichte  Markus Lanz vom 06. Dezember 2023.de.vtt\n",
+      "[download] 100% of  107.69KiB in 00:00:00 at 465.63KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=dBiMdLo7S3I\n",
+      "[youtube] dBiMdLo7S3I: Downloading webpage\n",
+      "[youtube] dBiMdLo7S3I: Downloading ios player API JSON\n",
+      "[youtube] dBiMdLo7S3I: Downloading web creator player API JSON\n",
+      "[youtube] dBiMdLo7S3I: Downloading m3u8 information\n",
+      "[info] dBiMdLo7S3I: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=dBiMdLo7S3I\n",
+      "[youtube] dBiMdLo7S3I: Downloading webpage\n",
+      "[youtube] dBiMdLo7S3I: Downloading ios player API JSON\n",
+      "[youtube] dBiMdLo7S3I: Downloading web creator player API JSON\n",
+      "[youtube] dBiMdLo7S3I: Downloading m3u8 information\n",
+      "[info] dBiMdLo7S3I: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] dBiMdLo7S3I: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israel und Hamas Wie realistisch ist ein Waffenstillstand Nahost-Experte Gerlach bei ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israel und Hamas Wie realistisch ist ein Waffenstillstand Nahost-Experte Gerlach bei ZDFheute live.de.vtt\n",
+      "[download] 100% of  292.23KiB in 00:00:00 at 1.25MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ttnenOgPAuU\n",
+      "[youtube] ttnenOgPAuU: Downloading webpage\n",
+      "[youtube] ttnenOgPAuU: Downloading ios player API JSON\n",
+      "[youtube] ttnenOgPAuU: Downloading web creator player API JSON\n",
+      "[youtube] ttnenOgPAuU: Downloading m3u8 information\n",
+      "[info] ttnenOgPAuU: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ttnenOgPAuU\n",
+      "[youtube] ttnenOgPAuU: Downloading webpage\n",
+      "[youtube] ttnenOgPAuU: Downloading ios player API JSON\n",
+      "[youtube] ttnenOgPAuU: Downloading web creator player API JSON\n",
+      "[youtube] ttnenOgPAuU: Downloading m3u8 information\n",
+      "[info] ttnenOgPAuU: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] ttnenOgPAuU: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Rückkehr nach Israel Wenn Krieg die Heimat zerreißt I auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Rückkehr nach Israel Wenn Krieg die Heimat zerreißt I auslandsjournal.de.vtt\n",
+      "[download] 100% of   36.27KiB in 00:00:00 at 250.31KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=mm3OS8H92fw\n",
+      "[youtube] mm3OS8H92fw: Downloading webpage\n",
+      "[youtube] mm3OS8H92fw: Downloading ios player API JSON\n",
+      "[youtube] mm3OS8H92fw: Downloading web creator player API JSON\n",
+      "[youtube] mm3OS8H92fw: Downloading m3u8 information\n",
+      "[info] mm3OS8H92fw: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=mm3OS8H92fw\n",
+      "[youtube] mm3OS8H92fw: Downloading webpage\n",
+      "[youtube] mm3OS8H92fw: Downloading ios player API JSON\n",
+      "[youtube] mm3OS8H92fw: Downloading web creator player API JSON\n",
+      "[youtube] mm3OS8H92fw: Downloading m3u8 information\n",
+      "[info] mm3OS8H92fw: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] mm3OS8H92fw: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Angriffe der Huthi Wie die Miliz aus Jemen in Nahost eskaliert  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Angriffe der Huthi Wie die Miliz aus Jemen in Nahost eskaliert  ZDFheute live.de.vtt\n",
+      "[download] 100% of  310.77KiB in 00:00:00 at 1.30MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5nnO25mAlYI\n",
+      "[youtube] 5nnO25mAlYI: Downloading webpage\n",
+      "[youtube] 5nnO25mAlYI: Downloading ios player API JSON\n",
+      "[youtube] 5nnO25mAlYI: Downloading web creator player API JSON\n",
+      "[youtube] 5nnO25mAlYI: Downloading m3u8 information\n",
+      "[info] 5nnO25mAlYI: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5nnO25mAlYI\n",
+      "[youtube] 5nnO25mAlYI: Downloading webpage\n",
+      "[youtube] 5nnO25mAlYI: Downloading ios player API JSON\n",
+      "[youtube] 5nnO25mAlYI: Downloading web creator player API JSON\n",
+      "[youtube] 5nnO25mAlYI: Downloading m3u8 information\n",
+      "[info] 5nnO25mAlYI: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 5nnO25mAlYI: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Bewegende Begegnung nach Hamas-Massaker  Markus Lanz - Das Jahr 2023.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Bewegende Begegnung nach Hamas-Massaker  Markus Lanz - Das Jahr 2023.de.vtt\n",
+      "[download] 100% of  145.62KiB in 00:00:00 at 693.81KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=jWO-QCszoTg\n",
+      "[youtube] jWO-QCszoTg: Downloading webpage\n",
+      "[youtube] jWO-QCszoTg: Downloading ios player API JSON\n",
+      "[youtube] jWO-QCszoTg: Downloading web creator player API JSON\n",
+      "[youtube] jWO-QCszoTg: Downloading m3u8 information\n",
+      "[info] jWO-QCszoTg: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=jWO-QCszoTg\n",
+      "[youtube] jWO-QCszoTg: Downloading webpage\n",
+      "[youtube] jWO-QCszoTg: Downloading ios player API JSON\n",
+      "[youtube] jWO-QCszoTg: Downloading web creator player API JSON\n",
+      "[youtube] jWO-QCszoTg: Downloading m3u8 information\n",
+      "[info] jWO-QCszoTg: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] jWO-QCszoTg: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Hisbollah droht Israel Nahost-Experte Daniel Gerlach zu Eskalations-Potenzial  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Hisbollah droht Israel Nahost-Experte Daniel Gerlach zu Eskalations-Potenzial  ZDFheute live.de.vtt\n",
+      "[download] 100% of  308.26KiB in 00:00:00 at 915.72KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5Rz5nvSWpNk\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading webpage\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading ios player API JSON\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading web creator player API JSON\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading m3u8 information\n",
+      "[info] 5Rz5nvSWpNk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5Rz5nvSWpNk\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading webpage\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading ios player API JSON\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading web creator player API JSON\n",
+      "[youtube] 5Rz5nvSWpNk: Downloading m3u8 information\n",
+      "[info] 5Rz5nvSWpNk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 5Rz5nvSWpNk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Wie Iran gegen Israel hetzt und Terror-Gruppen finanziert I auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Wie Iran gegen Israel hetzt und Terror-Gruppen finanziert I auslandsjournal.de.vtt\n",
+      "[download] 100% of   39.83KiB in 00:00:00 at 375.38KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zTDWbZE3kPw\n",
+      "[youtube] zTDWbZE3kPw: Downloading webpage\n",
+      "[youtube] zTDWbZE3kPw: Downloading ios player API JSON\n",
+      "[youtube] zTDWbZE3kPw: Downloading web creator player API JSON\n",
+      "[youtube] zTDWbZE3kPw: Downloading m3u8 information\n",
+      "[info] zTDWbZE3kPw: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=zTDWbZE3kPw\n",
+      "[youtube] zTDWbZE3kPw: Downloading webpage\n",
+      "[youtube] zTDWbZE3kPw: Downloading ios player API JSON\n",
+      "[youtube] zTDWbZE3kPw: Downloading web creator player API JSON\n",
+      "[youtube] zTDWbZE3kPw: Downloading m3u8 information\n",
+      "[info] zTDWbZE3kPw: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] zTDWbZE3kPw: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\UN-Gericht warnt, fordert aber kein Ende des israelischen Militäreinsatzes in Gaza  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\UN-Gericht warnt, fordert aber kein Ende des israelischen Militäreinsatzes in Gaza  ZDFheute live.de.vtt\n",
+      "[download] 100% of  222.78KiB in 00:00:00 at 443.05KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=qIt6FRk8l_Q\n",
+      "[youtube] qIt6FRk8l_Q: Downloading webpage\n",
+      "[youtube] qIt6FRk8l_Q: Downloading ios player API JSON\n",
+      "[youtube] qIt6FRk8l_Q: Downloading web creator player API JSON\n",
+      "[youtube] qIt6FRk8l_Q: Downloading m3u8 information\n",
+      "[info] qIt6FRk8l_Q: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=qIt6FRk8l_Q\n",
+      "[youtube] qIt6FRk8l_Q: Downloading webpage\n",
+      "[youtube] qIt6FRk8l_Q: Downloading ios player API JSON\n",
+      "[youtube] qIt6FRk8l_Q: Downloading web creator player API JSON\n",
+      "[youtube] qIt6FRk8l_Q: Downloading m3u8 information\n",
+      "[info] qIt6FRk8l_Q: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] qIt6FRk8l_Q: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Geisel-Befreiung und neue israelische Offensive - was Zivilisten in Rafah droht  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Geisel-Befreiung und neue israelische Offensive - was Zivilisten in Rafah droht  ZDFheute live.de.vtt\n",
+      "[download] 100% of  284.91KiB in 00:00:00 at 880.49KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=V-J25aqNZ54\n",
+      "[youtube] V-J25aqNZ54: Downloading webpage\n",
+      "[youtube] V-J25aqNZ54: Downloading ios player API JSON\n",
+      "[youtube] V-J25aqNZ54: Downloading web creator player API JSON\n",
+      "[youtube] V-J25aqNZ54: Downloading m3u8 information\n",
+      "[info] V-J25aqNZ54: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=V-J25aqNZ54\n",
+      "[youtube] V-J25aqNZ54: Downloading webpage\n",
+      "[youtube] V-J25aqNZ54: Downloading ios player API JSON\n",
+      "[youtube] V-J25aqNZ54: Downloading web creator player API JSON\n",
+      "[youtube] V-J25aqNZ54: Downloading m3u8 information\n",
+      "[info] V-J25aqNZ54: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] V-J25aqNZ54: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israel stört GPS Nahost-Experte über Bedrohung durch Hisbollah und Iran.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israel stört GPS Nahost-Experte über Bedrohung durch Hisbollah und Iran.de.vtt\n",
+      "[download] 100% of   90.72KiB in 00:00:00 at 388.37KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=U2gxSO5AyU0\n",
+      "[youtube] U2gxSO5AyU0: Downloading webpage\n",
+      "[youtube] U2gxSO5AyU0: Downloading ios player API JSON\n",
+      "[youtube] U2gxSO5AyU0: Downloading web creator player API JSON\n",
+      "[youtube] U2gxSO5AyU0: Downloading m3u8 information\n",
+      "[info] U2gxSO5AyU0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=U2gxSO5AyU0\n",
+      "[youtube] U2gxSO5AyU0: Downloading webpage\n",
+      "[youtube] U2gxSO5AyU0: Downloading ios player API JSON\n",
+      "[youtube] U2gxSO5AyU0: Downloading web creator player API JSON\n",
+      "[youtube] U2gxSO5AyU0: Downloading m3u8 information\n",
+      "[info] U2gxSO5AyU0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] U2gxSO5AyU0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nach Israel-Angriff Wie umgehen mit Iran  Berlin direkt.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nach Israel-Angriff Wie umgehen mit Iran  Berlin direkt.de.vtt\n",
+      "[download] 100% of  112.88KiB in 00:00:00 at 413.43KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=TGaXXlVNDP0\n",
+      "[youtube] TGaXXlVNDP0: Downloading webpage\n",
+      "[youtube] TGaXXlVNDP0: Downloading ios player API JSON\n",
+      "[youtube] TGaXXlVNDP0: Downloading web creator player API JSON\n",
+      "[youtube] TGaXXlVNDP0: Downloading m3u8 information\n",
+      "[info] TGaXXlVNDP0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=TGaXXlVNDP0\n",
+      "[youtube] TGaXXlVNDP0: Downloading webpage\n",
+      "[youtube] TGaXXlVNDP0: Downloading ios player API JSON\n",
+      "[youtube] TGaXXlVNDP0: Downloading web creator player API JSON\n",
+      "[youtube] TGaXXlVNDP0: Downloading m3u8 information\n",
+      "[info] TGaXXlVNDP0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] TGaXXlVNDP0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nach Irans Attacke auf Israel Eskaliert die Lage in Nahost  Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nach Irans Attacke auf Israel Eskaliert die Lage in Nahost  Morgenmagazin.de.vtt\n",
+      "[download] 100% of   78.79KiB in 00:00:00 at 431.24KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0-tCEFyuHmY\n",
+      "[youtube] 0-tCEFyuHmY: Downloading webpage\n",
+      "[youtube] 0-tCEFyuHmY: Downloading ios player API JSON\n",
+      "[youtube] 0-tCEFyuHmY: Downloading web creator player API JSON\n",
+      "[youtube] 0-tCEFyuHmY: Downloading m3u8 information\n",
+      "[info] 0-tCEFyuHmY: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0-tCEFyuHmY\n",
+      "[youtube] 0-tCEFyuHmY: Downloading webpage\n",
+      "[youtube] 0-tCEFyuHmY: Downloading ios player API JSON\n",
+      "[youtube] 0-tCEFyuHmY: Downloading web creator player API JSON\n",
+      "[youtube] 0-tCEFyuHmY: Downloading m3u8 information\n",
+      "[info] 0-tCEFyuHmY: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 0-tCEFyuHmY: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Nach Raketenangriff des Iran Kommt Vergeltungsschlag aus Israel  Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Nach Raketenangriff des Iran Kommt Vergeltungsschlag aus Israel  Morgenmagazin.de.vtt\n",
+      "[download] 100% of   79.47KiB in 00:00:00 at 402.49KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=EemLmtlo098\n",
+      "[youtube] EemLmtlo098: Downloading webpage\n",
+      "[youtube] EemLmtlo098: Downloading ios player API JSON\n",
+      "[youtube] EemLmtlo098: Downloading web creator player API JSON\n",
+      "[youtube] EemLmtlo098: Downloading m3u8 information\n",
+      "[info] EemLmtlo098: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=EemLmtlo098\n",
+      "[youtube] EemLmtlo098: Downloading webpage\n",
+      "[youtube] EemLmtlo098: Downloading ios player API JSON\n",
+      "[youtube] EemLmtlo098: Downloading web creator player API JSON\n",
+      "[youtube] EemLmtlo098: Downloading m3u8 information\n",
+      "[info] EemLmtlo098: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] EemLmtlo098: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Antwort auf iranischen Angriff Was sind Israels Optionen  Militärexperte bei ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Antwort auf iranischen Angriff Was sind Israels Optionen  Militärexperte bei ZDFheute live.de.vtt\n",
+      "[download] 100% of  285.74KiB in 00:00:00 at 926.24KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=q1BdMvNbzwg\n",
+      "[youtube] q1BdMvNbzwg: Downloading webpage\n",
+      "[youtube] q1BdMvNbzwg: Downloading ios player API JSON\n",
+      "[youtube] q1BdMvNbzwg: Downloading web creator player API JSON\n",
+      "[youtube] q1BdMvNbzwg: Downloading m3u8 information\n",
+      "[info] q1BdMvNbzwg: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=q1BdMvNbzwg\n",
+      "[youtube] q1BdMvNbzwg: Downloading webpage\n",
+      "[youtube] q1BdMvNbzwg: Downloading ios player API JSON\n",
+      "[youtube] q1BdMvNbzwg: Downloading web creator player API JSON\n",
+      "[youtube] q1BdMvNbzwg: Downloading m3u8 information\n",
+      "[info] q1BdMvNbzwg: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] q1BdMvNbzwg: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Explosionen in Isfahan Hat Israels Gegenschlag begonnen  Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Explosionen in Isfahan Hat Israels Gegenschlag begonnen  Morgenmagazin.de.vtt\n",
+      "[download] 100% of   40.66KiB in 00:00:00 at 373.24KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=xqliXa42ngo\n",
+      "[youtube] xqliXa42ngo: Downloading webpage\n",
+      "[youtube] xqliXa42ngo: Downloading ios player API JSON\n",
+      "[youtube] xqliXa42ngo: Downloading web creator player API JSON\n",
+      "[youtube] xqliXa42ngo: Downloading m3u8 information\n",
+      "[info] xqliXa42ngo: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=xqliXa42ngo\n",
+      "[youtube] xqliXa42ngo: Downloading webpage\n",
+      "[youtube] xqliXa42ngo: Downloading ios player API JSON\n",
+      "[youtube] xqliXa42ngo: Downloading web creator player API JSON\n",
+      "[youtube] xqliXa42ngo: Downloading m3u8 information\n",
+      "[info] xqliXa42ngo: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] xqliXa42ngo: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Israel, Iran und Gaza - Eskalation unvermeidlich  maybrit illner vom 18.04.2024.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Israel, Iran und Gaza - Eskalation unvermeidlich  maybrit illner vom 18.04.2024.de.vtt\n",
+      "[download] 100% of  501.09KiB in 00:00:00 at 1.52MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=tK4u3ZLMXno\n",
+      "[youtube] tK4u3ZLMXno: Downloading webpage\n",
+      "[youtube] tK4u3ZLMXno: Downloading ios player API JSON\n",
+      "[youtube] tK4u3ZLMXno: Downloading web creator player API JSON\n",
+      "[youtube] tK4u3ZLMXno: Downloading m3u8 information\n",
+      "[info] tK4u3ZLMXno: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=tK4u3ZLMXno\n",
+      "[youtube] tK4u3ZLMXno: Downloading webpage\n",
+      "[youtube] tK4u3ZLMXno: Downloading ios player API JSON\n",
+      "[youtube] tK4u3ZLMXno: Downloading web creator player API JSON\n",
+      "[youtube] tK4u3ZLMXno: Downloading m3u8 information\n",
+      "[info] tK4u3ZLMXno: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] tK4u3ZLMXno: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Was steht Gaza bevor Nahostexperte über Zukunftsszenario und Chance auf Frieden  ZDFheute live.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Was steht Gaza bevor Nahostexperte über Zukunftsszenario und Chance auf Frieden  ZDFheute live.de.vtt\n",
+      "[download] 100% of  322.34KiB in 00:00:00 at 813.60KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=nIV1PrUbgQE\n",
+      "[youtube] nIV1PrUbgQE: Downloading webpage\n",
+      "[youtube] nIV1PrUbgQE: Downloading ios player API JSON\n",
+      "[youtube] nIV1PrUbgQE: Downloading web creator player API JSON\n",
+      "[youtube] nIV1PrUbgQE: Downloading m3u8 information\n",
+      "[info] nIV1PrUbgQE: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=nIV1PrUbgQE\n",
+      "[youtube] nIV1PrUbgQE: Downloading webpage\n",
+      "[youtube] nIV1PrUbgQE: Downloading ios player API JSON\n",
+      "[youtube] nIV1PrUbgQE: Downloading web creator player API JSON\n",
+      "[youtube] nIV1PrUbgQE: Downloading m3u8 information\n",
+      "[info] nIV1PrUbgQE: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] nIV1PrUbgQE: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Pistorius warnt vor Rüstungsstopp  heute journal vom 09.05.2024.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Pistorius warnt vor Rüstungsstopp  heute journal vom 09.05.2024.de.vtt\n",
+      "[download] 100% of   53.30KiB in 00:00:00 at 382.35KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=NqYlfOY9D9U\n",
+      "[youtube] NqYlfOY9D9U: Downloading webpage\n",
+      "[youtube] NqYlfOY9D9U: Downloading ios player API JSON\n",
+      "[youtube] NqYlfOY9D9U: Downloading web creator player API JSON\n",
+      "[youtube] NqYlfOY9D9U: Downloading m3u8 information\n",
+      "[info] NqYlfOY9D9U: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=NqYlfOY9D9U\n",
+      "[youtube] NqYlfOY9D9U: Downloading webpage\n",
+      "[youtube] NqYlfOY9D9U: Downloading ios player API JSON\n",
+      "[youtube] NqYlfOY9D9U: Downloading web creator player API JSON\n",
+      "[youtube] NqYlfOY9D9U: Downloading m3u8 information\n",
+      "[info] NqYlfOY9D9U: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] NqYlfOY9D9U: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Pro-Palästina-Proteste an US-Unis  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Pro-Palästina-Proteste an US-Unis  auslandsjournal.de.vtt\n",
+      "[download] 100% of   80.67KiB in 00:00:00 at 601.59KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=94caa6NfGM0\n",
+      "[youtube] 94caa6NfGM0: Downloading webpage\n",
+      "[youtube] 94caa6NfGM0: Downloading ios player API JSON\n",
+      "[youtube] 94caa6NfGM0: Downloading web creator player API JSON\n",
+      "[youtube] 94caa6NfGM0: Downloading m3u8 information\n",
+      "[info] 94caa6NfGM0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=94caa6NfGM0\n",
+      "[youtube] 94caa6NfGM0: Downloading webpage\n",
+      "[youtube] 94caa6NfGM0: Downloading ios player API JSON\n",
+      "[youtube] 94caa6NfGM0: Downloading web creator player API JSON\n",
+      "[youtube] 94caa6NfGM0: Downloading m3u8 information\n",
+      "[info] 94caa6NfGM0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] 94caa6NfGM0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Protest gegen Israel – was unterscheidet Kritik von Hass  maybrit illner vom 16.05.2024.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Protest gegen Israel – was unterscheidet Kritik von Hass  maybrit illner vom 16.05.2024.de.vtt\n",
+      "[download] 100% of  452.22KiB in 00:00:00 at 1.38MiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=g20DoY6lnYk\n",
+      "[youtube] g20DoY6lnYk: Downloading webpage\n",
+      "[youtube] g20DoY6lnYk: Downloading ios player API JSON\n",
+      "[youtube] g20DoY6lnYk: Downloading web creator player API JSON\n",
+      "[youtube] g20DoY6lnYk: Downloading m3u8 information\n",
+      "[info] g20DoY6lnYk: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=g20DoY6lnYk\n",
+      "[youtube] g20DoY6lnYk: Downloading webpage\n",
+      "[youtube] g20DoY6lnYk: Downloading ios player API JSON\n",
+      "[youtube] g20DoY6lnYk: Downloading web creator player API JSON\n",
+      "[youtube] g20DoY6lnYk: Downloading m3u8 information\n",
+      "[info] g20DoY6lnYk: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] g20DoY6lnYk: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Netanjahu unter Druck Wie geht es weiter in Nahost  auslandsjournal.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Netanjahu unter Druck Wie geht es weiter in Nahost  auslandsjournal.de.vtt\n",
+      "[download] 100% of   45.58KiB in 00:00:00 at 296.65KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=VirecTomYy0\n",
+      "[youtube] VirecTomYy0: Downloading webpage\n",
+      "[youtube] VirecTomYy0: Downloading ios player API JSON\n",
+      "[youtube] VirecTomYy0: Downloading web creator player API JSON\n",
+      "[youtube] VirecTomYy0: Downloading m3u8 information\n",
+      "[info] VirecTomYy0: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=VirecTomYy0\n",
+      "[youtube] VirecTomYy0: Downloading webpage\n",
+      "[youtube] VirecTomYy0: Downloading ios player API JSON\n",
+      "[youtube] VirecTomYy0: Downloading web creator player API JSON\n",
+      "[youtube] VirecTomYy0: Downloading m3u8 information\n",
+      "[info] VirecTomYy0: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] VirecTomYy0: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Rafah Israel spricht von tragischem Fehler  Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Rafah Israel spricht von tragischem Fehler  Morgenmagazin.de.vtt\n",
+      "[download] 100% of   60.33KiB in 00:00:00 at 279.03KiB/s\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=IK04HP5NvmU\n",
+      "[youtube] IK04HP5NvmU: Downloading webpage\n",
+      "[youtube] IK04HP5NvmU: Downloading ios player API JSON\n",
+      "[youtube] IK04HP5NvmU: Downloading web creator player API JSON\n",
+      "[youtube] IK04HP5NvmU: Downloading m3u8 information\n",
+      "[info] IK04HP5NvmU: Downloading subtitles: en\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=IK04HP5NvmU\n",
+      "[youtube] IK04HP5NvmU: Downloading webpage\n",
+      "[youtube] IK04HP5NvmU: Downloading ios player API JSON\n",
+      "[youtube] IK04HP5NvmU: Downloading web creator player API JSON\n",
+      "[youtube] IK04HP5NvmU: Downloading m3u8 information\n",
+      "[info] IK04HP5NvmU: Downloading subtitles: de\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[info] IK04HP5NvmU: Downloading 1 format(s): 18\n",
+      "[info] Writing video subtitles to: data\\de_ZDFheute\\Rafah Israelisches Militär setzt Angriffe fort   Morgenmagazin.de.vtt\n",
+      "[download] Destination: data\\de_ZDFheute\\Rafah Israelisches Militär setzt Angriffe fort   Morgenmagazin.de.vtt\n",
+      "[download] 100% of   30.80KiB in 00:00:00 at 370.57KiB/s\n",
+      "Dataset created successfully with 85 entries.\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "import requests\n",
+    "import pandas as pd\n",
+    "import webvtt\n",
+    "from pytube import Playlist\n",
+    "import yt_dlp\n",
+    "import re\n",
+    "import time\n",
+    "import unicodedata\n",
+    "\n",
+    "# Assume `playlist` is a pytube Playlist object already initialized\n",
+    "playlist_url = 'https://www.youtube.com/playlist?list=PLdPrKDvwrog4A9LzWcEFb6TKPumEh2aZG'\n",
+    "playlist = Playlist(playlist_url)\n",
+    "\n",
+    "# Get all video URLs in the playlist\n",
+    "video_urls = [video.watch_url for video in playlist.videos]\n",
+    "\n",
+    "# Directory to save thumbnails and transcripts\n",
+    "output_dir = 'data/de_ZDFheute'\n",
+    "os.makedirs(output_dir, exist_ok=True)\n",
+    "\n",
+    "def sanitize_filename(name):\n",
+    "    \"\"\"\n",
+    "    Sanitize the filename by removing invalid characters, full-width symbols,\n",
+    "    stripping newlines, and normalizing unicode to ASCII where possible.\n",
+    "    \"\"\"\n",
+    "    # Normalize full-width characters to their ASCII equivalents\n",
+    "    name = unicodedata.normalize('NFKC', name)  # Normalize Unicode characters to ASCII-compatible form\n",
+    "    \n",
+    "    # Remove problematic characters for filenames\n",
+    "    name = re.sub(r'[\\\\/*?:\"<>|]', \"\", name)  # Remove invalid characters\n",
+    "    name = name.replace('\\n', '').replace('\\r', '')  # Remove newlines\n",
+    "    name = name.strip()  # Trim leading/trailing spaces\n",
+    "\n",
+    "    # Ensure the filename length is not too long (you can set a specific limit)\n",
+    "    max_filename_length = 255\n",
+    "    return name[:max_filename_length]\n",
+    "\n",
+    "def download_thumbnail(thumbnail_url, title):\n",
+    "    try:\n",
+    "        response = requests.get(thumbnail_url)\n",
+    "        sanitized_title = sanitize_filename(title)\n",
+    "        thumbnail_file = os.path.join(output_dir, f'{sanitized_title}.jpg')\n",
+    "        with open(thumbnail_file, 'wb') as file:\n",
+    "            file.write(response.content)\n",
+    "        return thumbnail_file\n",
+    "    except Exception as e:\n",
+    "        print(f\"Failed to download thumbnail for {title}: {e}\")\n",
+    "        return None\n",
+    "\n",
+    "def download_subtitles(video_url, video_title, subtitle_languages):\n",
+    "    sanitized_title = sanitize_filename(video_title)\n",
+    "    \n",
+    "    # Define the download options\n",
+    "    ydl_opts = {\n",
+    "        'writesubtitles': True,\n",
+    "        'writeautomaticsub': True,\n",
+    "        'skip_download': True,  # Skip video download\n",
+    "        'outtmpl': os.path.join(output_dir, f'{sanitized_title}.%(ext)s'),  # Use sanitized title\n",
+    "        'restrictfilenames': True,\n",
+    "    }\n",
+    "    \n",
+    "    try:\n",
+    "        with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n",
+    "            if 'de' in subtitle_languages:\n",
+    "                # Download English subtitles\n",
+    "                subtitle_file = os.path.join(output_dir, f'{sanitized_title}.de.vtt')\n",
+    "                if not os.path.exists(subtitle_file):\n",
+    "                    ydl_opts['subtitleslangs'] = ['de']\n",
+    "                    ydl.download([video_url])  # Download subtitles for the video\n",
+    "                return subtitle_file\n",
+    "            elif subtitle_languages:\n",
+    "                # Download the first available subtitle if English is not found\n",
+    "                first_lang = list(subtitle_languages)[0]\n",
+    "                subtitle_file = os.path.join(output_dir, f'{sanitized_title}.{first_lang}.vtt')\n",
+    "                if not os.path.exists(subtitle_file):\n",
+    "                    ydl_opts['subtitleslangs'] = [first_lang]\n",
+    "                    ydl.download([video_url])\n",
+    "                return subtitle_file\n",
+    "                \n",
+    "    except yt_dlp.utils.DownloadError as e:\n",
+    "        error_message = str(e)\n",
+    "        print(f\"Error downloading subtitles for {video_title}: {error_message}\")\n",
+    "        return None\n",
+    "                \n",
+    "def download_video_info(video_url, max_retries=3, retry_interval=180):\n",
+    "    ydl_opts = {\n",
+    "        'writesubtitles': True,\n",
+    "        'writeautomaticsub': True,\n",
+    "        'skip_download': True,\n",
+    "        #'outtmpl': os.path.join(output_dir, f'{\"%(sanitized_title)s\"}.%(ext)s'),\n",
+    "        'postprocessors': [{\n",
+    "            'key': 'FFmpegMetadata',\n",
+    "        }],\n",
+    "    }\n",
+    "    retries = 0\n",
+    "    while retries < max_retries:\n",
+    "        try:\n",
+    "            with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n",
+    "                info_dict = ydl.extract_info(video_url, download=False)\n",
+    "                video_title = info_dict.get('title', None)\n",
+    "                video_id = info_dict.get('id', None)\n",
+    "                thumbnail_url = info_dict.get('thumbnail', None)\n",
+    "                publish_date = info_dict.get('upload_date', None)  # Format: 'YYYYMMDD'\n",
+    "                subtitle_languages = info_dict.get('automatic_captions', {}).keys()\n",
+    "\n",
+    "                # Download thumbnail\n",
+    "                thumbnail_file = None\n",
+    "                if thumbnail_url:\n",
+    "                    thumbnail_file = download_thumbnail(thumbnail_url, video_title)\n",
+    "\n",
+    "                # Download subtitles\n",
+    "                subtitle_file = None\n",
+    "                subtitle_file = download_subtitles(video_url, video_title, subtitle_languages)\n",
+    "                \n",
+    "            # Return the collected video information\n",
+    "            return video_id, video_title, thumbnail_file, subtitle_file, publish_date\n",
+    "\n",
+    "        except yt_dlp.utils.DownloadError as e:\n",
+    "            error_message = str(e)\n",
+    "            if \"Sign in to confirm you’re not a bot\" in error_message:\n",
+    "                retries += 1\n",
+    "                print(f\"Error: {error_message}. Retrying in {retry_interval} seconds... (Attempt {retries}/{max_retries})\")\n",
+    "                time.sleep(retry_interval)  # Wait before retrying\n",
+    "            else:\n",
+    "                print(f\"Failed to download video info for {video_url}: {e}\")\n",
+    "                return None, None, None, None, None\n",
+    "\n",
+    "    # After max retries, log the failure and return None\n",
+    "    print(f\"Max retries reached. Skipping video: {video_url}\")\n",
+    "    return None, None, None, None, None\n",
+    "\n",
+    "def vtt_to_text(vtt_file_path):\n",
+    "    try:\n",
+    "        text = ''\n",
+    "        lines = []\n",
+    "        deduplicated_lines = []\n",
+    "        for caption in webvtt.read(vtt_file_path):\n",
+    "            # Split the block into lines and deduplicate them within the block\n",
+    "            lines.extend(caption.text.strip().split('\\n'))\n",
+    "            #print(caption.text.strip().split('\\n'))\n",
+    "        for line in lines:\n",
+    "            if line and (not deduplicated_lines or line != deduplicated_lines[-1]):  # Avoid consecutive duplicates\n",
+    "                deduplicated_lines.append(line)\n",
+    "     \n",
+    "        text = \"\\n\".join(deduplicated_lines)\n",
+    "    \n",
+    "    except Exception as e:\n",
+    "        print(f\"Failed to convert {vtt_file_path} to text: {e}\")\n",
+    "        \n",
+    "    return text\n",
+    "\n",
+    "# Create a list to store video information\n",
+    "data = []\n",
+    "\n",
+    "# Loop through each video URL and download the required data\n",
+    "for video_url in video_urls:\n",
+    "    video_id, video_title, thumbnail_file, subtitle_file, publish_date = download_video_info(video_url)\n",
+    "    # If video info is successfully retrieved\n",
+    "    if video_id and video_title:\n",
+    "        # Convert subtitles to text if available\n",
+    "        transcript = None\n",
+    "        if subtitle_file and os.path.exists(subtitle_file):\n",
+    "            transcript = vtt_to_text(subtitle_file)\n",
+    "        else:\n",
+    "            print(\"subtitle file not found\")\n",
+    "        # Append data to the list\n",
+    "        data.append({\n",
+    "            'video_id': video_id,\n",
+    "            'video_title': video_title,\n",
+    "            'thumbnail_path': thumbnail_file,\n",
+    "            'transcript': transcript,\n",
+    "            'publish_date': publish_date\n",
+    "        })\n",
+    "\n",
+    "# Convert the list to a DataFrame\n",
+    "df = pd.DataFrame(data, columns=['video_id', 'video_title', 'thumbnail_path', 'transcript', 'publish_date'])\n",
+    "\n",
+    "# Save the DataFrame to a CSV file\n",
+    "df.to_csv(os.path.join(output_dir,'../', 'de_ZDFheute.csv'), index=False)\n",
+    "\n",
+    "print(f\"Dataset created successfully with {len(df)} entries.\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

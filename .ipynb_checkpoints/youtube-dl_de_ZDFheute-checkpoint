@@ -1,0 +1,2520 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 1: Install Required Libraries\n",
+    "First, you need to install the necessary Python libraries:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Defaulting to user installation because normal site-packages is not writeable\n",
+      "Requirement already satisfied: yt-dlp in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (2024.8.6)\n",
+      "Requirement already satisfied: pytube in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (15.0.0)\n",
+      "Requirement already satisfied: pandas in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (2.2.2)\n",
+      "Requirement already satisfied: webvtt-py in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (0.5.1)\n",
+      "Requirement already satisfied: requests in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (2.32.3)\n",
+      "Requirement already satisfied: brotli in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (1.1.0)\n",
+      "Requirement already satisfied: certifi in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (2024.8.30)\n",
+      "Requirement already satisfied: mutagen in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (1.47.0)\n",
+      "Requirement already satisfied: pycryptodomex in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (3.20.0)\n",
+      "Requirement already satisfied: urllib3<3,>=1.26.17 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (2.2.2)\n",
+      "Requirement already satisfied: websockets>=12.0 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from yt-dlp) (13.0.1)\n",
+      "Requirement already satisfied: numpy>=1.26.0 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2.1.1)\n",
+      "Requirement already satisfied: python-dateutil>=2.8.2 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2.9.0.post0)\n",
+      "Requirement already satisfied: pytz>=2020.1 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2024.1)\n",
+      "Requirement already satisfied: tzdata>=2022.7 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from pandas) (2024.1)\n",
+      "Requirement already satisfied: charset-normalizer<4,>=2 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from requests) (3.3.2)\n",
+      "Requirement already satisfied: idna<4,>=2.5 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from requests) (3.8)\n",
+      "Requirement already satisfied: six>=1.5 in c:\\users\\lorenz\\appdata\\roaming\\python\\python312\\site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0)\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install yt-dlp pytube pandas webvtt-py requests\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[youtube] Extracting URL: https://youtube.com/watch?v=NX3VEeL3aW8\n",
+      "[youtube] NX3VEeL3aW8: Downloading webpage\n",
+      "[youtube] NX3VEeL3aW8: Downloading ios player API JSON\n",
+      "[youtube] NX3VEeL3aW8: Downloading web creator player API JSON\n",
+      "[youtube] NX3VEeL3aW8: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=W_16zPz9MRg\n",
+      "[youtube] W_16zPz9MRg: Downloading webpage\n",
+      "[youtube] W_16zPz9MRg: Downloading ios player API JSON\n",
+      "[youtube] W_16zPz9MRg: Downloading web creator player API JSON\n",
+      "[youtube] W_16zPz9MRg: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=eE32NFyT-xE\n",
+      "[youtube] eE32NFyT-xE: Downloading webpage\n",
+      "[youtube] eE32NFyT-xE: Downloading ios player API JSON\n",
+      "[youtube] eE32NFyT-xE: Downloading web creator player API JSON\n",
+      "[youtube] eE32NFyT-xE: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=jasQxm52eLI\n",
+      "[youtube] jasQxm52eLI: Downloading webpage\n",
+      "[youtube] jasQxm52eLI: Downloading ios player API JSON\n",
+      "[youtube] jasQxm52eLI: Downloading web creator player API JSON\n",
+      "[youtube] jasQxm52eLI: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=6UdGy-kNREs\n",
+      "[youtube] 6UdGy-kNREs: Downloading webpage\n",
+      "[youtube] 6UdGy-kNREs: Downloading ios player API JSON\n",
+      "[youtube] 6UdGy-kNREs: Downloading web creator player API JSON\n",
+      "[youtube] 6UdGy-kNREs: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=-ekAGXfR6OI\n",
+      "[youtube] -ekAGXfR6OI: Downloading webpage\n",
+      "[youtube] -ekAGXfR6OI: Downloading ios player API JSON\n",
+      "[youtube] -ekAGXfR6OI: Downloading web creator player API JSON\n",
+      "[youtube] -ekAGXfR6OI: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ZJc9y3TfJvM\n",
+      "[youtube] ZJc9y3TfJvM: Downloading webpage\n",
+      "[youtube] ZJc9y3TfJvM: Downloading ios player API JSON\n",
+      "[youtube] ZJc9y3TfJvM: Downloading web creator player API JSON\n",
+      "[youtube] ZJc9y3TfJvM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5tHwMmVTs54\n",
+      "[youtube] 5tHwMmVTs54: Downloading webpage\n",
+      "[youtube] 5tHwMmVTs54: Downloading ios player API JSON\n",
+      "[youtube] 5tHwMmVTs54: Downloading web creator player API JSON\n",
+      "[youtube] 5tHwMmVTs54: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=v17Kl6ogmP4\n",
+      "[youtube] v17Kl6ogmP4: Downloading webpage\n",
+      "[youtube] v17Kl6ogmP4: Downloading ios player API JSON\n",
+      "[youtube] v17Kl6ogmP4: Downloading web creator player API JSON\n",
+      "[youtube] v17Kl6ogmP4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=hBkpkpwa9MM\n",
+      "[youtube] hBkpkpwa9MM: Downloading webpage\n",
+      "[youtube] hBkpkpwa9MM: Downloading ios player API JSON\n",
+      "[youtube] hBkpkpwa9MM: Downloading web creator player API JSON\n",
+      "[youtube] hBkpkpwa9MM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=LYc1_vtpPNY\n",
+      "[youtube] LYc1_vtpPNY: Downloading webpage\n",
+      "[youtube] LYc1_vtpPNY: Downloading ios player API JSON\n",
+      "[youtube] LYc1_vtpPNY: Downloading web creator player API JSON\n",
+      "[youtube] LYc1_vtpPNY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=WSaaHZsLTpM\n",
+      "[youtube] WSaaHZsLTpM: Downloading webpage\n",
+      "[youtube] WSaaHZsLTpM: Downloading ios player API JSON\n",
+      "[youtube] WSaaHZsLTpM: Downloading web creator player API JSON\n",
+      "[youtube] WSaaHZsLTpM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=tvM8OrsM-Mc\n",
+      "[youtube] tvM8OrsM-Mc: Downloading webpage\n",
+      "[youtube] tvM8OrsM-Mc: Downloading ios player API JSON\n",
+      "[youtube] tvM8OrsM-Mc: Downloading web creator player API JSON\n",
+      "[youtube] tvM8OrsM-Mc: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=rFtbYu_ugNQ\n",
+      "[youtube] rFtbYu_ugNQ: Downloading webpage\n",
+      "[youtube] rFtbYu_ugNQ: Downloading ios player API JSON\n",
+      "[youtube] rFtbYu_ugNQ: Downloading web creator player API JSON\n",
+      "[youtube] rFtbYu_ugNQ: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1YwAI_aY-wQ\n",
+      "[youtube] 1YwAI_aY-wQ: Downloading webpage\n",
+      "[youtube] 1YwAI_aY-wQ: Downloading ios player API JSON\n",
+      "[youtube] 1YwAI_aY-wQ: Downloading web creator player API JSON\n",
+      "[youtube] 1YwAI_aY-wQ: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=mTVF47b3eo4\n",
+      "[youtube] mTVF47b3eo4: Downloading webpage\n",
+      "[youtube] mTVF47b3eo4: Downloading ios player API JSON\n",
+      "[youtube] mTVF47b3eo4: Downloading web creator player API JSON\n",
+      "[youtube] mTVF47b3eo4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pwEcL55YJj4\n",
+      "[youtube] pwEcL55YJj4: Downloading webpage\n",
+      "[youtube] pwEcL55YJj4: Downloading ios player API JSON\n",
+      "[youtube] pwEcL55YJj4: Downloading web creator player API JSON\n",
+      "[youtube] pwEcL55YJj4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=9gUxvWkkVEU\n",
+      "[youtube] 9gUxvWkkVEU: Downloading webpage\n",
+      "[youtube] 9gUxvWkkVEU: Downloading ios player API JSON\n",
+      "[youtube] 9gUxvWkkVEU: Downloading web creator player API JSON\n",
+      "[youtube] 9gUxvWkkVEU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MnUoE3YP2x0\n",
+      "[youtube] MnUoE3YP2x0: Downloading webpage\n",
+      "[youtube] MnUoE3YP2x0: Downloading ios player API JSON\n",
+      "[youtube] MnUoE3YP2x0: Downloading web creator player API JSON\n",
+      "[youtube] MnUoE3YP2x0: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=r4_quH0G8gc\n",
+      "[youtube] r4_quH0G8gc: Downloading webpage\n",
+      "[youtube] r4_quH0G8gc: Downloading ios player API JSON\n",
+      "[youtube] r4_quH0G8gc: Downloading web creator player API JSON\n",
+      "[youtube] r4_quH0G8gc: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pFtVewAOrHM\n",
+      "[youtube] pFtVewAOrHM: Downloading webpage\n",
+      "[youtube] pFtVewAOrHM: Downloading ios player API JSON\n",
+      "[youtube] pFtVewAOrHM: Downloading web creator player API JSON\n",
+      "[youtube] pFtVewAOrHM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5s-vSY6x0hY\n",
+      "[youtube] 5s-vSY6x0hY: Downloading webpage\n",
+      "[youtube] 5s-vSY6x0hY: Downloading ios player API JSON\n",
+      "[youtube] 5s-vSY6x0hY: Downloading web creator player API JSON\n",
+      "[youtube] 5s-vSY6x0hY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5dmMZiLK7G4\n",
+      "[youtube] 5dmMZiLK7G4: Downloading webpage\n",
+      "[youtube] 5dmMZiLK7G4: Downloading ios player API JSON\n",
+      "[youtube] 5dmMZiLK7G4: Downloading web creator player API JSON\n",
+      "[youtube] 5dmMZiLK7G4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=fPW8DEt-rnw\n",
+      "[youtube] fPW8DEt-rnw: Downloading webpage\n",
+      "[youtube] fPW8DEt-rnw: Downloading ios player API JSON\n",
+      "[youtube] fPW8DEt-rnw: Downloading web creator player API JSON\n",
+      "[youtube] fPW8DEt-rnw: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=vDTV2FBs9LA\n",
+      "[youtube] vDTV2FBs9LA: Downloading webpage\n",
+      "[youtube] vDTV2FBs9LA: Downloading ios player API JSON\n",
+      "[youtube] vDTV2FBs9LA: Downloading web creator player API JSON\n",
+      "[youtube] vDTV2FBs9LA: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=PjWQoUki_xM\n",
+      "[youtube] PjWQoUki_xM: Downloading webpage\n",
+      "[youtube] PjWQoUki_xM: Downloading ios player API JSON\n",
+      "[youtube] PjWQoUki_xM: Downloading web creator player API JSON\n",
+      "[youtube] PjWQoUki_xM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=NadPs-28iOw\n",
+      "[youtube] NadPs-28iOw: Downloading webpage\n",
+      "[youtube] NadPs-28iOw: Downloading ios player API JSON\n",
+      "[youtube] NadPs-28iOw: Downloading web creator player API JSON\n",
+      "[youtube] NadPs-28iOw: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=55K1locU654\n",
+      "[youtube] 55K1locU654: Downloading webpage\n",
+      "[youtube] 55K1locU654: Downloading ios player API JSON\n",
+      "[youtube] 55K1locU654: Downloading web creator player API JSON\n",
+      "[youtube] 55K1locU654: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=4rJx-LJJ8-w\n",
+      "[youtube] 4rJx-LJJ8-w: Downloading webpage\n",
+      "[youtube] 4rJx-LJJ8-w: Downloading ios player API JSON\n",
+      "[youtube] 4rJx-LJJ8-w: Downloading web creator player API JSON\n",
+      "[youtube] 4rJx-LJJ8-w: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5MYWmLvvfJY\n",
+      "[youtube] 5MYWmLvvfJY: Downloading webpage\n",
+      "[youtube] 5MYWmLvvfJY: Downloading ios player API JSON\n",
+      "[youtube] 5MYWmLvvfJY: Downloading web creator player API JSON\n",
+      "[youtube] 5MYWmLvvfJY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=hDVUewsNACM\n",
+      "[youtube] hDVUewsNACM: Downloading webpage\n",
+      "[youtube] hDVUewsNACM: Downloading ios player API JSON\n",
+      "[youtube] hDVUewsNACM: Downloading web creator player API JSON\n",
+      "[youtube] hDVUewsNACM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=grycXqsZHkE\n",
+      "[youtube] grycXqsZHkE: Downloading webpage\n",
+      "[youtube] grycXqsZHkE: Downloading ios player API JSON\n",
+      "[youtube] grycXqsZHkE: Downloading web creator player API JSON\n",
+      "[youtube] grycXqsZHkE: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Z12gYhJNyhg\n",
+      "[youtube] Z12gYhJNyhg: Downloading webpage\n",
+      "[youtube] Z12gYhJNyhg: Downloading ios player API JSON\n",
+      "[youtube] Z12gYhJNyhg: Downloading web creator player API JSON\n",
+      "[youtube] Z12gYhJNyhg: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=PAss6WNEUA4\n",
+      "[youtube] PAss6WNEUA4: Downloading webpage\n",
+      "[youtube] PAss6WNEUA4: Downloading ios player API JSON\n",
+      "[youtube] PAss6WNEUA4: Downloading web creator player API JSON\n",
+      "[youtube] PAss6WNEUA4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ofU-I2IRAJ0\n",
+      "[youtube] ofU-I2IRAJ0: Downloading webpage\n",
+      "[youtube] ofU-I2IRAJ0: Downloading ios player API JSON\n",
+      "[youtube] ofU-I2IRAJ0: Downloading web creator player API JSON\n",
+      "[youtube] ofU-I2IRAJ0: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=5MaGoQgDeck\n",
+      "[youtube] 5MaGoQgDeck: Downloading webpage\n",
+      "[youtube] 5MaGoQgDeck: Downloading ios player API JSON\n",
+      "[youtube] 5MaGoQgDeck: Downloading web creator player API JSON\n",
+      "[youtube] 5MaGoQgDeck: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Rjo0cci96e4\n",
+      "[youtube] Rjo0cci96e4: Downloading webpage\n",
+      "[youtube] Rjo0cci96e4: Downloading ios player API JSON\n",
+      "[youtube] Rjo0cci96e4: Downloading web creator player API JSON\n",
+      "[youtube] Rjo0cci96e4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=sBwQr1n9XK8\n",
+      "[youtube] sBwQr1n9XK8: Downloading webpage\n",
+      "[youtube] sBwQr1n9XK8: Downloading ios player API JSON\n",
+      "[youtube] sBwQr1n9XK8: Downloading web creator player API JSON\n",
+      "[youtube] sBwQr1n9XK8: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=O4ZzF5T0o1U\n",
+      "[youtube] O4ZzF5T0o1U: Downloading webpage\n",
+      "[youtube] O4ZzF5T0o1U: Downloading ios player API JSON\n",
+      "[youtube] O4ZzF5T0o1U: Downloading web creator player API JSON\n",
+      "[youtube] O4ZzF5T0o1U: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=OGubIb0PD5Q\n",
+      "[youtube] OGubIb0PD5Q: Downloading webpage\n",
+      "[youtube] OGubIb0PD5Q: Downloading ios player API JSON\n",
+      "[youtube] OGubIb0PD5Q: Downloading web creator player API JSON\n",
+      "[youtube] OGubIb0PD5Q: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=fHKE3tFtfvM\n",
+      "[youtube] fHKE3tFtfvM: Downloading webpage\n",
+      "[youtube] fHKE3tFtfvM: Downloading ios player API JSON\n",
+      "[youtube] fHKE3tFtfvM: Downloading web creator player API JSON\n",
+      "[youtube] fHKE3tFtfvM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=K3rnXKZUKjo\n",
+      "[youtube] K3rnXKZUKjo: Downloading webpage\n",
+      "[youtube] K3rnXKZUKjo: Downloading ios player API JSON\n",
+      "[youtube] K3rnXKZUKjo: Downloading web creator player API JSON\n",
+      "[youtube] K3rnXKZUKjo: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ue-HvOXkZXg\n",
+      "[youtube] ue-HvOXkZXg: Downloading webpage\n",
+      "[youtube] ue-HvOXkZXg: Downloading ios player API JSON\n",
+      "[youtube] ue-HvOXkZXg: Downloading web creator player API JSON\n",
+      "[youtube] ue-HvOXkZXg: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=KGlUAcpPhGA\n",
+      "[youtube] KGlUAcpPhGA: Downloading webpage\n",
+      "[youtube] KGlUAcpPhGA: Downloading ios player API JSON\n",
+      "[youtube] KGlUAcpPhGA: Downloading web creator player API JSON\n",
+      "[youtube] KGlUAcpPhGA: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=asCsa6fErN4\n",
+      "[youtube] asCsa6fErN4: Downloading webpage\n",
+      "[youtube] asCsa6fErN4: Downloading ios player API JSON\n",
+      "[youtube] asCsa6fErN4: Downloading web creator player API JSON\n",
+      "[youtube] asCsa6fErN4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=wUs2kMoZTfU\n",
+      "[youtube] wUs2kMoZTfU: Downloading webpage\n",
+      "[youtube] wUs2kMoZTfU: Downloading ios player API JSON\n",
+      "[youtube] wUs2kMoZTfU: Downloading web creator player API JSON\n",
+      "[youtube] wUs2kMoZTfU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=GkBJeFphgkk\n",
+      "[youtube] GkBJeFphgkk: Downloading webpage\n",
+      "[youtube] GkBJeFphgkk: Downloading ios player API JSON\n",
+      "[youtube] GkBJeFphgkk: Downloading web creator player API JSON\n",
+      "[youtube] GkBJeFphgkk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=C2D7fqjlyVI\n",
+      "[youtube] C2D7fqjlyVI: Downloading webpage\n",
+      "[youtube] C2D7fqjlyVI: Downloading ios player API JSON\n",
+      "[youtube] C2D7fqjlyVI: Downloading web creator player API JSON\n",
+      "[youtube] C2D7fqjlyVI: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=7j0BVMV6yww\n",
+      "[youtube] 7j0BVMV6yww: Downloading webpage\n",
+      "[youtube] 7j0BVMV6yww: Downloading ios player API JSON\n",
+      "[youtube] 7j0BVMV6yww: Downloading web creator player API JSON\n",
+      "[youtube] 7j0BVMV6yww: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MuqStdCXgXQ\n",
+      "[youtube] MuqStdCXgXQ: Downloading webpage\n",
+      "[youtube] MuqStdCXgXQ: Downloading ios player API JSON\n",
+      "[youtube] MuqStdCXgXQ: Downloading web creator player API JSON\n",
+      "[youtube] MuqStdCXgXQ: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=hI_aTALKd8k\n",
+      "[youtube] hI_aTALKd8k: Downloading webpage\n",
+      "[youtube] hI_aTALKd8k: Downloading ios player API JSON\n",
+      "[youtube] hI_aTALKd8k: Downloading web creator player API JSON\n",
+      "[youtube] hI_aTALKd8k: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=FcJ6SRb3Dwc\n",
+      "[youtube] FcJ6SRb3Dwc: Downloading webpage\n",
+      "[youtube] FcJ6SRb3Dwc: Downloading ios player API JSON\n",
+      "[youtube] FcJ6SRb3Dwc: Downloading web creator player API JSON\n",
+      "[youtube] FcJ6SRb3Dwc: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=GtViofSWSK0\n",
+      "[youtube] GtViofSWSK0: Downloading webpage\n",
+      "[youtube] GtViofSWSK0: Downloading ios player API JSON\n",
+      "[youtube] GtViofSWSK0: Downloading web creator player API JSON\n",
+      "[youtube] GtViofSWSK0: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=LE-sDEFNh44\n",
+      "[youtube] LE-sDEFNh44: Downloading webpage\n",
+      "[youtube] LE-sDEFNh44: Downloading ios player API JSON\n",
+      "[youtube] LE-sDEFNh44: Downloading web creator player API JSON\n",
+      "[youtube] LE-sDEFNh44: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=OBs9CXrUGeU\n",
+      "[youtube] OBs9CXrUGeU: Downloading webpage\n",
+      "[youtube] OBs9CXrUGeU: Downloading ios player API JSON\n",
+      "[youtube] OBs9CXrUGeU: Downloading web creator player API JSON\n",
+      "[youtube] OBs9CXrUGeU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1JfACKHjQRM\n",
+      "[youtube] 1JfACKHjQRM: Downloading webpage\n",
+      "[youtube] 1JfACKHjQRM: Downloading ios player API JSON\n",
+      "[youtube] 1JfACKHjQRM: Downloading web creator player API JSON\n",
+      "[youtube] 1JfACKHjQRM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=6EMoBE2HKlU\n",
+      "[youtube] 6EMoBE2HKlU: Downloading webpage\n",
+      "[youtube] 6EMoBE2HKlU: Downloading ios player API JSON\n",
+      "[youtube] 6EMoBE2HKlU: Downloading web creator player API JSON\n",
+      "[youtube] 6EMoBE2HKlU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Lnh6m4ymuSE\n",
+      "[youtube] Lnh6m4ymuSE: Downloading webpage\n",
+      "[youtube] Lnh6m4ymuSE: Downloading ios player API JSON\n",
+      "[youtube] Lnh6m4ymuSE: Downloading web creator player API JSON\n",
+      "[youtube] Lnh6m4ymuSE: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1WoS-akERl8\n",
+      "[youtube] 1WoS-akERl8: Downloading webpage\n",
+      "[youtube] 1WoS-akERl8: Downloading ios player API JSON\n",
+      "[youtube] 1WoS-akERl8: Downloading web creator player API JSON\n",
+      "[youtube] 1WoS-akERl8: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=tI3kNHYQ_xg\n",
+      "[youtube] tI3kNHYQ_xg: Downloading webpage\n",
+      "[youtube] tI3kNHYQ_xg: Downloading ios player API JSON\n",
+      "[youtube] tI3kNHYQ_xg: Downloading web creator player API JSON\n",
+      "[youtube] tI3kNHYQ_xg: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Ww6CS0tjPes\n",
+      "[youtube] Ww6CS0tjPes: Downloading webpage\n",
+      "[youtube] Ww6CS0tjPes: Downloading ios player API JSON\n",
+      "[youtube] Ww6CS0tjPes: Downloading web creator player API JSON\n",
+      "[youtube] Ww6CS0tjPes: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=d6B2oqF_pKU\n",
+      "[youtube] d6B2oqF_pKU: Downloading webpage\n",
+      "[youtube] d6B2oqF_pKU: Downloading ios player API JSON\n",
+      "[youtube] d6B2oqF_pKU: Downloading web creator player API JSON\n",
+      "[youtube] d6B2oqF_pKU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0mdG2QHl28k\n",
+      "[youtube] 0mdG2QHl28k: Downloading webpage\n",
+      "[youtube] 0mdG2QHl28k: Downloading ios player API JSON\n",
+      "[youtube] 0mdG2QHl28k: Downloading web creator player API JSON\n",
+      "[youtube] 0mdG2QHl28k: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ppfhCJxzsQc\n",
+      "[youtube] ppfhCJxzsQc: Downloading webpage\n",
+      "[youtube] ppfhCJxzsQc: Downloading ios player API JSON\n",
+      "[youtube] ppfhCJxzsQc: Downloading web creator player API JSON\n",
+      "[youtube] ppfhCJxzsQc: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=MvoZcvyaIEI\n",
+      "[youtube] MvoZcvyaIEI: Downloading webpage\n",
+      "[youtube] MvoZcvyaIEI: Downloading ios player API JSON\n",
+      "[youtube] MvoZcvyaIEI: Downloading web creator player API JSON\n",
+      "[youtube] MvoZcvyaIEI: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=GFFVbSihc-U\n",
+      "[youtube] GFFVbSihc-U: Downloading webpage\n",
+      "[youtube] GFFVbSihc-U: Downloading ios player API JSON\n",
+      "[youtube] GFFVbSihc-U: Downloading web creator player API JSON\n",
+      "[youtube] GFFVbSihc-U: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=95p2bJIE1F4\n",
+      "[youtube] 95p2bJIE1F4: Downloading webpage\n",
+      "[youtube] 95p2bJIE1F4: Downloading ios player API JSON\n",
+      "[youtube] 95p2bJIE1F4: Downloading web creator player API JSON\n",
+      "[youtube] 95p2bJIE1F4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=a8rMXDs7mnA\n",
+      "[youtube] a8rMXDs7mnA: Downloading webpage\n",
+      "[youtube] a8rMXDs7mnA: Downloading ios player API JSON\n",
+      "[youtube] a8rMXDs7mnA: Downloading web creator player API JSON\n",
+      "[youtube] a8rMXDs7mnA: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=cjHHTF754uI\n",
+      "[youtube] cjHHTF754uI: Downloading webpage\n",
+      "[youtube] cjHHTF754uI: Downloading ios player API JSON\n",
+      "[youtube] cjHHTF754uI: Downloading web creator player API JSON\n",
+      "[youtube] cjHHTF754uI: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=TIzZyrETI6Q\n",
+      "[youtube] TIzZyrETI6Q: Downloading webpage\n",
+      "[youtube] TIzZyrETI6Q: Downloading ios player API JSON\n",
+      "[youtube] TIzZyrETI6Q: Downloading web creator player API JSON\n",
+      "[youtube] TIzZyrETI6Q: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=6TeyAR1skfQ\n",
+      "[youtube] 6TeyAR1skfQ: Downloading webpage\n",
+      "[youtube] 6TeyAR1skfQ: Downloading ios player API JSON\n",
+      "[youtube] 6TeyAR1skfQ: Downloading web creator player API JSON\n",
+      "[youtube] 6TeyAR1skfQ: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=8C83uN0FdNE\n",
+      "[youtube] 8C83uN0FdNE: Downloading webpage\n",
+      "[youtube] 8C83uN0FdNE: Downloading ios player API JSON\n",
+      "[youtube] 8C83uN0FdNE: Downloading web creator player API JSON\n",
+      "[youtube] 8C83uN0FdNE: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=klvuqVFgTGA\n",
+      "[youtube] klvuqVFgTGA: Downloading webpage\n",
+      "[youtube] klvuqVFgTGA: Downloading ios player API JSON\n",
+      "[youtube] klvuqVFgTGA: Downloading web creator player API JSON\n",
+      "[youtube] klvuqVFgTGA: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=8CqAoHvn5Sk\n",
+      "[youtube] 8CqAoHvn5Sk: Downloading webpage\n",
+      "[youtube] 8CqAoHvn5Sk: Downloading ios player API JSON\n",
+      "[youtube] 8CqAoHvn5Sk: Downloading web creator player API JSON\n",
+      "[youtube] 8CqAoHvn5Sk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Kug5SlWrqNo\n",
+      "[youtube] Kug5SlWrqNo: Downloading webpage\n",
+      "[youtube] Kug5SlWrqNo: Downloading ios player API JSON\n",
+      "[youtube] Kug5SlWrqNo: Downloading web creator player API JSON\n",
+      "[youtube] Kug5SlWrqNo: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=cJtaLeWqlF8\n",
+      "[youtube] cJtaLeWqlF8: Downloading webpage\n",
+      "[youtube] cJtaLeWqlF8: Downloading ios player API JSON\n",
+      "[youtube] cJtaLeWqlF8: Downloading web creator player API JSON\n",
+      "[youtube] cJtaLeWqlF8: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=XpWyIzU-KJs\n",
+      "[youtube] XpWyIzU-KJs: Downloading webpage\n",
+      "[youtube] XpWyIzU-KJs: Downloading ios player API JSON\n",
+      "[youtube] XpWyIzU-KJs: Downloading web creator player API JSON\n",
+      "[youtube] XpWyIzU-KJs: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0WuEk8bmdK4\n",
+      "[youtube] 0WuEk8bmdK4: Downloading webpage\n",
+      "[youtube] 0WuEk8bmdK4: Downloading ios player API JSON\n",
+      "[youtube] 0WuEk8bmdK4: Downloading web creator player API JSON\n",
+      "[youtube] 0WuEk8bmdK4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=stEDWoMgl6k\n",
+      "[youtube] stEDWoMgl6k: Downloading webpage\n",
+      "[youtube] stEDWoMgl6k: Downloading ios player API JSON\n",
+      "[youtube] stEDWoMgl6k: Downloading web creator player API JSON\n",
+      "[youtube] stEDWoMgl6k: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ciV9x95uSWk\n",
+      "[youtube] ciV9x95uSWk: Downloading webpage\n",
+      "[youtube] ciV9x95uSWk: Downloading ios player API JSON\n",
+      "[youtube] ciV9x95uSWk: Downloading web creator player API JSON\n",
+      "[youtube] ciV9x95uSWk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=thdUiKLjzLM\n",
+      "[youtube] thdUiKLjzLM: Downloading webpage\n",
+      "[youtube] thdUiKLjzLM: Downloading ios player API JSON\n",
+      "[youtube] thdUiKLjzLM: Downloading web creator player API JSON\n",
+      "[youtube] thdUiKLjzLM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=x1FIWpG3TiY\n",
+      "[youtube] x1FIWpG3TiY: Downloading webpage\n",
+      "[youtube] x1FIWpG3TiY: Downloading ios player API JSON\n",
+      "[youtube] x1FIWpG3TiY: Downloading web creator player API JSON\n",
+      "[youtube] x1FIWpG3TiY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ycRIyYn6GR4\n",
+      "[youtube] ycRIyYn6GR4: Downloading webpage\n",
+      "[youtube] ycRIyYn6GR4: Downloading ios player API JSON\n",
+      "[youtube] ycRIyYn6GR4: Downloading web creator player API JSON\n",
+      "[youtube] ycRIyYn6GR4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ppKa-ctA1ow\n",
+      "[youtube] ppKa-ctA1ow: Downloading webpage\n",
+      "[youtube] ppKa-ctA1ow: Downloading ios player API JSON\n",
+      "[youtube] ppKa-ctA1ow: Downloading web creator player API JSON\n",
+      "[youtube] ppKa-ctA1ow: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=O_6GCdd125Q\n",
+      "[youtube] O_6GCdd125Q: Downloading webpage\n",
+      "[youtube] O_6GCdd125Q: Downloading ios player API JSON\n",
+      "[youtube] O_6GCdd125Q: Downloading web creator player API JSON\n",
+      "[youtube] O_6GCdd125Q: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=TQomd2k0bwE\n",
+      "[youtube] TQomd2k0bwE: Downloading webpage\n",
+      "[youtube] TQomd2k0bwE: Downloading ios player API JSON\n",
+      "[youtube] TQomd2k0bwE: Downloading web creator player API JSON\n",
+      "[youtube] TQomd2k0bwE: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=0VclvzqE-30\n",
+      "[youtube] 0VclvzqE-30: Downloading webpage\n",
+      "[youtube] 0VclvzqE-30: Downloading ios player API JSON\n",
+      "[youtube] 0VclvzqE-30: Downloading web creator player API JSON\n",
+      "[youtube] 0VclvzqE-30: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=mRfUg0tuKg4\n",
+      "[youtube] mRfUg0tuKg4: Downloading webpage\n",
+      "[youtube] mRfUg0tuKg4: Downloading ios player API JSON\n",
+      "[youtube] mRfUg0tuKg4: Downloading web creator player API JSON\n",
+      "[youtube] mRfUg0tuKg4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=45B3qT0v-Ro\n",
+      "[youtube] 45B3qT0v-Ro: Downloading webpage\n",
+      "[youtube] 45B3qT0v-Ro: Downloading ios player API JSON\n",
+      "[youtube] 45B3qT0v-Ro: Downloading web creator player API JSON\n",
+      "[youtube] 45B3qT0v-Ro: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=O6xYW-K4GFY\n",
+      "[youtube] O6xYW-K4GFY: Downloading webpage\n",
+      "[youtube] O6xYW-K4GFY: Downloading ios player API JSON\n",
+      "[youtube] O6xYW-K4GFY: Downloading web creator player API JSON\n",
+      "[youtube] O6xYW-K4GFY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=Fz0Pav_rGek\n",
+      "[youtube] Fz0Pav_rGek: Downloading webpage\n",
+      "[youtube] Fz0Pav_rGek: Downloading ios player API JSON\n",
+      "[youtube] Fz0Pav_rGek: Downloading web creator player API JSON\n",
+      "[youtube] Fz0Pav_rGek: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=E9AT_m8Sndo\n",
+      "[youtube] E9AT_m8Sndo: Downloading webpage\n",
+      "[youtube] E9AT_m8Sndo: Downloading ios player API JSON\n",
+      "[youtube] E9AT_m8Sndo: Downloading web creator player API JSON\n",
+      "[youtube] E9AT_m8Sndo: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=axuaoarnJ2o\n",
+      "[youtube] axuaoarnJ2o: Downloading webpage\n",
+      "[youtube] axuaoarnJ2o: Downloading ios player API JSON\n",
+      "[youtube] axuaoarnJ2o: Downloading web creator player API JSON\n",
+      "[youtube] axuaoarnJ2o: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=8dkmqU_6BMk\n",
+      "[youtube] 8dkmqU_6BMk: Downloading webpage\n",
+      "[youtube] 8dkmqU_6BMk: Downloading ios player API JSON\n",
+      "[youtube] 8dkmqU_6BMk: Downloading web creator player API JSON\n",
+      "[youtube] 8dkmqU_6BMk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=juRhxjs-Myw\n",
+      "[youtube] juRhxjs-Myw: Downloading webpage\n",
+      "[youtube] juRhxjs-Myw: Downloading ios player API JSON\n",
+      "[youtube] juRhxjs-Myw: Downloading web creator player API JSON\n",
+      "[youtube] juRhxjs-Myw: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=OBGEoZJbosc\n",
+      "[youtube] OBGEoZJbosc: Downloading webpage\n",
+      "[youtube] OBGEoZJbosc: Downloading ios player API JSON\n",
+      "[youtube] OBGEoZJbosc: Downloading web creator player API JSON\n",
+      "[youtube] OBGEoZJbosc: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=RCfWrnJ_zSM\n",
+      "[youtube] RCfWrnJ_zSM: Downloading webpage\n",
+      "[youtube] RCfWrnJ_zSM: Downloading ios player API JSON\n",
+      "[youtube] RCfWrnJ_zSM: Downloading web creator player API JSON\n",
+      "[youtube] RCfWrnJ_zSM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pg_0tpFkezU\n",
+      "[youtube] pg_0tpFkezU: Downloading webpage\n",
+      "[youtube] pg_0tpFkezU: Downloading ios player API JSON\n",
+      "[youtube] pg_0tpFkezU: Downloading web creator player API JSON\n",
+      "[youtube] pg_0tpFkezU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=1CaUXu7Rsus\n",
+      "[youtube] 1CaUXu7Rsus: Downloading webpage\n",
+      "[youtube] 1CaUXu7Rsus: Downloading ios player API JSON\n",
+      "[youtube] 1CaUXu7Rsus: Downloading web creator player API JSON\n",
+      "[youtube] 1CaUXu7Rsus: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=WrmxPyvnLB8\n",
+      "[youtube] WrmxPyvnLB8: Downloading webpage\n",
+      "[youtube] WrmxPyvnLB8: Downloading ios player API JSON\n",
+      "[youtube] WrmxPyvnLB8: Downloading web creator player API JSON\n",
+      "[youtube] WrmxPyvnLB8: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=UPOpjny_Hik\n",
+      "[youtube] UPOpjny_Hik: Downloading webpage\n",
+      "[youtube] UPOpjny_Hik: Downloading ios player API JSON\n",
+      "[youtube] UPOpjny_Hik: Downloading web creator player API JSON\n",
+      "[youtube] UPOpjny_Hik: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=RmxoTx9bkD4\n",
+      "[youtube] RmxoTx9bkD4: Downloading webpage\n",
+      "[youtube] RmxoTx9bkD4: Downloading ios player API JSON\n",
+      "[youtube] RmxoTx9bkD4: Downloading web creator player API JSON\n",
+      "[youtube] RmxoTx9bkD4: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=GDJ4tfmdADk\n",
+      "[youtube] GDJ4tfmdADk: Downloading webpage\n",
+      "[youtube] GDJ4tfmdADk: Downloading ios player API JSON\n",
+      "[youtube] GDJ4tfmdADk: Downloading web creator player API JSON\n",
+      "[youtube] GDJ4tfmdADk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=CHizBn1KPu8\n",
+      "[youtube] CHizBn1KPu8: Downloading webpage\n",
+      "[youtube] CHizBn1KPu8: Downloading ios player API JSON\n",
+      "[youtube] CHizBn1KPu8: Downloading web creator player API JSON\n",
+      "[youtube] CHizBn1KPu8: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=pSQ1Vx4PEcY\n",
+      "[youtube] pSQ1Vx4PEcY: Downloading webpage\n",
+      "[youtube] pSQ1Vx4PEcY: Downloading ios player API JSON\n",
+      "[youtube] pSQ1Vx4PEcY: Downloading web creator player API JSON\n",
+      "[youtube] pSQ1Vx4PEcY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=nwiH_LoDd4w\n",
+      "[youtube] nwiH_LoDd4w: Downloading webpage\n",
+      "[youtube] nwiH_LoDd4w: Downloading ios player API JSON\n",
+      "[youtube] nwiH_LoDd4w: Downloading web creator player API JSON\n",
+      "[youtube] nwiH_LoDd4w: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=YZAs_4h7wvA\n",
+      "[youtube] YZAs_4h7wvA: Downloading webpage\n",
+      "[youtube] YZAs_4h7wvA: Downloading ios player API JSON\n",
+      "[youtube] YZAs_4h7wvA: Downloading web creator player API JSON\n",
+      "[youtube] YZAs_4h7wvA: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=hwE2qIVvsxM\n",
+      "[youtube] hwE2qIVvsxM: Downloading webpage\n",
+      "[youtube] hwE2qIVvsxM: Downloading ios player API JSON\n",
+      "[youtube] hwE2qIVvsxM: Downloading web creator player API JSON\n",
+      "[youtube] hwE2qIVvsxM: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=ue2Ud-W93Ps\n",
+      "[youtube] ue2Ud-W93Ps: Downloading webpage\n",
+      "[youtube] ue2Ud-W93Ps: Downloading ios player API JSON\n",
+      "[youtube] ue2Ud-W93Ps: Downloading web creator player API JSON\n",
+      "[youtube] ue2Ud-W93Ps: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=oHOrMzrVGgg\n",
+      "[youtube] oHOrMzrVGgg: Downloading webpage\n",
+      "[youtube] oHOrMzrVGgg: Downloading ios player API JSON\n",
+      "[youtube] oHOrMzrVGgg: Downloading web creator player API JSON\n",
+      "[youtube] oHOrMzrVGgg: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=nIANekb3dgk\n",
+      "[youtube] nIANekb3dgk: Downloading webpage\n",
+      "[youtube] nIANekb3dgk: Downloading ios player API JSON\n",
+      "[youtube] nIANekb3dgk: Downloading web creator player API JSON\n",
+      "[youtube] nIANekb3dgk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=4-dta-Ux_FY\n",
+      "[youtube] 4-dta-Ux_FY: Downloading webpage\n",
+      "[youtube] 4-dta-Ux_FY: Downloading ios player API JSON\n",
+      "[youtube] 4-dta-Ux_FY: Downloading web creator player API JSON\n",
+      "[youtube] 4-dta-Ux_FY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=SFfD_D0UQMk\n",
+      "[youtube] SFfD_D0UQMk: Downloading webpage\n",
+      "[youtube] SFfD_D0UQMk: Downloading ios player API JSON\n",
+      "[youtube] SFfD_D0UQMk: Downloading web creator player API JSON\n",
+      "[youtube] SFfD_D0UQMk: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=mytXEOkaR7s\n",
+      "[youtube] mytXEOkaR7s: Downloading webpage\n",
+      "[youtube] mytXEOkaR7s: Downloading ios player API JSON\n",
+      "[youtube] mytXEOkaR7s: Downloading web creator player API JSON\n",
+      "[youtube] mytXEOkaR7s: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=yDejoyz5fdw\n",
+      "[youtube] yDejoyz5fdw: Downloading webpage\n",
+      "[youtube] yDejoyz5fdw: Downloading ios player API JSON\n",
+      "[youtube] yDejoyz5fdw: Downloading web creator player API JSON\n",
+      "[youtube] yDejoyz5fdw: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=LrIuGGhSPQw\n",
+      "[youtube] LrIuGGhSPQw: Downloading webpage\n",
+      "[youtube] LrIuGGhSPQw: Downloading ios player API JSON\n",
+      "[youtube] LrIuGGhSPQw: Downloading web creator player API JSON\n",
+      "[youtube] LrIuGGhSPQw: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=d6fgKyVx8fY\n",
+      "[youtube] d6fgKyVx8fY: Downloading webpage\n",
+      "[youtube] d6fgKyVx8fY: Downloading ios player API JSON\n",
+      "[youtube] d6fgKyVx8fY: Downloading web creator player API JSON\n",
+      "[youtube] d6fgKyVx8fY: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=k_4CnCPm3vU\n",
+      "[youtube] k_4CnCPm3vU: Downloading webpage\n",
+      "[youtube] k_4CnCPm3vU: Downloading ios player API JSON\n",
+      "[youtube] k_4CnCPm3vU: Downloading web creator player API JSON\n",
+      "[youtube] k_4CnCPm3vU: Downloading m3u8 information\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "subtitle file not found\n",
+      "[youtube] Extracting URL: https://youtube.com/watch?v=10usYdxXlN8\n",
+      "[youtube] 10usYdxXlN8: Downloading webpage\n",
+      "[youtube] 10usYdxXlN8: Downloading ios player API JSON\n",
+      "[youtube] 10usYdxXlN8: Downloading web creator player API JSON\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "import requests\n",
+    "import pandas as pd\n",
+    "import webvtt\n",
+    "from pytube import Playlist\n",
+    "import yt_dlp\n",
+    "import re\n",
+    "import time\n",
+    "import unicodedata\n",
+    "\n",
+    "# Assume `playlist` is a pytube Playlist object already initialized\n",
+    "playlist_url = 'https://www.youtube.com/playlist?list=PLdPrKDvwrog4A9LzWcEFb6TKPumEh2aZG'\n",
+    "playlist = Playlist(playlist_url)\n",
+    "\n",
+    "# Get all video URLs in the playlist\n",
+    "video_urls = [video.watch_url for video in playlist.videos]\n",
+    "\n",
+    "# Directory to save thumbnails and transcripts\n",
+    "output_dir = 'data/de_ZDFheute'\n",
+    "os.makedirs(output_dir, exist_ok=True)\n",
+    "\n",
+    "def sanitize_filename(name):\n",
+    "    \"\"\"\n",
+    "    Sanitize the filename by removing invalid characters, full-width symbols,\n",
+    "    stripping newlines, and normalizing unicode to ASCII where possible.\n",
+    "    \"\"\"\n",
+    "    # Normalize full-width characters to their ASCII equivalents\n",
+    "    name = unicodedata.normalize('NFKC', name)  # Normalize Unicode characters to ASCII-compatible form\n",
+    "    \n",
+    "    # Remove problematic characters for filenames\n",
+    "    name = re.sub(r'[\\\\/*?:\"<>|]', \"\", name)  # Remove invalid characters\n",
+    "    name = name.replace('\\n', '').replace('\\r', '')  # Remove newlines\n",
+    "    name = name.strip()  # Trim leading/trailing spaces\n",
+    "\n",
+    "    # Ensure the filename length is not too long (you can set a specific limit)\n",
+    "    max_filename_length = 255\n",
+    "    return name[:max_filename_length]\n",
+    "\n",
+    "def download_thumbnail(thumbnail_url, title):\n",
+    "    try:\n",
+    "        response = requests.get(thumbnail_url)\n",
+    "        sanitized_title = sanitize_filename(title)\n",
+    "        thumbnail_file = os.path.join(output_dir, f'{sanitized_title}.jpg')\n",
+    "        with open(thumbnail_file, 'wb') as file:\n",
+    "            file.write(response.content)\n",
+    "        return thumbnail_file\n",
+    "    except Exception as e:\n",
+    "        print(f\"Failed to download thumbnail for {title}: {e}\")\n",
+    "        return None\n",
+    "\n",
+    "def download_subtitles(video_url, video_title, subtitle_languages):\n",
+    "    sanitized_title = sanitize_filename(video_title)\n",
+    "    \n",
+    "    # Define the download options\n",
+    "    ydl_opts = {\n",
+    "        'writesubtitles': True,\n",
+    "        'writeautomaticsub': True,\n",
+    "        'skip_download': True,  # Skip video download\n",
+    "        'outtmpl': os.path.join(output_dir, f'{sanitized_title}.%(ext)s'),  # Use sanitized title\n",
+    "        'restrictfilenames': True,\n",
+    "    }\n",
+    "    \n",
+    "    try:\n",
+    "        with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n",
+    "            if 'de' in subtitle_languages:\n",
+    "                # Download English subtitles\n",
+    "                subtitle_file = os.path.join(output_dir, f'{sanitized_title}.de.vtt')\n",
+    "                if not os.path.exists(subtitle_file):\n",
+    "                    ydl_opts['subtitleslangs'] = ['de']\n",
+    "                    ydl.download([video_url])  # Download subtitles for the video\n",
+    "                return subtitle_file\n",
+    "            elif subtitle_languages:\n",
+    "                # Download the first available subtitle if English is not found\n",
+    "                first_lang = list(subtitle_languages)[0]\n",
+    "                subtitle_file = os.path.join(output_dir, f'{sanitized_title}.{first_lang}.vtt')\n",
+    "                if not os.path.exists(subtitle_file):\n",
+    "                    ydl_opts['subtitleslangs'] = [first_lang]\n",
+    "                    ydl.download([video_url])\n",
+    "                return subtitle_file\n",
+    "                \n",
+    "    except yt_dlp.utils.DownloadError as e:\n",
+    "        error_message = str(e)\n",
+    "        print(f\"Error downloading subtitles for {video_title}: {error_message}\")\n",
+    "        return None\n",
+    "                \n",
+    "def download_video_info(video_url, max_retries=3, retry_interval=180):\n",
+    "    ydl_opts = {\n",
+    "        'writesubtitles': True,\n",
+    "        'writeautomaticsub': True,\n",
+    "        'skip_download': True,\n",
+    "        #'outtmpl': os.path.join(output_dir, f'{\"%(sanitized_title)s\"}.%(ext)s'),\n",
+    "        'postprocessors': [{\n",
+    "            'key': 'FFmpegMetadata',\n",
+    "        }],\n",
+    "    }\n",
+    "    retries = 0\n",
+    "    while retries < max_retries:\n",
+    "        try:\n",
+    "            with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n",
+    "                info_dict = ydl.extract_info(video_url, download=False)\n",
+    "                video_title = info_dict.get('title', None)\n",
+    "                video_id = info_dict.get('id', None)\n",
+    "                thumbnail_url = info_dict.get('thumbnail', None)\n",
+    "                publish_date = info_dict.get('upload_date', None)  # Format: 'YYYYMMDD'\n",
+    "                subtitle_languages = info_dict.get('automatic_captions', {}).keys()\n",
+    "\n",
+    "                # Download thumbnail\n",
+    "                thumbnail_file = None\n",
+    "                if thumbnail_url:\n",
+    "                    thumbnail_file = download_thumbnail(thumbnail_url, video_title)\n",
+    "\n",
+    "                # Download subtitles\n",
+    "                subtitle_file = None\n",
+    "                subtitle_file = download_subtitles(video_url, video_title, subtitle_languages)\n",
+    "                \n",
+    "            # Return the collected video information\n",
+    "            return video_id, video_title, thumbnail_file, subtitle_file, publish_date\n",
+    "\n",
+    "        except yt_dlp.utils.DownloadError as e:\n",
+    "            error_message = str(e)\n",
+    "            if \"Sign in to confirm you’re not a bot\" in error_message:\n",
+    "                retries += 1\n",
+    "                print(f\"Error: {error_message}. Retrying in {retry_interval} seconds... (Attempt {retries}/{max_retries})\")\n",
+    "                time.sleep(retry_interval)  # Wait before retrying\n",
+    "            else:\n",
+    "                print(f\"Failed to download video info for {video_url}: {e}\")\n",
+    "                return None, None, None, None, None\n",
+    "\n",
+    "    # After max retries, log the failure and return None\n",
+    "    print(f\"Max retries reached. Skipping video: {video_url}\")\n",
+    "    return None, None, None, None, None\n",
+    "\n",
+    "def vtt_to_text(vtt_file_path):\n",
+    "    try:\n",
+    "        text = ''\n",
+    "        lines = []\n",
+    "        deduplicated_lines = []\n",
+    "        for caption in webvtt.read(vtt_file_path):\n",
+    "            # Split the block into lines and deduplicate them within the block\n",
+    "            lines.extend(caption.text.strip().split('\\n'))\n",
+    "            #print(caption.text.strip().split('\\n'))\n",
+    "        for line in lines:\n",
+    "            if line and (not deduplicated_lines or line != deduplicated_lines[-1]):  # Avoid consecutive duplicates\n",
+    "                deduplicated_lines.append(line)\n",
+    "     \n",
+    "        text = \"\\n\".join(deduplicated_lines)\n",
+    "    \n",
+    "    except Exception as e:\n",
+    "        print(f\"Failed to convert {vtt_file_path} to text: {e}\")\n",
+    "        \n",
+    "    return text\n",
+    "\n",
+    "# Create a list to store video information\n",
+    "data = []\n",
+    "\n",
+    "# Loop through each video URL and download the required data\n",
+    "for video_url in video_urls:\n",
+    "    video_id, video_title, thumbnail_file, subtitle_file, publish_date = download_video_info(video_url)\n",
+    "    # If video info is successfully retrieved\n",
+    "    if video_id and video_title:\n",
+    "        # Convert subtitles to text if available\n",
+    "        transcript = None\n",
+    "        if subtitle_file and os.path.exists(subtitle_file):\n",
+    "            transcript = vtt_to_text(subtitle_file)\n",
+    "        else:\n",
+    "            print(\"subtitle file not found\")\n",
+    "        # Append data to the list\n",
+    "        data.append({\n",
+    "            'video_id': video_id,\n",
+    "            'video_title': video_title,\n",
+    "            'thumbnail_path': thumbnail_file,\n",
+    "            'transcript': transcript,\n",
+    "            'publish_date': publish_date\n",
+    "        })\n",
+    "\n",
+    "# Convert the list to a DataFrame\n",
+    "df = pd.DataFrame(data, columns=['video_id', 'video_title', 'thumbnail_path', 'transcript', 'publish_date'])\n",
+    "\n",
+    "# Save the DataFrame to a CSV file\n",
+    "df.to_csv(os.path.join(output_dir,'../', 'de_ZDFheute.csv'), index=False)\n",
+    "\n",
+    "print(f\"Dataset created successfully with {len(df)} entries.\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

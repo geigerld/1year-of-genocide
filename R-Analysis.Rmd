@@ -1,0 +1,16 @@
+---
+title: "Analysis in R"
+author: "Lorenz Geiger"
+date: "2024-09-07"
+output: html_document
+---
+
+```{r clean_start}
+rm(list = ls())
+
+## Load required libraries 
+require(tidyverse)
+
+```
+# Detect boundaries
+
