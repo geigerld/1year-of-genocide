@@ -38,7 +38,11 @@ Total Frequencies Across All Files:
 
 
 ```{r}
-en_DW <- read.csv("data/en_DW/keyword_frequencies.csv")
+en_AJ <- read.csv("frequency_data/en_AJ_frequency.csv")
+en_BBCNews <- read.csv("frequency_data/en_BBCNews_frequency.csv")
+en_CNN <- read.csv("frequency_data/en_CNN_frequency.csv")
+en_DW <- read.csv("frequency_data/en_DW_frequency.csv")
+
 ```
 
 
