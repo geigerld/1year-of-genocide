@@ -12,5 +12,39 @@ rm(list = ls())
 require(tidyverse)
 
 ```
-# Detect boundaries
+Results have been saved to data/en_DW/keyword_frequencies.csv
+Total Frequencies Across All Files:
+  israel Total Count: 19697
+  israel Relative Frequency: 12587.33 instances per million
+  gaza Total Count: 10317
+  gaza Relative Frequency: 6593.06 instances per million
+  hamas Total Count: 7001
+  hamas Relative Frequency: 4473.98 instances per million
+  people Total Count: 5951
+  people Relative Frequency: 3802.98 instances per million
+  israeli Total Count: 6385
+  israeli Relative Frequency: 4080.32 instances per million
+  know Total Count: 5901
+  know Relative Frequency: 3771.02 instances per million
+  war Total Count: 6228
+  war Relative Frequency: 3979.99 instances per million
+  think Total Count: 3803
+  think Relative Frequency: 2430.30 instances per million
+  hostages Total Count: 2494
+  hostages Relative Frequency: 1593.79 instances per million
+  iran Total Count: 3207
+  iran Relative Frequency: 2049.43 instances per million
+  Total Word Count Across All Files: 1564827
+
+
+```{r}
+en_DW <- read.csv("data/en_DW/keyword_frequencies.csv")
+```
+
+
+```{r}
+ggplot(en_DW, aes=())
+```
+
+
 
