@@ -1,4 +1,6 @@
-<doc>	NN	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 well	RB	well
 hany	NP	hany
 Mahmud	NP	Mahmud
@@ -44,7 +46,9 @@ you	PP	you
 the	DT	the
 latest	JJS	late
 of	IN	of
-what's	NNS	what's
+what	WP	what
+'	POS	'
+s	NNS	s
 going	VVG	go
 on	IN	on
 here	RB	here
@@ -191,8 +195,10 @@ completely	RB	completely
 incinerated	VVN	incinerate
 beyond	IN	beyond
 recognition	NN	recognition
-they're	NN	they're
-all	RB	all
+they	PP	they
+'	''	'
+re	IN	re
+all	DT	all
 in	IN	in
 a	DT	a
 Nar	NP	Nar
@@ -213,7 +219,9 @@ where	WRB	where
 the	DT	the
 point	NN	point
 where	WRB	where
-we're	NN	we're
+we	PP	we
+'	POS	'
+re	NN	re
 reporting	NN	reporting
 from	IN	from
 this	DT	this
@@ -298,7 +306,9 @@ but	CC	but
 also	RB	also
 its	PP$	its
 vicinity	NN	vicinity
-we're	NN	we're
+we	PP	we
+'	POS	'
+re	NN	re
 talking	VVG	talk
 about	RB	about
 five	CD	five
@@ -389,7 +399,9 @@ to	TO	to
 go	VV	go
 there	RB	there
 because	IN	because
-it's	NNS	it's
+it	PP	it
+'	POS	'
+s	NN	S
 a	DT	a
 safe	JJ	safe
 area	NN	area
@@ -436,7 +448,9 @@ part	NN	part
 of	IN	of
 the	DT	the
 city	NN	city
-that's	NNS	that's
+that	RB	that
+'	POS	'
+s	NNS	s
 a	DT	a
 family	NN	family
 of	IN	of
@@ -450,7 +464,9 @@ his	PP$	his
 family	NN	family
 and	CC	and
 his	PP$	his
-in-laws	NNS	in-law
+in	IN	in
+-	NN	-
+laws	NNS	law
 were	VBD	be
 Sheltering	VVG	shelter
 inside	IN	inside
@@ -505,4 +521,7 @@ much	JJ	much
 hany	NP	hany
 Mahmud	NP	Mahmud
 there	RB	there
-</doc>	JJ	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

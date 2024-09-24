@@ -1,4 +1,6 @@
-<doc>	NN	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 these	DT	these
 soldiers	NNS	soldier
 have	VHP	have
@@ -19,7 +21,9 @@ the	DT	the
 night	NN	night
 but	CC	but
 this	DT	this
-isn't	NP	isn't
+isn	NN	isn
+'	POS	'
+t	NN	t
 Gaza	NP	Gaza
 this	DT	this
 is	VBZ	be
@@ -45,9 +49,11 @@ by	IN	by
 soldiers	NNS	soldier
 in	IN	in
 the	DT	the
-Israeli	JJ	Israeli
+Israeli	NP	Israeli
 Army	NP	Army
-we've	NN	we've
+we	PP	we
+'	POS	'
+ve	NN	ve
 tracked	VVD	track
 and	CC	and
 analyzed	VVD	analyze
@@ -171,4 +177,7 @@ shared	VVN	share
 on	IN	on
 social	JJ	social
 media	NNS	medium
-</doc>	NN	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

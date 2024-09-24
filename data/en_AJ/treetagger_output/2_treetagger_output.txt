@@ -1,4 +1,6 @@
-<doc>	JJ	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 hungry	JJ	hungry
 and	CC	and
 displaced	VVN	displace
@@ -9,7 +11,9 @@ receiving	VVG	receive
 food	NN	food
 handouts	NNS	handout
 all	RB	all
-2.3	CD	@card@
+2	CD	@card@
+.	SENT	.
+3	CD	@card@
 million	CD	million
 people	NNS	people
 in	IN	in
@@ -21,7 +25,9 @@ deliberate	JJ	deliberate
 famine	NN	famine
 due	JJ	due
 to	TO	to
-Israel's	NP	Israel's
+Israel	NP	Israel
+'	POS	'
+s	JJ	s
 use	NN	use
 of	IN	of
 starvation	NN	starvation
@@ -128,7 +134,9 @@ of	IN	of
 the	DT	the
 more	JJR	more
 than	IN	than
-1.3	CD	@card@
+1	CD	@card@
+.	SENT	.
+3	CD	@card@
 million	CD	million
 people	NNS	people
 who	WP	who
@@ -185,8 +193,10 @@ ground	NN	ground
 essentially	RB	essentially
 herbs	NNS	herb
 and	CC	and
-weeds	NNS	weed
-I'm	NP	I'm
+weeds	VVZ	weed
+I	PP	I
+'	''	'
+m	NN	m
 trying	VVG	try
 to	TO	to
 collect	VV	collect
@@ -217,7 +227,9 @@ living	VVG	live
 on	IN	on
 for	IN	for
 months	NNS	month
-I'm	NP	I'm
+I	PP	I
+'	POS	'
+m	NN	m
 risking	VVG	risk
 my	PP$	my
 life	NN	life
@@ -242,7 +254,9 @@ and	CC	and
 this	DT	this
 can	MD	can
 cause	VV	cause
-long-term	JJ	long-term
+long	JJ	long
+-	NN	-
+term	NN	term
 damage	NN	damage
 to	TO	to
 their	PP$	their
@@ -284,7 +298,9 @@ feed	NN	feed
 to	TO	to
 survive	VV	survive
 but	CC	but
-that's	NNS	that's
+that	IN/that	that
+'	POS	'
+s	NNS	s
 running	VVG	run
 out	RP	out
 too	RB	too
@@ -348,4 +364,7 @@ latest	JJS	late
 news	NN	news
 from	IN	from
 Al	NP	Al
-</doc>	NP	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

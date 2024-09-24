@@ -1,4 +1,6 @@
-<doc>	JJ	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 journalists	NNS	journalist
 targeted	VVN	target
 yet	RB	yet
@@ -151,7 +153,9 @@ were	VBD	be
 targeted	VVN	target
 anyway	RB	anyway
 they	PP	they
-aren't	VVD	aren't
+aren	JJ	aren
+'	''	'
+t	NN	t
 the	DT	the
 first	JJ	first
 members	NNS	member
@@ -226,7 +230,9 @@ along	IN	along
 the	DT	the
 border	NN	border
 we	PP	we
-can't	VVD	can't
+can	MD	can
+'	''	'
+t	NN	t
 access	NN	access
 many	JJ	many
 areas	NNS	area
@@ -236,8 +242,10 @@ is	VBZ	be
 too	RB	too
 dangerous	JJ	dangerous
 we	PP	we
-can't	VVD	can't
-stay	VV	stay
+can	MD	can
+'	''	'
+t	NN	t
+stay	NN	stay
 in	IN	in
 the	DT	the
 same	JJ	same
@@ -248,7 +256,9 @@ long	JJ	long
 time	NN	time
 even	RB	even
 though	IN	though
-we're	NN	we're
+we	PP	we
+'	POS	'
+re	NN	re
 carrying	VVG	carry
 a	DT	a
 camera	NN	camera
@@ -374,7 +384,9 @@ to	TO	to
 be	VB	be
 telling	VVG	tell
 us	PP	us
-what's	NNS	what's
+what	WP	what
+'	POS	'
+s	NN	S
 happening	VVG	happen
 Lebanon	NP	Lebanon
 says	VVZ	say
@@ -391,7 +403,9 @@ the	DT	the
 latest	JJS	late
 killings	NNS	killing
 it	PP	it
-won't	NP	won't
+won	VVD	win
+'	''	'
+t	NN	t
 be	VB	be
 the	DT	the
 first	JJ	first
@@ -414,4 +428,7 @@ latest	JJS	late
 news	NN	news
 from	IN	from
 Al	NP	Al
-</doc>	NP	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

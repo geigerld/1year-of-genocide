@@ -1,4 +1,6 @@
-<doc>	NN	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 this	DT	this
 was	VBD	be
 the	DT	the
@@ -58,7 +60,9 @@ hit	VVD	hit
 this	DT	this
 tent	NN	tent
 there	RB	there
-isn't	VVD	isn't
+isn	NP	isn
+'	POS	'
+t	NN	t
 a	DT	a
 single	JJ	single
 reason	NN	reason
@@ -158,7 +162,9 @@ has	VHZ	have
 collapsed	VVN	collapse
 because	IN	because
 of	IN	of
-Israel's	NP	Israel's
+Israel	NP	Israel
+'	POS	'
+s	NN	S
 bombardment	NN	bombardment
 and	CC	and
 blockade	NN	blockade
@@ -223,7 +229,9 @@ attack	VV	attack
 the	DT	the
 hospital	NN	hospital
 again	RB	again
-it's	JJ	it's
+it	PP	it
+'	POS	'
+s	JJ	s
 horrifying	VVG	horrify
 everyone	NN	everyone
 is	VBZ	be
@@ -280,4 +288,7 @@ latest	JJS	late
 news	NN	news
 from	IN	from
 Al	NP	Al
-</doc>	NP	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

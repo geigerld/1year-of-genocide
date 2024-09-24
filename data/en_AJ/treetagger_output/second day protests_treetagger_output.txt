@@ -1,4 +1,6 @@
-<doc>	JJ	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 fre	NN	fre
 free	JJ	free
 paltin	NN	paltin
@@ -20,7 +22,9 @@ come	VV	come
 in	IN	in
 the	DT	the
 streets	NNS	street
-they're	NN	they're
+they	PP	they
+'	''	'
+re	IN	re
 saying	VVG	say
 they	PP	they
 will	MD	will
@@ -39,7 +43,9 @@ attacks	NNS	attack
 on	IN	on
 Palestinian	JJ	Palestinian
 people	NNS	people
-it's	NNS	it's
+it	PP	it
+'	POS	'
+s	NNS	s
 killing	VVG	kill
 of	IN	of
 Palestinian	JJ	Palestinian
@@ -64,7 +70,9 @@ a	DT	a
 cancellation	NN	cancellation
 of	IN	of
 President	NP	President
-Biden's	NP	Biden's
+Biden	NP	Biden
+'	POS	'
+s	JJ	s
 trip	NN	trip
 to	TO	to
 Jordan	NP	Jordan
@@ -106,4 +114,7 @@ be	VB	be
 no	RB	no
 more	JJR	more
 talks	NNS	talk
-</doc>	NN	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

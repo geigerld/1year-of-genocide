@@ -1,4 +1,6 @@
-<doc>	NN	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 a	DT	a
 crowded	JJ	crowded
 area	NN	area
@@ -22,8 +24,10 @@ Palestinians	NNS	Palestinian
 into	IN	into
 chaos	NN	chaos
 and	CC	and
-[Applause]	NN	[Applause]
-despair	VVP	despair
+[	SYM	[
+Applause	NN	applause
+]	SYM	]
+despair	VV	despair
 my	PP$	my
 family	NN	family
 and	CC	and
@@ -73,7 +77,9 @@ Israeli	JJ	Israeli
 forces	NNS	force
 destroyed	VVD	destroy
 this	DT	this
-three-story	NN	three-story
+three	CD	three
+-	NN	-
+story	NN	story
 building	NN	building
 in	IN	in
 central	JJ	central
@@ -88,8 +94,10 @@ was	VBD	be
 on	IN	on
 us	PP	us
 we	PP	we
-didn't	VVD	didn't
-know	VV	know
+didn	NP	didn
+'	POS	'
+t	NN	t
+know	VVP	know
 what	WP	what
 was	VBD	be
 happening	VVG	happen
@@ -114,7 +122,11 @@ my	PP$	my
 father	NN	father
 mother	NN	mother
 and	CC	and
-5-year-old	JJ	5-year-old
+5	CD	@card@
+-	NN	-
+year	NN	year
+-	NN	-
+old	JJ	old
 daughter	NN	daughter
 are	VBP	be
 among	IN	among
@@ -171,4 +183,7 @@ latest	JJS	late
 news	NN	news
 from	IN	from
 Al	NP	Al
-</doc>	NP	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

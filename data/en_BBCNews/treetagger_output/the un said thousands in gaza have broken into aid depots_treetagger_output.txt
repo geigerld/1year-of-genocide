@@ -1,4 +1,6 @@
-<doc>	NN	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 the	DT	the
 situation	NN	situation
 inside	IN	inside
@@ -30,8 +32,10 @@ in	IN	in
 Gaza	NP	Gaza
 since	IN	since
 Friday	NP	Friday
-evening	NN	evening
-they're	NN	they're
+evening	VVG	even
+they	PP	they
+'	POS	'
+re	NN	re
 starting	VVG	start
 to	TO	to
 return	VV	return
@@ -132,4 +136,7 @@ happen	VV	happen
 in	IN	in
 normal	JJ	normal
 time	NN	time
-</doc>	NN	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>

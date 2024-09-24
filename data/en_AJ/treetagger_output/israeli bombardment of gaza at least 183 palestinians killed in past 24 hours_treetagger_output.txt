@@ -1,4 +1,6 @@
-<doc>	NN	<doc>
+<	SYM	<
+doc	NN	doc
+>	SYM	>
 by	IN	by
 the	DT	the
 light	NN	light
@@ -95,7 +97,9 @@ reports	VVZ	report
 only	RB	only
 14	CD	@card@
 of	IN	of
-gaza's	NN	gaza's
+gaza	NP	Gaza
+'	POS	'
+s	NN	S
 36	CD	@card@
 hospitals	NNS	hospital
 are	VBP	be
@@ -115,9 +119,11 @@ watch	VV	watch
 unable	JJ	unable
 to	TO	to
 help	VV	help
-it's	NNS	it's
+it	PP	it
+'	POS	'
+s	JJ	s
 happening	VVG	happen
-right	RB	right
+right	NN	right
 in	IN	in
 front	NN	front
 of	IN	of
@@ -202,7 +208,9 @@ situation	NN	situation
 is	VBZ	be
 extremely	RB	extremely
 difficult	JJ	difficult
-we're	NN	we're
+we	PP	we
+'	''	'
+re	IN	re
 calling	VVG	call
 on	IN	on
 the	DT	the
@@ -224,7 +232,9 @@ to	TO	to
 use	VV	use
 these	DT	these
 families	NNS	family
-who've	NN	who've
+who	WP	who
+'	POS	'
+ve	NN	ve
 already	RB	already
 lost	VVD	lose
 so	RB	so
@@ -246,7 +256,9 @@ with	IN	with
 no	DT	no
 guarantee	NN	guarantee
 that	IN/that	that
-there'll	RB	there'll
+there	EX	there
+'	''	'
+ll	NN	ll
 be	VB	be
 any	DT	any
 safer	JJR	safe
@@ -269,4 +281,7 @@ latest	JJS	late
 news	NN	news
 from	IN	from
 Al	NP	Al
-</doc>	NP	</doc>
+<	SYM	<
+/	SYM	/
+doc	NN	doc
+>	SYM	>
