@@ -1,6 +1,3 @@
-<	SYM	<
-doc	NN	doc
->	SYM	>
 open	VV	open
 the	DT	the
 court	NN	court
@@ -3208,9 +3205,5 @@ today	NN	today
 I	PP	I
 declare	VVP	declare
 the	DT	the
-sitting	VVG	sit
-closed	VVN	close
-<	SYM	<
-/	SYM	/
-doc	NN	doc
->	SYM	>
+sitting	NN	sitting
+closed	VVD	close
