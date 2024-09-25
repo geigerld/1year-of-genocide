@@ -1,0 +1,2552 @@
+{
+    "video_id": "Xz4HJpdKK-k",
+    "publish_date": "20231113",
+    "video_title": "Biden warns Israel \"Gaza hospital must be protected” - BBC News",
+    "treetagger_output": [
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "Joe",
+            "Tag": "NP",
+            "Lemma": "Joe"
+        },
+        {
+            "Token": "Biden",
+            "Tag": "NP",
+            "Lemma": "Biden"
+        },
+        {
+            "Token": "has",
+            "Tag": "VHZ",
+            "Lemma": "have"
+        },
+        {
+            "Token": "warned",
+            "Tag": "VVN",
+            "Lemma": "warn"
+        },
+        {
+            "Token": "that",
+            "Tag": "IN/that",
+            "Lemma": "that"
+        },
+        {
+            "Token": "gaza",
+            "Tag": "NP",
+            "Lemma": "Gaza"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "JJ",
+            "Lemma": "s"
+        },
+        {
+            "Token": "main",
+            "Tag": "JJ",
+            "Lemma": "main"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "must",
+            "Tag": "MD",
+            "Lemma": "must"
+        },
+        {
+            "Token": "be",
+            "Tag": "VB",
+            "Lemma": "be"
+        },
+        {
+            "Token": "protected",
+            "Tag": "VVN",
+            "Lemma": "protect"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "he",
+            "Tag": "PP",
+            "Lemma": "he"
+        },
+        {
+            "Token": "hopes",
+            "Tag": "VVZ",
+            "Lemma": "hope"
+        },
+        {
+            "Token": "military",
+            "Tag": "JJ",
+            "Lemma": "military"
+        },
+        {
+            "Token": "action",
+            "Tag": "NN",
+            "Lemma": "action"
+        },
+        {
+            "Token": "by",
+            "Tag": "IN",
+            "Lemma": "by"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "Israeli",
+            "Tag": "JJ",
+            "Lemma": "Israeli"
+        },
+        {
+            "Token": "Defense",
+            "Tag": "NN",
+            "Lemma": "defense"
+        },
+        {
+            "Token": "Forces",
+            "Tag": "NNS",
+            "Lemma": "force"
+        },
+        {
+            "Token": "will",
+            "Tag": "MD",
+            "Lemma": "will"
+        },
+        {
+            "Token": "be",
+            "Tag": "VB",
+            "Lemma": "be"
+        },
+        {
+            "Token": "less",
+            "Tag": "RBR",
+            "Lemma": "less"
+        },
+        {
+            "Token": "intrusive",
+            "Tag": "JJ",
+            "Lemma": "intrusive"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "comments",
+            "Tag": "NNS",
+            "Lemma": "comment"
+        },
+        {
+            "Token": "come",
+            "Tag": "VVN",
+            "Lemma": "come"
+        },
+        {
+            "Token": "as",
+            "Tag": "IN",
+            "Lemma": "as"
+        },
+        {
+            "Token": "2",
+            "Tag": "CD",
+            "Lemma": "@card@"
+        },
+        {
+            "Token": ",",
+            "Tag": ",",
+            "Lemma": ","
+        },
+        {
+            "Token": "000",
+            "Tag": "CD",
+            "Lemma": "@card@"
+        },
+        {
+            "Token": "people",
+            "Tag": "NNS",
+            "Lemma": "people"
+        },
+        {
+            "Token": "remain",
+            "Tag": "VVP",
+            "Lemma": "remain"
+        },
+        {
+            "Token": "camped",
+            "Tag": "VVN",
+            "Lemma": "camp"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "alifa",
+            "Tag": "NN",
+            "Lemma": "alifa"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "north",
+            "Tag": "NN",
+            "Lemma": "north"
+        },
+        {
+            "Token": "of",
+            "Tag": "IN",
+            "Lemma": "of"
+        },
+        {
+            "Token": "Gaza",
+            "Tag": "NP",
+            "Lemma": "Gaza"
+        },
+        {
+            "Token": "Sheltering",
+            "Tag": "VVG",
+            "Lemma": "shelter"
+        },
+        {
+            "Token": "from",
+            "Tag": "IN",
+            "Lemma": "from"
+        },
+        {
+            "Token": "Israeli",
+            "Tag": "JJ",
+            "Lemma": "Israeli"
+        },
+        {
+            "Token": "bombardments",
+            "Tag": "NNS",
+            "Lemma": "bombardment"
+        },
+        {
+            "Token": "near",
+            "Tag": "IN",
+            "Lemma": "near"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "building",
+            "Tag": "NN",
+            "Lemma": "building"
+        },
+        {
+            "Token": "with",
+            "Tag": "IN",
+            "Lemma": "with"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "lack",
+            "Tag": "NN",
+            "Lemma": "lack"
+        },
+        {
+            "Token": "of",
+            "Tag": "IN",
+            "Lemma": "of"
+        },
+        {
+            "Token": "power",
+            "Tag": "NN",
+            "Lemma": "power"
+        },
+        {
+            "Token": "due",
+            "Tag": "JJ",
+            "Lemma": "due"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "fuel",
+            "Tag": "VV",
+            "Lemma": "fuel"
+        },
+        {
+            "Token": "shortages",
+            "Tag": "NNS",
+            "Lemma": "shortage"
+        },
+        {
+            "Token": "doctors",
+            "Tag": "NNS",
+            "Lemma": "doctor"
+        },
+        {
+            "Token": "there",
+            "Tag": "RB",
+            "Lemma": "there"
+        },
+        {
+            "Token": "say",
+            "Tag": "VVP",
+            "Lemma": "say"
+        },
+        {
+            "Token": "30",
+            "Tag": "CD",
+            "Lemma": "@card@"
+        },
+        {
+            "Token": "babies",
+            "Tag": "NNS",
+            "Lemma": "baby"
+        },
+        {
+            "Token": "need",
+            "Tag": "VVP",
+            "Lemma": "need"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "be",
+            "Tag": "VB",
+            "Lemma": "be"
+        },
+        {
+            "Token": "moved",
+            "Tag": "VVN",
+            "Lemma": "move"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "Egypt",
+            "Tag": "NP",
+            "Lemma": "Egypt"
+        },
+        {
+            "Token": "if",
+            "Tag": "IN",
+            "Lemma": "if"
+        },
+        {
+            "Token": "there",
+            "Tag": "RB",
+            "Lemma": "there"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "survive",
+            "Tag": "VV",
+            "Lemma": "survive"
+        },
+        {
+            "Token": "ol",
+            "Tag": "NN",
+            "Lemma": "ol"
+        },
+        {
+            "Token": "agaran",
+            "Tag": "NN",
+            "Lemma": "agaran"
+        },
+        {
+            "Token": "has",
+            "Tag": "VHZ",
+            "Lemma": "have"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "very",
+            "Tag": "RB",
+            "Lemma": "very"
+        },
+        {
+            "Token": "latest",
+            "Tag": "JJS",
+            "Lemma": "late"
+        },
+        {
+            "Token": "from",
+            "Tag": "IN",
+            "Lemma": "from"
+        },
+        {
+            "Token": "Jerusalem",
+            "Tag": "NP",
+            "Lemma": "Jerusalem"
+        },
+        {
+            "Token": "under",
+            "Tag": "IN",
+            "Lemma": "under"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "warning",
+            "Tag": "NN",
+            "Lemma": "warning"
+        },
+        {
+            "Token": "her",
+            "Tag": "PP$",
+            "Lemma": "her"
+        },
+        {
+            "Token": "peace",
+            "Tag": "NN",
+            "Lemma": "peace"
+        },
+        {
+            "Token": "contains",
+            "Tag": "VVZ",
+            "Lemma": "contain"
+        },
+        {
+            "Token": "distressing",
+            "Tag": "JJ",
+            "Lemma": "distressing"
+        },
+        {
+            "Token": "images",
+            "Tag": "NNS",
+            "Lemma": "image"
+        },
+        {
+            "Token": "from",
+            "Tag": "IN",
+            "Lemma": "from"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "very",
+            "Tag": "JJ",
+            "Lemma": "very"
+        },
+        {
+            "Token": "beginning",
+            "Tag": "NN",
+            "Lemma": "beginning"
+        },
+        {
+            "Token": "war",
+            "Tag": "NN",
+            "Lemma": "war"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "closing",
+            "Tag": "VVG",
+            "Lemma": "close"
+        },
+        {
+            "Token": "in",
+            "Tag": "RP",
+            "Lemma": "in"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "they",
+            "Tag": "PP",
+            "Lemma": "they"
+        },
+        {
+            "Token": "are",
+            "Tag": "VBP",
+            "Lemma": "be"
+        },
+        {
+            "Token": "running",
+            "Tag": "VVG",
+            "Lemma": "run"
+        },
+        {
+            "Token": "out",
+            "Tag": "RP",
+            "Lemma": "out"
+        },
+        {
+            "Token": "of",
+            "Tag": "IN",
+            "Lemma": "of"
+        },
+        {
+            "Token": "time",
+            "Tag": "NN",
+            "Lemma": "time"
+        },
+        {
+            "Token": "these",
+            "Tag": "DT",
+            "Lemma": "these"
+        },
+        {
+            "Token": "premature",
+            "Tag": "JJ",
+            "Lemma": "premature"
+        },
+        {
+            "Token": "babies",
+            "Tag": "NNS",
+            "Lemma": "baby"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "Al",
+            "Tag": "NP",
+            "Lemma": "Al"
+        },
+        {
+            "Token": "shaa",
+            "Tag": "NP",
+            "Lemma": "shaa"
+        },
+        {
+            "Token": "Hospital",
+            "Tag": "NP",
+            "Lemma": "Hospital"
+        },
+        {
+            "Token": "fighting",
+            "Tag": "VVG",
+            "Lemma": "fight"
+        },
+        {
+            "Token": "for",
+            "Tag": "IN",
+            "Lemma": "for"
+        },
+        {
+            "Token": "life",
+            "Tag": "NN",
+            "Lemma": "life"
+        },
+        {
+            "Token": "without",
+            "Tag": "IN",
+            "Lemma": "without"
+        },
+        {
+            "Token": "incubators",
+            "Tag": "NNS",
+            "Lemma": "incubator"
+        },
+        {
+            "Token": "since",
+            "Tag": "IN",
+            "Lemma": "since"
+        },
+        {
+            "Token": "these",
+            "Tag": "DT",
+            "Lemma": "these"
+        },
+        {
+            "Token": "pictures",
+            "Tag": "NNS",
+            "Lemma": "picture"
+        },
+        {
+            "Token": "were",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "taken",
+            "Tag": "VVN",
+            "Lemma": "take"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "weekend",
+            "Tag": "NN",
+            "Lemma": "weekend"
+        },
+        {
+            "Token": "several",
+            "Tag": "JJ",
+            "Lemma": "several"
+        },
+        {
+            "Token": "babies",
+            "Tag": "NNS",
+            "Lemma": "baby"
+        },
+        {
+            "Token": "have",
+            "Tag": "VHP",
+            "Lemma": "have"
+        },
+        {
+            "Token": "died",
+            "Tag": "VVN",
+            "Lemma": "die"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "according",
+            "Tag": "VVG",
+            "Lemma": "accord"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "health",
+            "Tag": "NN",
+            "Lemma": "health"
+        },
+        {
+            "Token": "Ministry",
+            "Tag": "NP",
+            "Lemma": "Ministry"
+        },
+        {
+            "Token": "officials",
+            "Tag": "NNS",
+            "Lemma": "official"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "grounds",
+            "Tag": "NNS",
+            "Lemma": "ground"
+        },
+        {
+            "Token": "already",
+            "Tag": "RB",
+            "Lemma": "already"
+        },
+        {
+            "Token": "look",
+            "Tag": "VVP",
+            "Lemma": "look"
+        },
+        {
+            "Token": "like",
+            "Tag": "IN",
+            "Lemma": "like"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "war",
+            "Tag": "NN",
+            "Lemma": "war"
+        },
+        {
+            "Token": "zone",
+            "Tag": "NN",
+            "Lemma": "zone"
+        },
+        {
+            "Token": "Palestinians",
+            "Tag": "NNS",
+            "Lemma": "Palestinian"
+        },
+        {
+            "Token": "say",
+            "Tag": "VVP",
+            "Lemma": "say"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "aftermath",
+            "Tag": "NN",
+            "Lemma": "aftermath"
+        },
+        {
+            "Token": "of",
+            "Tag": "IN",
+            "Lemma": "of"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "recent",
+            "Tag": "JJ",
+            "Lemma": "recent"
+        },
+        {
+            "Token": "Israeli",
+            "Tag": "JJ",
+            "Lemma": "Israeli"
+        },
+        {
+            "Token": "strike",
+            "Tag": "NN",
+            "Lemma": "strike"
+        },
+        {
+            "Token": "Israel",
+            "Tag": "NP",
+            "Lemma": "Israel"
+        },
+        {
+            "Token": "denies",
+            "Tag": "VVZ",
+            "Lemma": "deny"
+        },
+        {
+            "Token": "targeting",
+            "Tag": "VVG",
+            "Lemma": "target"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "but",
+            "Tag": "CC",
+            "Lemma": "but"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "US",
+            "Tag": "NP",
+            "Lemma": "US"
+        },
+        {
+            "Token": "President",
+            "Tag": "NP",
+            "Lemma": "President"
+        },
+        {
+            "Token": "Joe",
+            "Tag": "NP",
+            "Lemma": "Joe"
+        },
+        {
+            "Token": "Biden",
+            "Tag": "NP",
+            "Lemma": "Biden"
+        },
+        {
+            "Token": "has",
+            "Tag": "VHZ",
+            "Lemma": "have"
+        },
+        {
+            "Token": "intervened",
+            "Tag": "VVN",
+            "Lemma": "intervene"
+        },
+        {
+            "Token": "saying",
+            "Tag": "VVG",
+            "Lemma": "say"
+        },
+        {
+            "Token": "Al",
+            "Tag": "NP",
+            "Lemma": "Al"
+        },
+        {
+            "Token": "shaa",
+            "Tag": "NP",
+            "Lemma": "shaa"
+        },
+        {
+            "Token": "must",
+            "Tag": "MD",
+            "Lemma": "must"
+        },
+        {
+            "Token": "be",
+            "Tag": "VB",
+            "Lemma": "be"
+        },
+        {
+            "Token": "protected",
+            "Tag": "VVN",
+            "Lemma": "protect"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "he",
+            "Tag": "PP",
+            "Lemma": "he"
+        },
+        {
+            "Token": "hopes",
+            "Tag": "VVZ",
+            "Lemma": "hope"
+        },
+        {
+            "Token": "there",
+            "Tag": "EX",
+            "Lemma": "there"
+        },
+        {
+            "Token": "will",
+            "Tag": "MD",
+            "Lemma": "will"
+        },
+        {
+            "Token": "be",
+            "Tag": "VB",
+            "Lemma": "be"
+        },
+        {
+            "Token": "less",
+            "Tag": "RBR",
+            "Lemma": "less"
+        },
+        {
+            "Token": "intrusive",
+            "Tag": "JJ",
+            "Lemma": "intrusive"
+        },
+        {
+            "Token": "action",
+            "Tag": "NN",
+            "Lemma": "action"
+        },
+        {
+            "Token": "crammed",
+            "Tag": "VVD",
+            "Lemma": "cram"
+        },
+        {
+            "Token": "inside",
+            "Tag": "RB",
+            "Lemma": "inside"
+        },
+        {
+            "Token": "along",
+            "Tag": "RB",
+            "Lemma": "along"
+        },
+        {
+            "Token": "with",
+            "Tag": "IN",
+            "Lemma": "with"
+        },
+        {
+            "Token": "600",
+            "Tag": "CD",
+            "Lemma": "@card@"
+        },
+        {
+            "Token": "patients",
+            "Tag": "NNS",
+            "Lemma": "patient"
+        },
+        {
+            "Token": "about",
+            "Tag": "IN",
+            "Lemma": "about"
+        },
+        {
+            "Token": "2",
+            "Tag": "CD",
+            "Lemma": "@card@"
+        },
+        {
+            "Token": ",",
+            "Tag": ",",
+            "Lemma": ","
+        },
+        {
+            "Token": "000",
+            "Tag": "CD",
+            "Lemma": "@card@"
+        },
+        {
+            "Token": "people",
+            "Tag": "NNS",
+            "Lemma": "people"
+        },
+        {
+            "Token": "who",
+            "Tag": "WP",
+            "Lemma": "who"
+        },
+        {
+            "Token": "have",
+            "Tag": "VHP",
+            "Lemma": "have"
+        },
+        {
+            "Token": "sought",
+            "Tag": "VVN",
+            "Lemma": "seek"
+        },
+        {
+            "Token": "Refuge",
+            "Tag": "NP",
+            "Lemma": "Refuge"
+        },
+        {
+            "Token": "Israel",
+            "Tag": "NP",
+            "Lemma": "Israel"
+        },
+        {
+            "Token": "says",
+            "Tag": "VVZ",
+            "Lemma": "say"
+        },
+        {
+            "Token": "it",
+            "Tag": "PP",
+            "Lemma": "it"
+        },
+        {
+            "Token": "has",
+            "Tag": "VHZ",
+            "Lemma": "have"
+        },
+        {
+            "Token": "opened",
+            "Tag": "VVN",
+            "Lemma": "open"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "safe",
+            "Tag": "JJ",
+            "Lemma": "safe"
+        },
+        {
+            "Token": "evacuation",
+            "Tag": "NN",
+            "Lemma": "evacuation"
+        },
+        {
+            "Token": "Corridor",
+            "Tag": "NP",
+            "Lemma": "Corridor"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "source",
+            "Tag": "NN",
+            "Lemma": "source"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "told",
+            "Tag": "VVD",
+            "Lemma": "tell"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "BBC",
+            "Tag": "NP",
+            "Lemma": "BBC"
+        },
+        {
+            "Token": "that",
+            "Tag": "WDT",
+            "Lemma": "that"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "NN",
+            "Lemma": "S"
+        },
+        {
+            "Token": "totally",
+            "Tag": "RB",
+            "Lemma": "totally"
+        },
+        {
+            "Token": "untrue",
+            "Tag": "JJ",
+            "Lemma": "untrue"
+        },
+        {
+            "Token": "there",
+            "Tag": "EX",
+            "Lemma": "there"
+        },
+        {
+            "Token": "are",
+            "Tag": "VBP",
+            "Lemma": "be"
+        },
+        {
+            "Token": "bullets",
+            "Tag": "NNS",
+            "Lemma": "bullet"
+        },
+        {
+            "Token": "everywhere",
+            "Tag": "RB",
+            "Lemma": "everywhere"
+        },
+        {
+            "Token": "especially",
+            "Tag": "RB",
+            "Lemma": "especially"
+        },
+        {
+            "Token": "near",
+            "Tag": "IN",
+            "Lemma": "near"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "windows",
+            "Tag": "NNS",
+            "Lemma": "window"
+        },
+        {
+            "Token": "so",
+            "Tag": "IN",
+            "Lemma": "so"
+        },
+        {
+            "Token": "no",
+            "Tag": "DT",
+            "Lemma": "no"
+        },
+        {
+            "Token": "one",
+            "Tag": "CD",
+            "Lemma": "one"
+        },
+        {
+            "Token": "inside",
+            "Tag": "IN",
+            "Lemma": "inside"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "can",
+            "Tag": "MD",
+            "Lemma": "can"
+        },
+        {
+            "Token": "move",
+            "Tag": "VV",
+            "Lemma": "move"
+        },
+        {
+            "Token": "some",
+            "Tag": "DT",
+            "Lemma": "some"
+        },
+        {
+            "Token": "people",
+            "Tag": "NNS",
+            "Lemma": "people"
+        },
+        {
+            "Token": "left",
+            "Tag": "VVN",
+            "Lemma": "leave"
+        },
+        {
+            "Token": "through",
+            "Tag": "IN",
+            "Lemma": "through"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "corridor",
+            "Tag": "NN",
+            "Lemma": "corridor"
+        },
+        {
+            "Token": "they",
+            "Tag": "PP",
+            "Lemma": "they"
+        },
+        {
+            "Token": "are",
+            "Tag": "VBP",
+            "Lemma": "be"
+        },
+        {
+            "Token": "talking",
+            "Tag": "VVG",
+            "Lemma": "talk"
+        },
+        {
+            "Token": "about",
+            "Tag": "RB",
+            "Lemma": "about"
+        },
+        {
+            "Token": "but",
+            "Tag": "CC",
+            "Lemma": "but"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "men",
+            "Tag": "NNS",
+            "Lemma": "man"
+        },
+        {
+            "Token": "were",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "taken",
+            "Tag": "VVN",
+            "Lemma": "take"
+        },
+        {
+            "Token": "only",
+            "Tag": "RB",
+            "Lemma": "only"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "women",
+            "Tag": "NNS",
+            "Lemma": "woman"
+        },
+        {
+            "Token": "escaped",
+            "Tag": "VVD",
+            "Lemma": "escape"
+        },
+        {
+            "Token": "one",
+            "Tag": "CD",
+            "Lemma": "one"
+        },
+        {
+            "Token": "man",
+            "Tag": "NN",
+            "Lemma": "man"
+        },
+        {
+            "Token": "was",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "shot",
+            "Tag": "VVN",
+            "Lemma": "shoot"
+        },
+        {
+            "Token": "when",
+            "Tag": "WRB",
+            "Lemma": "when"
+        },
+        {
+            "Token": "we",
+            "Tag": "PP",
+            "Lemma": "we"
+        },
+        {
+            "Token": "tried",
+            "Tag": "VVD",
+            "Lemma": "try"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "reach",
+            "Tag": "VV",
+            "Lemma": "reach"
+        },
+        {
+            "Token": "him",
+            "Tag": "PP",
+            "Lemma": "him"
+        },
+        {
+            "Token": "they",
+            "Tag": "PP",
+            "Lemma": "they"
+        },
+        {
+            "Token": "fired",
+            "Tag": "VVD",
+            "Lemma": "fire"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "us",
+            "Tag": "PP",
+            "Lemma": "us"
+        },
+        {
+            "Token": "he",
+            "Tag": "PP",
+            "Lemma": "he"
+        },
+        {
+            "Token": "was",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "shot",
+            "Tag": "VVN",
+            "Lemma": "shoot"
+        },
+        {
+            "Token": "again",
+            "Tag": "RB",
+            "Lemma": "again"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "chest",
+            "Tag": "NN",
+            "Lemma": "chest"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "he",
+            "Tag": "PP",
+            "Lemma": "he"
+        },
+        {
+            "Token": "di",
+            "Tag": "NP",
+            "Lemma": "di"
+        },
+        {
+            "Token": "Israel",
+            "Tag": "NP",
+            "Lemma": "Israel"
+        },
+        {
+            "Token": "claims",
+            "Tag": "VVZ",
+            "Lemma": "claim"
+        },
+        {
+            "Token": "that",
+            "Tag": "IN/that",
+            "Lemma": "that"
+        },
+        {
+            "Token": "Hamas",
+            "Tag": "JJ",
+            "Lemma": "Hamas"
+        },
+        {
+            "Token": "hides",
+            "Tag": "NNS",
+            "Lemma": "hide"
+        },
+        {
+            "Token": "beneath",
+            "Tag": "IN",
+            "Lemma": "beneath"
+        },
+        {
+            "Token": "Al",
+            "Tag": "NP",
+            "Lemma": "Al"
+        },
+        {
+            "Token": "shaah",
+            "Tag": "NN",
+            "Lemma": "shaah"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "operates",
+            "Tag": "VVZ",
+            "Lemma": "operate"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "command",
+            "Tag": "NN",
+            "Lemma": "command"
+        },
+        {
+            "Token": "center",
+            "Tag": "NN",
+            "Lemma": "center"
+        },
+        {
+            "Token": "below",
+            "Tag": "IN",
+            "Lemma": "below"
+        },
+        {
+            "Token": "ground",
+            "Tag": "NN",
+            "Lemma": "ground"
+        },
+        {
+            "Token": "Hamas",
+            "Tag": "NN",
+            "Lemma": "Hamas"
+        },
+        {
+            "Token": "denies",
+            "Tag": "VVZ",
+            "Lemma": "deny"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "so",
+            "Tag": "RB",
+            "Lemma": "so"
+        },
+        {
+            "Token": "do",
+            "Tag": "VVP",
+            "Lemma": "do"
+        },
+        {
+            "Token": "doctors",
+            "Tag": "NNS",
+            "Lemma": "doctor"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "rantis",
+            "Tag": "NP",
+            "Lemma": "rantis"
+        },
+        {
+            "Token": "Hospital",
+            "Tag": "NP",
+            "Lemma": "Hospital"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "basement",
+            "Tag": "NN",
+            "Lemma": "basement"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "building",
+            "Tag": "VVG",
+            "Lemma": "build"
+        },
+        {
+            "Token": "I",
+            "Tag": "PP",
+            "Lemma": "I"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "ve",
+            "Tag": "NN",
+            "Lemma": "ve"
+        },
+        {
+            "Token": "shown",
+            "Tag": "VVN",
+            "Lemma": "show"
+        },
+        {
+            "Token": "you",
+            "Tag": "PP",
+            "Lemma": "you"
+        },
+        {
+            "Token": "tonight",
+            "Tag": "RB",
+            "Lemma": "tonight"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "Israeli",
+            "Tag": "NP",
+            "Lemma": "Israeli"
+        },
+        {
+            "Token": "Army",
+            "Tag": "NP",
+            "Lemma": "Army"
+        },
+        {
+            "Token": "issued",
+            "Tag": "VVD",
+            "Lemma": "issue"
+        },
+        {
+            "Token": "video",
+            "Tag": "NN",
+            "Lemma": "video"
+        },
+        {
+            "Token": "which",
+            "Tag": "WDT",
+            "Lemma": "which"
+        },
+        {
+            "Token": "it",
+            "Tag": "PP",
+            "Lemma": "it"
+        },
+        {
+            "Token": "claims",
+            "Tag": "VVZ",
+            "Lemma": "claim"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "concrete",
+            "Tag": "JJ",
+            "Lemma": "concrete"
+        },
+        {
+            "Token": "proof",
+            "Tag": "NN",
+            "Lemma": "proof"
+        },
+        {
+            "Token": "that",
+            "Tag": "IN/that",
+            "Lemma": "that"
+        },
+        {
+            "Token": "Hamas",
+            "Tag": "NP",
+            "Lemma": "Hamas"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "entrenched",
+            "Tag": "VVN",
+            "Lemma": "entrench"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "hospitals",
+            "Tag": "NNS",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "Gaza",
+            "Tag": "NP",
+            "Lemma": "Gaza"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "case",
+            "Tag": "NN",
+            "Lemma": "case"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "Alan",
+            "Tag": "NP",
+            "Lemma": "Alan"
+        },
+        {
+            "Token": "Children",
+            "Tag": "NP",
+            "Lemma": "Children"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "JJ",
+            "Lemma": "s"
+        },
+        {
+            "Token": "Hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "these",
+            "Tag": "DT",
+            "Lemma": "these"
+        },
+        {
+            "Token": "are",
+            "Tag": "VBP",
+            "Lemma": "be"
+        },
+        {
+            "Token": "explosives",
+            "Tag": "NNS",
+            "Lemma": "explosive"
+        },
+        {
+            "Token": "these",
+            "Tag": "DT",
+            "Lemma": "these"
+        },
+        {
+            "Token": "are",
+            "Tag": "NN",
+            "Lemma": "are"
+        },
+        {
+            "Token": "vest",
+            "Tag": "NN",
+            "Lemma": "vest"
+        },
+        {
+            "Token": "vest",
+            "Tag": "NN",
+            "Lemma": "vest"
+        },
+        {
+            "Token": "with",
+            "Tag": "IN",
+            "Lemma": "with"
+        },
+        {
+            "Token": "explosives",
+            "Tag": "NNS",
+            "Lemma": "explosive"
+        },
+        {
+            "Token": "yeah",
+            "Tag": "RB",
+            "Lemma": "yeah"
+        },
+        {
+            "Token": "it",
+            "Tag": "PP",
+            "Lemma": "it"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "NNS",
+            "Lemma": "s"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "body",
+            "Tag": "NN",
+            "Lemma": "body"
+        },
+        {
+            "Token": "vest",
+            "Tag": "NN",
+            "Lemma": "vest"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "woman",
+            "Tag": "NN",
+            "Lemma": "woman"
+        },
+        {
+            "Token": "clothes",
+            "Tag": "NNS",
+            "Lemma": "clothes"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "a",
+            "Tag": "DT",
+            "Lemma": "a"
+        },
+        {
+            "Token": "rope",
+            "Tag": "NN",
+            "Lemma": "rope"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "IDF",
+            "Tag": "NP",
+            "Lemma": "IDF"
+        },
+        {
+            "Token": "spokesman",
+            "Tag": "NN",
+            "Lemma": "spokesman"
+        },
+        {
+            "Token": "Daniel",
+            "Tag": "NP",
+            "Lemma": "Daniel"
+        },
+        {
+            "Token": "hagari",
+            "Tag": "NP",
+            "Lemma": "hagari"
+        },
+        {
+            "Token": "said",
+            "Tag": "VVD",
+            "Lemma": "say"
+        },
+        {
+            "Token": "there",
+            "Tag": "EX",
+            "Lemma": "there"
+        },
+        {
+            "Token": "were",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "indications",
+            "Tag": "NNS",
+            "Lemma": "indication"
+        },
+        {
+            "Token": "that",
+            "Tag": "IN/that",
+            "Lemma": "that"
+        },
+        {
+            "Token": "Israeli",
+            "Tag": "JJ",
+            "Lemma": "Israeli"
+        },
+        {
+            "Token": "hostages",
+            "Tag": "NNS",
+            "Lemma": "hostage"
+        },
+        {
+            "Token": "were",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "held",
+            "Tag": "VVN",
+            "Lemma": "hold"
+        },
+        {
+            "Token": "here",
+            "Tag": "RB",
+            "Lemma": "here"
+        },
+        {
+            "Token": "I",
+            "Tag": "PP",
+            "Lemma": "I"
+        },
+        {
+            "Token": "was",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "thinking",
+            "Tag": "VVG",
+            "Lemma": "think"
+        },
+        {
+            "Token": "when",
+            "Tag": "WRB",
+            "Lemma": "when"
+        },
+        {
+            "Token": "I",
+            "Tag": "PP",
+            "Lemma": "I"
+        },
+        {
+            "Token": "was",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "there",
+            "Tag": "RB",
+            "Lemma": "there"
+        },
+        {
+            "Token": "about",
+            "Tag": "IN",
+            "Lemma": "about"
+        },
+        {
+            "Token": "babies",
+            "Tag": "NNS",
+            "Lemma": "baby"
+        },
+        {
+            "Token": "hostages",
+            "Tag": "NNS",
+            "Lemma": "hostage"
+        },
+        {
+            "Token": "babies",
+            "Tag": "VVZ",
+            "Lemma": "baby"
+        },
+        {
+            "Token": "Israeli",
+            "Tag": "JJ",
+            "Lemma": "Israeli"
+        },
+        {
+            "Token": "hostages",
+            "Tag": "NNS",
+            "Lemma": "hostage"
+        },
+        {
+            "Token": "babies",
+            "Tag": "NNS",
+            "Lemma": "baby"
+        },
+        {
+            "Token": "women",
+            "Tag": "NNS",
+            "Lemma": "woman"
+        },
+        {
+            "Token": "children",
+            "Tag": "NNS",
+            "Lemma": "child"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "Hamas",
+            "Tag": "RB",
+            "Lemma": "Hamas"
+        },
+        {
+            "Token": "barbaric",
+            "Tag": "JJ",
+            "Lemma": "barbaric"
+        },
+        {
+            "Token": "barbaric",
+            "Tag": "JJ",
+            "Lemma": "barbaric"
+        },
+        {
+            "Token": "Terror",
+            "Tag": "NN",
+            "Lemma": "terror"
+        },
+        {
+            "Token": "organization",
+            "Tag": "NN",
+            "Lemma": "organization"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "Hamas",
+            "Tag": "JJ",
+            "Lemma": "Hamas"
+        },
+        {
+            "Token": "using",
+            "Tag": "VVG",
+            "Lemma": "use"
+        },
+        {
+            "Token": "hospitals",
+            "Tag": "NNS",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "as",
+            "Tag": "IN",
+            "Lemma": "as"
+        },
+        {
+            "Token": "human",
+            "Tag": "JJ",
+            "Lemma": "human"
+        },
+        {
+            "Token": "shield",
+            "Tag": "NN",
+            "Lemma": "shield"
+        },
+        {
+            "Token": "as",
+            "Tag": "IN",
+            "Lemma": "as"
+        },
+        {
+            "Token": "Terror",
+            "Tag": "NN",
+            "Lemma": "terror"
+        },
+        {
+            "Token": "machines",
+            "Tag": "NNS",
+            "Lemma": "machine"
+        },
+        {
+            "Token": "there",
+            "Tag": "RB",
+            "Lemma": "there"
+        },
+        {
+            "Token": "'",
+            "Tag": "''",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "RB",
+            "Lemma": "s"
+        },
+        {
+            "Token": "been",
+            "Tag": "VBN",
+            "Lemma": "be"
+        },
+        {
+            "Token": "no",
+            "Tag": "DT",
+            "Lemma": "no"
+        },
+        {
+            "Token": "independent",
+            "Tag": "JJ",
+            "Lemma": "independent"
+        },
+        {
+            "Token": "access",
+            "Tag": "NN",
+            "Lemma": "access"
+        },
+        {
+            "Token": "to",
+            "Tag": "TO",
+            "Lemma": "to"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "basement",
+            "Tag": "NN",
+            "Lemma": "basement"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "BBC",
+            "Tag": "NP",
+            "Lemma": "BBC"
+        },
+        {
+            "Token": "cannot",
+            "Tag": "MD",
+            "Lemma": "can"
+        },
+        {
+            "Token": "verify",
+            "Tag": "VV",
+            "Lemma": "verify"
+        },
+        {
+            "Token": "any",
+            "Tag": "DT",
+            "Lemma": "any"
+        },
+        {
+            "Token": "of",
+            "Tag": "IN",
+            "Lemma": "of"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "Army",
+            "Tag": "NP",
+            "Lemma": "Army"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "NN",
+            "Lemma": "S"
+        },
+        {
+            "Token": "claims",
+            "Tag": "VVZ",
+            "Lemma": "claim"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "was",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "picture",
+            "Tag": "NN",
+            "Lemma": "picture"
+        },
+        {
+            "Token": "at",
+            "Tag": "IN",
+            "Lemma": "at"
+        },
+        {
+            "Token": "another",
+            "Tag": "DT",
+            "Lemma": "another"
+        },
+        {
+            "Token": "Gaza",
+            "Tag": "NP",
+            "Lemma": "Gaza"
+        },
+        {
+            "Token": "hospital",
+            "Tag": "NN",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "today",
+            "Tag": "NN",
+            "Lemma": "today"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "Han",
+            "Tag": "NP",
+            "Lemma": "Han"
+        },
+        {
+            "Token": "Yunis",
+            "Tag": "NP",
+            "Lemma": "Yunis"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "South",
+            "Tag": "JJ",
+            "Lemma": "South"
+        },
+        {
+            "Token": "children",
+            "Tag": "NNS",
+            "Lemma": "child"
+        },
+        {
+            "Token": "who",
+            "Tag": "WP",
+            "Lemma": "who"
+        },
+        {
+            "Token": "witnesses",
+            "Tag": "NNS",
+            "Lemma": "witness"
+        },
+        {
+            "Token": "say",
+            "Tag": "VVP",
+            "Lemma": "say"
+        },
+        {
+            "Token": "were",
+            "Tag": "VBD",
+            "Lemma": "be"
+        },
+        {
+            "Token": "bombed",
+            "Tag": "VVN",
+            "Lemma": "bomb"
+        },
+        {
+            "Token": "in",
+            "Tag": "IN",
+            "Lemma": "in"
+        },
+        {
+            "Token": "their",
+            "Tag": "PP$",
+            "Lemma": "their"
+        },
+        {
+            "Token": "own",
+            "Tag": "JJ",
+            "Lemma": "own"
+        },
+        {
+            "Token": "homes",
+            "Tag": "NNS",
+            "Lemma": "home"
+        },
+        {
+            "Token": "there",
+            "Tag": "EX",
+            "Lemma": "there"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "growing",
+            "Tag": "VVG",
+            "Lemma": "grow"
+        },
+        {
+            "Token": "concern",
+            "Tag": "NN",
+            "Lemma": "concern"
+        },
+        {
+            "Token": "internationally",
+            "Tag": "RB",
+            "Lemma": "internationally"
+        },
+        {
+            "Token": "about",
+            "Tag": "RB",
+            "Lemma": "about"
+        },
+        {
+            "Token": "how",
+            "Tag": "WRB",
+            "Lemma": "how"
+        },
+        {
+            "Token": "Israel",
+            "Tag": "NP",
+            "Lemma": "Israel"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "fighting",
+            "Tag": "VVG",
+            "Lemma": "fight"
+        },
+        {
+            "Token": "this",
+            "Tag": "DT",
+            "Lemma": "this"
+        },
+        {
+            "Token": "war",
+            "Tag": "NN",
+            "Lemma": "war"
+        },
+        {
+            "Token": "about",
+            "Tag": "IN",
+            "Lemma": "about"
+        },
+        {
+            "Token": "who",
+            "Tag": "WP",
+            "Lemma": "who"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "being",
+            "Tag": "VBG",
+            "Lemma": "be"
+        },
+        {
+            "Token": "killed",
+            "Tag": "VVN",
+            "Lemma": "kill"
+        },
+        {
+            "Token": "now",
+            "Tag": "RB",
+            "Lemma": "now"
+        },
+        {
+            "Token": "the",
+            "Tag": "DT",
+            "Lemma": "the"
+        },
+        {
+            "Token": "US",
+            "Tag": "NP",
+            "Lemma": "US"
+        },
+        {
+            "Token": "president",
+            "Tag": "NN",
+            "Lemma": "president"
+        },
+        {
+            "Token": "Israel",
+            "Tag": "NP",
+            "Lemma": "Israel"
+        },
+        {
+            "Token": "'",
+            "Tag": "POS",
+            "Lemma": "'"
+        },
+        {
+            "Token": "s",
+            "Tag": "JJ",
+            "Lemma": "s"
+        },
+        {
+            "Token": "staunchest",
+            "Tag": "JJS",
+            "Lemma": "staunch"
+        },
+        {
+            "Token": "Ally",
+            "Tag": "NP",
+            "Lemma": "Ally"
+        },
+        {
+            "Token": "is",
+            "Tag": "VBZ",
+            "Lemma": "be"
+        },
+        {
+            "Token": "signaling",
+            "Tag": "VVG",
+            "Lemma": "signal"
+        },
+        {
+            "Token": "that",
+            "Tag": "IN/that",
+            "Lemma": "that"
+        },
+        {
+            "Token": "hospitals",
+            "Tag": "NNS",
+            "Lemma": "hospital"
+        },
+        {
+            "Token": "are",
+            "Tag": "VBP",
+            "Lemma": "be"
+        },
+        {
+            "Token": "off",
+            "Tag": "RB",
+            "Lemma": "off"
+        },
+        {
+            "Token": "limits",
+            "Tag": "NNS",
+            "Lemma": "limit"
+        },
+        {
+            "Token": "or",
+            "Tag": "CC",
+            "Lemma": "or"
+        },
+        {
+            "Token": "and",
+            "Tag": "CC",
+            "Lemma": "and"
+        },
+        {
+            "Token": "BBC",
+            "Tag": "NP",
+            "Lemma": "BBC"
+        },
+        {
+            "Token": "News",
+            "Tag": "NP",
+            "Lemma": "News"
+        },
+        {
+            "Token": "Jerusalem",
+            "Tag": "NP",
+            "Lemma": "Jerusalem"
+        }
+    ]
+}

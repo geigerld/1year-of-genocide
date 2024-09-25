@@ -1,6 +1,3 @@
-<	SYM	<
-doc	NN	doc
->	SYM	>
 From	IN	from
 This	DT	this
 Moment	NP	Moment
@@ -253,8 +250,4 @@ small	JJ	small
 small	JJ	small
 light	NN	light
 and	CC	and
-I	CD	@card@
-<	SYM	<
-/	SYM	/
-doc	NN	doc
->	SYM	>
+I	PP	I

@@ -1,6 +1,3 @@
-<	SYM	<
-doc	NN	doc
->	SYM	>
 on	IN	on
 October	NP	October
 7th	JJ	7th
@@ -731,8 +728,4 @@ exploiting	VVG	exploit
 the	DT	the
 potential	NN	potential
 of	IN	of
-social	NN	social
-<	SYM	<
-/	SYM	/
-doc	NN	doc
->	SYM	>
+social	JJ	social
