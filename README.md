@@ -20,3 +20,4 @@
 + tokenizer [DONE]
 + network analyses
 + Restore puntuation of the video scripts [huggingface have the model "oliverguhr/fullstop-punctuation-multilingual"]
++ [Topic modelling and visualization example (we have the scrapping part already done)](https://tlfvincent.github.io/2015/10/23/presidential-speech-topics/#topic=19&lambda=1&term=)
