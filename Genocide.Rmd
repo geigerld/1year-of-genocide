@@ -1,0 +1,89 @@
+---
+title: "Genocide cumulative and so on"
+author: "Lorenz Geiger, Camilo Maliqueo"
+date: "2024-09-22"
+output: html_document
+---
+
+```{r clean_start}
+rm(list = ls())
+
+## Load required libraries 
+require(tidyverse)
+require(plotly)
+```
+
+
+```{r}
+en_AJ <- read.csv("frequency_data_new/en_AJ_frequency.csv")%>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+en_BBCNews <- read.csv("frequency_data_new/en_BBCNews_frequency.csv")%>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+en_CNN <- read.csv("frequency_data_new/en_CNN_frequency.csv")%>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+en_DW <- read_csv("frequency_data_new/en_DW_frequency.csv") %>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+```
+```{r}
+en_AJ <- en_AJ %>% filter(publish_date > "2023-08-07")
+en_BBCNews <- en_BBCNews %>% filter(publish_date > "2023-08-07")
+en_CNN <- en_CNN %>% filter(publish_date > "2023-08-07")
+en_DW <- en_DW %>% filter(publish_date > "2023-08-07")
+```
+
+```{r}
+en_DW <- en_DW %>% arrange(publish_date)
+en_DW <- en_DW %>% mutate( cum_genocide = cumsum(..genocide))
+en_BBCNews <- en_BBCNews %>% arrange(publish_date)
+en_BBCNews <- en_BBCNews %>% mutate( cum_genocide = cumsum(..genocide))
+en_CNN <- en_CNN %>% arrange(publish_date)
+en_CNN <- en_CNN %>% mutate( cum_genocide = cumsum(..genocide))
+en_AJ <- en_AJ %>% arrange(publish_date)
+en_AJ <- en_AJ %>% mutate( cum_genocide = cumsum(..genocide))
+interactive_plot <- ggplotly(ggplot()+geom_line(aes(x=en_DW$publish_date,y=en_DW$cum_genocide/max(en_DW$cum_genocide)),color="blue")+
+                                    geom_line(aes(x=en_BBCNews$publish_date,y=en_BBCNews$cum_genocide/max(en_BBCNews$cum_genocide)),color="darkred")+
+                                    geom_line(aes(x=en_CNN$publish_date,y=en_CNN$cum_genocide/max(en_CNN$cum_genocide)),color="red")+
+                                    geom_line(aes(x=en_AJ$publish_date,y=en_AJ$cum_genocide/max(en_AJ$cum_genocide)),color="green")
+                            +theme_minimal()+theme(panel.grid.major = element_blank(),
+                 panel.grid.minor = element_blank()))
+                                                
+interactive_plot
+```
+
+```{r}
+en_DW <- en_DW %>% arrange(publish_date)
+en_DW <- en_DW %>% mutate( cum_genocide = cumsum(..genocide))
+en_BBCNews <- en_BBCNews %>% arrange(publish_date)
+en_BBCNews <- en_BBCNews %>% mutate( cum_genocide = cumsum(..genocide))
+en_CNN <- en_CNN %>% arrange(publish_date)
+en_CNN <- en_CNN %>% mutate( cum_genocide = cumsum(..genocide))
+en_AJ <- en_AJ %>% arrange(publish_date)
+en_AJ <- en_AJ %>% mutate( cum_genocide = cumsum(..genocide))
+interactive_plot <- ggplotly(ggplot()+geom_line(aes(x=en_DW$publish_date,y=en_DW$cum_genocide/max(en_DW$cum_genocide)),color="blue")+
+                                    geom_line(aes(x=en_BBCNews$publish_date,y=en_BBCNews$cum_genocide/max(en_BBCNews$cum_genocide)),color="darkred")+
+                                    geom_line(aes(x=en_CNN$publish_date,y=en_CNN$cum_genocide/max(en_CNN$cum_genocide)),color="red")+
+                                    geom_line(aes(x=en_AJ$publish_date,y=en_AJ$cum_genocide/max(en_AJ$cum_genocide)),color="green")
+                            +theme_minimal()+theme(panel.grid.major = element_blank(),
+                 panel.grid.minor = element_blank()))
+                                                
+interactive_plot
+```
+
+```{r}
+ggplot()+geom_smooth(aes(x=en_AJ$publish_date, y=en_AJ$..genocide/en_AJ$total_word_count),color="green")+
+geom_smooth(aes(x=en_BBCNews$publish_date, y=en_BBCNews$..genocide/en_BBCNews$total_word_count),color="darkred")+
+geom_smooth(aes(x=en_CNN$publish_date, y=en_CNN$..genocide/en_CNN$total_word_count),color="red")+
+geom_smooth(aes(x=en_DW$publish_date, y=en_DW$..genocide/en_DW$total_word_count),color="blue")
+  
+```
+
+```{r}
+killed_CNN <- read_csv("frequency_data_new/en_CNN_killed-murdered.csv") %>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+
+killed_DW <- read_csv("frequency_data_new/en_DW_killed-murdered.csv") %>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+
+```
+
+
