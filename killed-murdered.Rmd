@@ -1,0 +1,174 @@
+---
+title: "Genocide cumulative and so on"
+author: "Lorenz Geiger, Camilo Maliqueo"
+date: "2024-09-22"
+output: html_document
+---
+
+```{r clean_start}
+rm(list = ls())
+
+## Load required libraries 
+require(tidyverse)
+require(plotly)
+require(purrr)
+```
+
+
+```{r}
+  en_AJ <- read.csv("killed_data/en_AJ_killed-murdered.csv")%>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+en_BBCNews <- read.csv("killed_data/en_BBCNews_killed-murdered.csv")%>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+en_CNN <- read.csv("killed_data/en_CNN_killed-murdered.csv")%>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+en_DW <- read_csv("killed_data/en_DW_killed-murdered.csv") %>% 
+  mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
+```
+```{r}
+en_AJ <- en_AJ %>% filter(publish_date > "2023-08-07")
+en_BBCNews <- en_BBCNews %>% filter(publish_date > "2023-08-07")
+en_CNN <- en_CNN %>% filter(publish_date > "2023-08-07")
+en_DW <- en_DW %>% filter(publish_date > "2023-08-07")
+```
+```{r}
+
+```
+
+
+```{r}
+# Split the strings into individual words and unlist them
+en_AJ_killed_subjects <- unlist(strsplit(en_AJ$killed.VVN.subject, " "))
+# Count the occurrences of each unique string
+en_AJ_killed_subjects_counts <- table(en_AJ_killed_subjects)
+# Convert to a data frame for easier viewing
+en_AJ_killed_subjects_counts_df <- as.data.frame(en_AJ_killed_subjects_counts)
+colnames(en_AJ_killed_subjects_counts_df) <- c("String", "Count")
+# Calculate the percentage
+en_AJ_killed_subjects_counts_df$Percentage <- round((en_AJ_killed_subjects_counts_df$Count / sum(en_AJ_killed_subjects_counts_df$Count)) * 100,2)
+
+
+
+# Split the strings into individual words and unlist them
+en_BBCNews_killed_subjects <- unlist(strsplit(en_BBCNews$killed.VVN.subject, " "))
+# Count the occurrences of each unique string
+en_BBCNews_killed_subjects_counts <- table(en_BBCNews_killed_subjects)
+# Convert to a data frame for easier viewing
+en_BBCNews_killed_subjects_counts_df <- as.data.frame(en_BBCNews_killed_subjects_counts)
+colnames(en_BBCNews_killed_subjects_counts_df) <- c("String", "Count")
+en_BBCNews_killed_subjects_counts_df$Percentage <- round((en_BBCNews_killed_subjects_counts_df$Count / sum(en_BBCNews_killed_subjects_counts_df$Count)) * 100,2)
+
+
+
+# Split the strings into individual words and unlist them
+en_CNN_killed_subjects <- unlist(strsplit(en_CNN$killed.VVN.subject, " "))
+# Count the occurrences of each unique string
+en_CNN_killed_subjects_counts <- table(en_CNN_killed_subjects)
+# Convert to a data frame for easier viewing
+en_CNN_killed_subjects_counts_df <- as.data.frame(en_CNN_killed_subjects_counts)
+colnames(en_CNN_killed_subjects_counts_df) <- c("String", "Count")
+en_CNN_killed_subjects_counts_df$Percentage <- round((en_CNN_killed_subjects_counts_df$Count / sum(en_CNN_killed_subjects_counts_df$Count)) * 100,2)
+
+
+
+
+# Split the strings into individual words and unlist them
+en_DW_killed_subjects <- unlist(strsplit(en_DW$killed.VVN.subject, " "))
+# Count the occurrences of each unique string
+en_DW_killed_subjects_counts <- table(en_DW_killed_subjects)
+# Convert to a data frame for easier viewing
+en_DW_killed_subjects_counts_df <- as.data.frame(en_DW_killed_subjects_counts)
+colnames(en_DW_killed_subjects_counts_df) <- c("String", "Count")
+en_DW_killed_subjects_counts_df$Percentage <- round((en_DW_killed_subjects_counts_df$Count / sum(en_DW_killed_subjects_counts_df$Count)) * 100,2)
+
+
+
+```
+
+
+```{r}
+
+
+
+
+
+# Assign names to the data frames
+killed_dfs <- (list(en_AJ_killed_subjects_counts_df=en_AJ_killed_subjects_counts_df, en_BBCNews_killed_subjects_counts_df=en_BBCNews_killed_subjects_counts_df, en_CNN_killed_subjects_counts_df=en_CNN_killed_subjects_counts_df, en_DW_killed_subjects_counts_df=en_DW_killed_subjects_counts_df))
+
+# Apply arrange to each data frame in the list
+killed_dfs_sorted <- lapply(killed_dfs, function(df) {
+  df %>% arrange(desc(Count))
+})
+
+en_AJ_killed_subjects_counts_df <- en_AJ_killed_subjects_counts_df %>% arrange(desc(Count))
+en_BBCNews_killed_subjects_counts_df <- en_BBCNews_killed_subjects_counts_df %>% arrange(desc(Count))
+en_CNN_killed_subjects_counts_df <- en_CNN_killed_subjects_counts_df %>% arrange(desc(Count))
+en_DW_killed_subjects_counts_df <- en_DW_killed_subjects_counts_df %>% arrange(desc(Count))
+# Rename the "Count" column in each data frame with the original data frame name
+killed_dfs <- imap(killed_dfs, ~ rename(.x, !!.y := Count))
+
+# Combine the data frames using full_join
+combined_killed_subject <- reduce(killed_dfs, full_join, by = "String")
+ggplotly(ggplot()+
+           geom_point(aes(y=en_AJ_killed_subjects_counts_df$String[1:5],x=en_AJ_killed_subjects_counts_df$Percentage[1:5]),color="green")+
+           geom_point(aes(y=en_BBCNews_killed_subjects_counts_df$String[1:5],x=en_BBCNews_killed_subjects_counts_df$Percentage[1:5]),color="darkred")+
+           geom_point(aes(y=en_CNN_killed_subjects_counts_df$String[1:5],x=en_CNN_killed_subjects_counts_df$Percentage[1:5]),color="red")+
+           geom_point(aes(y=en_DW_killed_subjects_counts_df$String[1:5],x=en_DW_killed_subjects_counts_df$Percentage[1:5]),color="blue")
+         )
+
+```
+
+```{r}
+combined_killed_subject <- combined_killed_subject %>% arrange(desc(en_AJ_killed_subjects_counts_df))
+ggplotly(ggplot()+
+           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.x[1:15]),color="green")+
+           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.y[1:15]),color="darkred")+
+           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.x.x[1:15]),color="red")+
+           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.y.y[1:15]),color="blue")
+         )
+```
+
+```{r}
+en_DW <- en_DW %>% arrange(publish_date)
+en_DW <- en_DW %>% mutate( cum_killed = cumsum(killed.VVN.))
+en_BBCNews <- en_BBCNews %>% arrange(publish_date)
+en_BBCNews <- en_BBCNews %>% mutate( cum_killed = cumsum(killed.VVN.))
+en_CNN <- en_CNN %>% arrange(publish_date)
+en_CNN <- en_CNN %>% mutate( cum_killed = cumsum(killed.VVN.))
+en_AJ <- en_AJ %>% arrange(publish_date)
+en_AJ <- en_AJ %>% mutate( cum_killed = cumsum(killed.VVN.))
+```
+
+```{r}
+
+ggplotly(ggplot()+geom_line(aes(x=en_DW$publish_date,y=en_DW$cum_killed/max(en_DW$cum_killed)),color="blue")+
+                                    geom_line(aes(x=en_BBCNews$publish_date,y=en_BBCNews$cum_killed/max(en_BBCNews$cum_killed)),color="darkred")+
+                                    geom_line(aes(x=en_CNN$publish_date,y=en_CNN$cum_killed/max(en_CNN$cum_killed)),color="red")+
+                                    geom_line(aes(x=en_AJ$publish_date,y=en_AJ$cum_killed/max(en_AJ$cum_killed)),color="green")+
+  theme_minimal()+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank()))
+                          
+           
+```
+
+
+```{r}
+
+# Assuming your combined_df is named 'combined_df'
+# Convert the data frame from wide to long format for ggplot2
+combined_df_long <- combined_killed_subject %>%
+  pivot_longer(cols = -String, names_to = "DataFrame", values_to = "Count")
+
+combined_df_long <- combined_df_long %>% arrange(-Count)
+# Create a point plot
+ggplot(combined_killed_subject[1:15,], aes(x = String, y = Count, color = DataFrame)) +
+  geom_point(size = 3, alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Counts of Strings Across Data Frames",
+       x = "String",
+       y = "Count",
+       color = "Data Frame") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+
