@@ -59,6 +59,14 @@ DW <- DW %>% filter(publish_date > "2023-08-07")
 
 ```
 
+```{r}
+AJ <- AJ %>% filter(total_word_count > 20)
+BBC <- BBC %>% filter(total_word_count > 20)
+CNN <- CNN %>% filter(total_word_count > 20)
+DW <- DW %>% filter(total_word_count > 20)
+
+```
+
 ## combine data
 ```{r}
 combined_channels <- rbind(AJ, BBC, CNN, DW)
@@ -74,14 +82,14 @@ plot_lemma <- function(lemma, date_to_plot) {
   filtered_data <- combined_channels %>%
     filter(word_lemma == lemma) %>%
     filter(as.Date(publish_date, format = "%Y-%m-%d") > as.Date("2023-10-07"))
-
+  
   plot1 <- filtered_data %>%
     ggplot(aes(x = publish_date, y = count_lemma_acum/count_lemma_max, color = media)) +
     geom_line() +
     theme_minimal() +
     theme(panel.grid = element_blank(),
           axis.text.x = element_blank()) +
-    scale_y_log10() +
+    #scale_y_log10() +
     scale_color_manual(values = media_colors) +
     xlab("") +
     ylab("Relative accumulated frequency") +
@@ -94,8 +102,8 @@ plot_lemma <- function(lemma, date_to_plot) {
     geom_col(alpha = 0.7) +
     theme_minimal() +
     theme(panel.grid = element_blank()) +
+    scale_y_continuous(labels = scales::comma) +
     scale_fill_manual(values = media_colors) +
-    scale_y_log10() +
     xlab("") +
     ylab("IPM")
 
@@ -118,22 +126,26 @@ plot_lemma(lemma = "Israel",
 ```
 ```{r}
   filtered_data <- combined_channels %>%
-    filter(word_lemma == "Palestine")
-           
-ggplot(filtered_data, aes(x = publish_date, y = ((count_lemma / total_word_count) * 1e6), fill=media)) +
+    filter(word_lemma == "Israel")
+ filtered_data   <- filtered_data %>%
+   mutate(rel.Freq = ((count_lemma / total_word_count) * 1e6) )
+   
+   
+plot1 <- ggplot(filtered_data, aes(x = publish_date, y = ((count_lemma / total_word_count) * 1e6), fill=media)) +
   #geom_line(size = 1)+
-  geom_col(size = 1) +
   labs(
     title = "Mentions of Palestine in the media",
     x = "Publish Date",
     y = "Relative Frequency log10(IPM)",
     color = "Word Lemma"
   ) +
-  geom_col(alpha = 0.7) +
-      scale_y_log10() +
+ geom_col(alpha = 0.7, position = "stack") +
+  #geom_point()+
     theme_minimal() +
     theme(panel.grid = element_blank()) +
     scale_fill_manual(values = media_colors) 
+
+ggplotly(plot1)
 ```
 
 ```{r}
