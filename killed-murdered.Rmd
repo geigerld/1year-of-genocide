@@ -12,9 +12,29 @@ rm(list = ls())
 require(tidyverse)
 require(plotly)
 require(purrr)
+library(patchwork)
 ```
 
 
+## define the colors
+
+
+```{r}
+BBC_black <-  "#000000"
+CNN_red <- "#cc0000"
+AJ_yellow <- "#d69d10"
+AJ_blue <- "#1d174e"
+DW_blue <- "#05b2fc"
+media_colors <- c("#d69d10", "#000000", "#cc0000", "#05b2fc")
+# Define the custom colors and shapes for each source
+source_colors <- c("en_BBCNews" = "#000000", "en_CNN" = "#cc0000", "en_AJ" = "#d69d10", "en_DW" = "#05b2fc")
+source_colors2 <- c("BBC" = "#000000", "CNN" = "#cc0000", "AJ" = "#d69d10", "DW" = "#05b2fc")
+source_shapes <- c("en_BBCNews" = 15, "en_CNN" = 17, "en_AJ" = 18, "en_DW" = 19)  # Assign different shapes
+source_shapes2 <- c("BBC" = 15, "CNN" = 17, "AJ" = 18, "DW" = 19)  # Assign different shapes
+```
+
+
+## import the data
 ```{r}
   en_AJ <- read.csv("killed_data/en_AJ_killed-murdered.csv")%>% 
   mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
@@ -25,150 +45,635 @@ en_CNN <- read.csv("killed_data/en_CNN_killed-murdered.csv")%>%
 en_DW <- read_csv("killed_data/en_DW_killed-murdered.csv") %>% 
   mutate(publish_date = as.Date(as.character(publish_date), format="%Y%m%d"))
 ```
+
+## filter data
+We only want the data after the 7th October
 ```{r}
 en_AJ <- en_AJ %>% filter(publish_date > "2023-08-07")
 en_BBCNews <- en_BBCNews %>% filter(publish_date > "2023-08-07")
 en_CNN <- en_CNN %>% filter(publish_date > "2023-08-07")
 en_DW <- en_DW %>% filter(publish_date > "2023-08-07")
-```
-```{r}
 
 ```
 
 
+
+## Create function to count column_name
 ```{r}
-# Split the strings into individual words and unlist them
-en_AJ_killed_subjects <- unlist(strsplit(en_AJ$killed.VVN.subject, " "))
-# Count the occurrences of each unique string
-en_AJ_killed_subjects_counts <- table(en_AJ_killed_subjects)
-# Convert to a data frame for easier viewing
-en_AJ_killed_subjects_counts_df <- as.data.frame(en_AJ_killed_subjects_counts)
-colnames(en_AJ_killed_subjects_counts_df) <- c("String", "Count")
-# Calculate the percentage
-en_AJ_killed_subjects_counts_df$Percentage <- round((en_AJ_killed_subjects_counts_df$Count / sum(en_AJ_killed_subjects_counts_df$Count)) * 100,2)
+simple_count_subjects <- function(data, column_name) {
+  # Split the strings into individual words and unlist them
+  subjects <- unlist(strsplit(data[[column_name]], " "))
+  
+  # Count the occurrences of each unique string
+  subjects_counts <- table(subjects)
+  
+  # Convert to a data frame for easier viewing
+  subjects_counts_df <- as.data.frame(subjects_counts)
+  colnames(subjects_counts_df) <- c("String", "Count")
+  
+  # Calculate the percentage
+  subjects_counts_df$Percentage <- round((subjects_counts_df$Count / sum(subjects_counts_df$Count)) * 100, 2)
+  
+  return(subjects_counts_df)
+}
+```
 
-
-
-# Split the strings into individual words and unlist them
-en_BBCNews_killed_subjects <- unlist(strsplit(en_BBCNews$killed.VVN.subject, " "))
-# Count the occurrences of each unique string
-en_BBCNews_killed_subjects_counts <- table(en_BBCNews_killed_subjects)
-# Convert to a data frame for easier viewing
-en_BBCNews_killed_subjects_counts_df <- as.data.frame(en_BBCNews_killed_subjects_counts)
-colnames(en_BBCNews_killed_subjects_counts_df) <- c("String", "Count")
-en_BBCNews_killed_subjects_counts_df$Percentage <- round((en_BBCNews_killed_subjects_counts_df$Count / sum(en_BBCNews_killed_subjects_counts_df$Count)) * 100,2)
-
-
-
-# Split the strings into individual words and unlist them
-en_CNN_killed_subjects <- unlist(strsplit(en_CNN$killed.VVN.subject, " "))
-# Count the occurrences of each unique string
-en_CNN_killed_subjects_counts <- table(en_CNN_killed_subjects)
-# Convert to a data frame for easier viewing
-en_CNN_killed_subjects_counts_df <- as.data.frame(en_CNN_killed_subjects_counts)
-colnames(en_CNN_killed_subjects_counts_df) <- c("String", "Count")
-en_CNN_killed_subjects_counts_df$Percentage <- round((en_CNN_killed_subjects_counts_df$Count / sum(en_CNN_killed_subjects_counts_df$Count)) * 100,2)
-
-
-
-
-# Split the strings into individual words and unlist them
-en_DW_killed_subjects <- unlist(strsplit(en_DW$killed.VVN.subject, " "))
-# Count the occurrences of each unique string
-en_DW_killed_subjects_counts <- table(en_DW_killed_subjects)
-# Convert to a data frame for easier viewing
-en_DW_killed_subjects_counts_df <- as.data.frame(en_DW_killed_subjects_counts)
-colnames(en_DW_killed_subjects_counts_df) <- c("String", "Count")
-en_DW_killed_subjects_counts_df$Percentage <- round((en_DW_killed_subjects_counts_df$Count / sum(en_DW_killed_subjects_counts_df$Count)) * 100,2)
-
+```{r}
+count_per_date_subjects <- function(data, column_name) {
+  # Create an empty data frame to store results
+  results_df <- data.frame(String = character(), publish_date = as.Date(character()), total_word_count = numeric(), stringsAsFactors = FALSE)
+  
+  # Loop over each row of the data frame
+  for (i in 1:nrow(data)) {
+    # Get the publish_date, total_word_count, and text column for the current row
+    current_date <- data$publish_date[i]
+    total_words <- data$total_word_count[i]
+    text_entry <- data[[column_name]][i]
+    
+    # Check if text_entry, current_date, or total_word_count is NA
+    if (is.na(text_entry) | is.na(current_date) | is.na(total_words)) {
+      next  # Skip this iteration if there are missing values
+    }
+    
+    # Split the strings into individual words
+    words <- unlist(strsplit(text_entry, " "))
+    
+    # Remove empty strings and NA values
+    words <- words[!is.na(words) & words != ""]
+    
+    # Only proceed if there are words
+    if (length(words) > 0) {
+      # Create a data frame with the words and their associated publish_date and total_word_count
+      temp_df <- data.frame(String = words, publish_date = current_date, total_word_count = total_words, stringsAsFactors = FALSE)
+      
+      # Combine this with the main results data frame
+      results_df <- rbind(results_df, temp_df)
+    }
+  }
+  
+  # Count occurrences of each unique string per publish_date
+  subjects_counts_df <- results_df %>%
+    group_by(String, publish_date, total_word_count) %>%
+    summarise(Count = n(), .groups = 'drop')
+  
+  # Calculate instances per million for each word per publish_date
+  subjects_counts_df$Instances_Per_Million <- (subjects_counts_df$Count / subjects_counts_df$total_word_count) * 1e6
+  
+  # Calculate the overall total count of each string across the entire dataset
+  total_counts <- results_df %>%
+    group_by(String) %>%
+    summarise(TotalCount = n(), .groups = 'drop')
+  
+  # Calculate the overall percentage for each word across the entire dataset
+  total_count_all_words <- sum(total_counts$TotalCount)
+  total_counts$Total_Percentage <- round((total_counts$TotalCount / total_count_all_words) * 100, 2)
+  
+  # Merge the total percentage information back to the main results
+  subjects_counts_df <- merge(subjects_counts_df, total_counts[, c("String", "Total_Percentage")], by = "String", all.x = TRUE)
+  
+  return(subjects_counts_df)
+}
 
 
 ```
 
+normalize the strings in the "killed.VVN.subject" column
+```{r}
+library(dplyr)
+library(stringr)
+#library(tm)  # For removing stop words
+
+# Example function to normalize the "killed.VVN.subject" column
+normalize_text <- function(text) {
+  text <- tolower(text)  # Convert to lowercase
+  text <- str_replace_all(text, "[[:punct:]]", " ")  # Remove punctuation
+  text <- str_squish(text)  # Remove extra whitespace
+#  text <- removeWords(text, stopwords("en"))  # Remove common English stop words
+  return(text)
+}
+
+# Apply normalization to the relevant columns
+en_AJ$killed.VVN.subject <- sapply(en_AJ$killed.VVN.subject, normalize_text)
+en_BBCNews$killed.VVN.subject <- sapply(en_BBCNews$killed.VVN.subject, normalize_text)
+en_CNN$killed.VVN.subject <- sapply(en_CNN$killed.VVN.subject, normalize_text)
+en_DW$killed.VVN.subject <- sapply(en_DW$killed.VVN.subject, normalize_text)
+
+```
+
+## Count the strings in col = "killed.VVN.subject"
+```{r}
+en_AJ_killed_subjects_counts_df <- simple_count_subjects(en_AJ, "killed.VVN.subject")
+en_BBCNews_killed_subjects_counts_df <- simple_count_subjects(en_BBCNews, "killed.VVN.subject")
+en_CNN_killed_subjects_counts_df <- simple_count_subjects(en_CNN, "killed.VVN.subject")
+en_DW_killed_subjects_counts_df <- simple_count_subjects(en_DW, "killed.VVN.subject")
+# Apply the function to each of your data frames
+en_AJ_killed_subjects_date_counts_df <- count_per_date_subjects(en_AJ, "killed.VVN.subject")
+en_BBCNews_killed_subjects_date_counts_df <- count_per_date_subjects(en_BBCNews, "killed.VVN.subject")
+en_CNN_killed_subjects_date_counts_df <- count_per_date_subjects(en_CNN, "killed.VVN.subject")
+en_DW_killed_subjects_date_counts_df <- count_per_date_subjects(en_DW, "killed.VVN.subject")
+```
 
 ```{r}
-
-
-
-
-
 # Assign names to the data frames
-killed_dfs <- (list(en_AJ_killed_subjects_counts_df=en_AJ_killed_subjects_counts_df, en_BBCNews_killed_subjects_counts_df=en_BBCNews_killed_subjects_counts_df, en_CNN_killed_subjects_counts_df=en_CNN_killed_subjects_counts_df, en_DW_killed_subjects_counts_df=en_DW_killed_subjects_counts_df))
+killed_dfs <- list(
+  en_AJ = en_AJ_killed_subjects_counts_df, 
+  en_BBCNews = en_BBCNews_killed_subjects_counts_df, 
+  en_CNN = en_CNN_killed_subjects_counts_df, 
+  en_DW = en_DW_killed_subjects_counts_df
+)
 
-# Apply arrange to each data frame in the list
-killed_dfs_sorted <- lapply(killed_dfs, function(df) {
-  df %>% arrange(desc(Count))
-})
+# Sort each data frame by Count in descending order
+killed_dfs_sorted <- map(killed_dfs, ~ arrange(.x, desc(Count)))
 
-en_AJ_killed_subjects_counts_df <- en_AJ_killed_subjects_counts_df %>% arrange(desc(Count))
-en_BBCNews_killed_subjects_counts_df <- en_BBCNews_killed_subjects_counts_df %>% arrange(desc(Count))
-en_CNN_killed_subjects_counts_df <- en_CNN_killed_subjects_counts_df %>% arrange(desc(Count))
-en_DW_killed_subjects_counts_df <- en_DW_killed_subjects_counts_df %>% arrange(desc(Count))
-# Rename the "Count" column in each data frame with the original data frame name
-killed_dfs <- imap(killed_dfs, ~ rename(.x, !!.y := Count))
+# Rename 'Count' column with the respective data frame name
+killed_dfs_named <- imap(killed_dfs_sorted, ~ rename(.x, !!.y := Count))
 
-# Combine the data frames using full_join
-combined_killed_subject <- reduce(killed_dfs, full_join, by = "String")
-ggplotly(ggplot()+
-           geom_point(aes(y=en_AJ_killed_subjects_counts_df$String[1:5],x=en_AJ_killed_subjects_counts_df$Percentage[1:5]),color="green")+
-           geom_point(aes(y=en_BBCNews_killed_subjects_counts_df$String[1:5],x=en_BBCNews_killed_subjects_counts_df$Percentage[1:5]),color="darkred")+
-           geom_point(aes(y=en_CNN_killed_subjects_counts_df$String[1:5],x=en_CNN_killed_subjects_counts_df$Percentage[1:5]),color="red")+
-           geom_point(aes(y=en_DW_killed_subjects_counts_df$String[1:5],x=en_DW_killed_subjects_counts_df$Percentage[1:5]),color="blue")
-         )
-
-```
-
-```{r}
-combined_killed_subject <- combined_killed_subject %>% arrange(desc(en_AJ_killed_subjects_counts_df))
-ggplotly(ggplot()+
-           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.x[1:15]),color="green")+
-           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.y[1:15]),color="darkred")+
-           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.x.x[1:15]),color="red")+
-           geom_point(aes(y=combined_killed_subject$String[1:15],x=combined_killed_subject$Percentage.y.y[1:15]),color="blue")
-         )
-```
-
-```{r}
-en_DW <- en_DW %>% arrange(publish_date)
-en_DW <- en_DW %>% mutate( cum_killed = cumsum(killed.VVN.))
-en_BBCNews <- en_BBCNews %>% arrange(publish_date)
-en_BBCNews <- en_BBCNews %>% mutate( cum_killed = cumsum(killed.VVN.))
-en_CNN <- en_CNN %>% arrange(publish_date)
-en_CNN <- en_CNN %>% mutate( cum_killed = cumsum(killed.VVN.))
-en_AJ <- en_AJ %>% arrange(publish_date)
-en_AJ <- en_AJ %>% mutate( cum_killed = cumsum(killed.VVN.))
-```
-
-```{r}
-
-ggplotly(ggplot()+geom_line(aes(x=en_DW$publish_date,y=en_DW$cum_killed/max(en_DW$cum_killed)),color="blue")+
-                                    geom_line(aes(x=en_BBCNews$publish_date,y=en_BBCNews$cum_killed/max(en_BBCNews$cum_killed)),color="darkred")+
-                                    geom_line(aes(x=en_CNN$publish_date,y=en_CNN$cum_killed/max(en_CNN$cum_killed)),color="red")+
-                                    geom_line(aes(x=en_AJ$publish_date,y=en_AJ$cum_killed/max(en_AJ$cum_killed)),color="green")+
-  theme_minimal()+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank()))
-                          
-           
+# Combine the data frames using full_join by "String"
+combined_killed_subject <- reduce(killed_dfs_named, full_join, by = "String")
 ```
 
 
 ```{r}
+process_frequency_data <- function(df, media_name) {
+  df %>%
+    arrange(publish_date, .by_group = TRUE) %>%
+    mutate(count_killed_acum = cumsum(Count)) %>%
+    mutate(count_killed_max = max(count_killed_acum)) %>%
+    mutate(slope = (count_killed_acum - lag(count_killed_acum)) / as.numeric(publish_date - lag(publish_date)))%>%
+    ungroup() %>%
+    mutate(log_count_killed_acum = log(count_killed_acum + 1)) %>%
+    mutate(media = media_name)
+}
+```
 
-# Assuming your combined_df is named 'combined_df'
-# Convert the data frame from wide to long format for ggplot2
-combined_df_long <- combined_killed_subject %>%
-  pivot_longer(cols = -String, names_to = "DataFrame", values_to = "Count")
+```{r}
+en_AJ_killed_subjects_date_counts_df <- process_frequency_data(en_AJ_killed_subjects_date_counts_df, "AJ")
+en_BBCNews_killed_subjects_date_counts_df <- process_frequency_data(en_BBCNews_killed_subjects_date_counts_df, "BBC")
+en_CNN_killed_subjects_date_counts_df <- process_frequency_data(en_CNN_killed_subjects_date_counts_df, "CNN")
+en_DW_killed_subjects_date_counts_df <- process_frequency_data(en_DW_killed_subjects_date_counts_df, "DW")
+```
 
-combined_df_long <- combined_df_long %>% arrange(-Count)
-# Create a point plot
-ggplot(combined_killed_subject[1:15,], aes(x = String, y = Count, color = DataFrame)) +
-  geom_point(size = 3, alpha = 0.7) +
+```{r}
+combined_killed_subject_date <- rbind(en_AJ_killed_subjects_date_counts_df,en_BBCNews_killed_subjects_date_counts_df,en_CNN_killed_subjects_date_counts_df,en_DW_killed_subjects_date_counts_df)
+```
+
+```{r}
+combined_killed_subject_date <- combined_killed_subject_date %>% arrange(desc(Total_Percentage))
+
+# Words to exclude
+words_to_exclude <- c("who", "that", "he", "they", "have", "palestinian","to")
+
+# Filter out the words to exclude
+df_filtered <- combined_killed_subject_date[!combined_killed_subject_date$String %in% words_to_exclude, ]
+
+# Get the first 10 unique strings
+unique_strings <- unique(df_filtered$String)[1:5]
+
+# Subset the filtered data frame based on these 10 unique strings
+subset_df <- df_filtered[df_filtered$String %in% unique_strings, ]
+
+subset_df <- subset_df %>% rename(Subjects = String)
+```
+
+
+```{r}
+# Add publish_month column
+subset_df <- subset_df %>%
+  mutate(publish_month = format(publish_date, "%Y-%m"))
+```
+
+##summarize for month
+```{r}
+summary_df <- subset_df %>%
+  group_by(Subjects, publish_month, media) %>%
+  summarise(
+    total_word_count = sum(total_word_count, na.rm = TRUE),
+    Count = sum(Count, na.rm = TRUE),
+    Instances_Per_Million = mean(Instances_Per_Million, na.rm = TRUE),
+    #Total_Percentage = mean(Total_Percentage, na.rm = TRUE),
+    #count_killed_acum = max(count_killed_acum, na.rm = TRUE),
+    #count_killed_max = max(count_killed_max, na.rm = TRUE),
+    #slope = mean(slope, na.rm = TRUE),
+    #log_count_killed_acum = mean(log_count_killed_acum, na.rm = TRUE)
+  )
+```
+```{r}
+filtered_subset_df <- summary_df %>% filter(Subjects=="palestinians")
+```
+
+
+```{r}
+ggplotly(ggplot(filtered_subset_df, aes(x = publish_month, y = Instances_Per_Million , fill = media)) +
+    #geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
+    geom_col(alpha = 0.7) +
+    #geom_point()+
+    theme_minimal() +
+    theme(panel.grid = element_blank()) +
+    #scale_color_manual(values = source_colors2) +
+    scale_fill_manual(values = media_colors) +
+    xlab("") +
+    ylab("Mentions")+
+  facet_grid(rows = vars(media)))
+```
+
+```{r}
+#ggplotly(ggplot(summary_df, aes(x = publish_month, y = count_killed_acum/count_killed_max , fill = Subjects)) +
+#    #geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
+#    geom_col(alpha = 0.7) +
+ #   theme_minimal() +
+ #   theme(panel.grid = element_blank()) +
+ #   #scale_fill_manual(values = media_colors) +
+ #   xlab("") +
+  #  ylab("Mentions")+
+#  facet_grid(rows = vars(media)))
+```
+
+
+```{r}
+# Make sure the dataset is sorted based on the relevant column (e.g., en_AJ, en_BBCNews, en_CNN, etc.)
+combined_killed_subject <- combined_killed_subject %>% arrange(desc(en_AJ))
+
+# Select the top 10 rows for visualization
+top10_combined <- combined_killed_subject[1:10, ]
+
+# Reshape data to long format
+top10_long <- top10_combined %>%
+  pivot_longer(
+    cols = starts_with("en_"), 
+    names_to = "media", 
+    values_to = "Count"
+  ) %>%
+  filter(!is.na(Count))  # Filter out rows with NA values
+
+# Extract the corresponding percentage columns for each source and pivot them as well
+percentage_long <- top10_combined %>%
+  select(String, starts_with("Percentage")) %>%
+  pivot_longer(
+    cols = starts_with("Percentage"),
+    names_to = "media",
+    values_to = "Percentage"
+  )
+
+# Clean the 'Source' column to match the original data frame names (e.g., "Percentage.x" to "en_AJ")
+percentage_long$Source <- gsub("Percentage\\.", "", percentage_long$media)
+percentage_long$Source <- recode(percentage_long$media,
+                                 "x" = "en_AJ", 
+                                 "y" = "en_BBCNews", 
+                                 "x.x" = "en_CNN", 
+                                 "y.y" = "en_DW")
+
+# Join the long-format data frames
+top10_long <- top10_long %>%
+  left_join(percentage_long, by = c("String", "media"))
+
+# Remove the "en_" prefix and change "BBCNews" to "BBC" in the 'media' column of the main dataset
+top10_long$media <- gsub("^en_", "", top10_long$media)
+top10_long$media <- gsub("BBCNews", "BBC", top10_long$media)
+
+# Sort the x-axis by the percentage in descending order
+top10_long <- top10_long %>%
+  arrange(desc(Percentage)) %>%
+  mutate(String = factor(String, levels = unique(String), ordered = TRUE))
+
+
+```
+
+
+
+
+```{r}
+# Define your list of words to filter out
+words_to_exclude <- c("who", "that", "he","they","have","palestinian")  # Replace with the actual words you want to exclude
+
+# Make sure the dataset is sorted based on the relevant column (e.g., en_AJ, en_BBCNews, en_CNN, etc.)
+combined_killed_subject <- combined_killed_subject %>% arrange(desc(en_AJ))
+
+# Filter out words that are in the exclusion list
+combined_killed_subject_filtered <- combined_killed_subject %>%
+  filter(!String %in% words_to_exclude)
+
+# Select the top 10 rows for visualization
+top10_filtered_combined <- combined_killed_subject_filtered[1:10, ]
+
+# Reshape data to long format
+top10_filtered_long <- top10_filtered_combined %>%
+  pivot_longer(
+    cols = starts_with("en_"), 
+    names_to = "media", 
+    values_to = "Count"
+  ) %>%
+  filter(!is.na(Count))  # Filter out rows with NA values
+
+# Extract the corresponding percentage columns for each source and pivot them as well
+percentage_long <- top10_filtered_combined %>%
+  select(String, starts_with("Percentage")) %>%
+  pivot_longer(
+    cols = starts_with("Percentage"),
+    names_to = "media",
+    values_to = "Percentage"
+  )
+
+# Clean the 'Source' column to match the original data frame names (e.g., "Percentage.x" to "en_AJ")
+percentage_long$media <- gsub("Percentage\\.", "", percentage_long$media)
+percentage_long$media <- recode(percentage_long$media,
+                                 "x" = "en_AJ", 
+                                 "y" = "en_BBCNews", 
+                                 "x.x" = "en_CNN", 
+                                 "y.y" = "en_DW")
+
+# Join the long-format data frames
+top10_filtered_long <- top10_filtered_long %>%
+  left_join(percentage_long, by = c("String", "media"))
+
+# Remove the "en_" prefix and change "BBCNews" to "BBC" in the 'media' column of the main dataset
+top10_filtered_long$media <- gsub("^en_", "", top10_filtered_long$media)
+top10_filtered_long$media <- gsub("BBCNews", "BBC", top10_filtered_long$media)
+
+# Sort the x-axis by the percentage in descending order
+top10_filtered_long <- top10_filtered_long %>%
+  arrange(desc(Percentage)) %>%
+  mutate(String = factor(String, levels = unique(String), ordered = TRUE))
+```
+
+
+```{r}
+# Calculate total word count for each source
+total_word_counts <- top10_filtered_long %>%
+  group_by(media) %>%
+  summarise(total_word_count = sum(Count))
+
+# Create a named vector for source colors and shapes with total counts in parentheses
+source_labels <- total_word_counts %>%
+  mutate(label = paste(media," ", "(", total_word_count, ")", sep = "")) %>%
+  pull(label)
+
+# Update the original color and shape mappings to include the counts in the labels
+#names(source_colors) <- source_labels
+#names(source_shapes) <- source_labels
+
+# Update the Source column to match the new labels
+#top10_filtered_long <- top10_filtered_long %>%
+#  left_join(total_word_counts, by = "Source") %>%
+#  mutate(Source = paste(Source, " (", total_word_count, ")", sep = ""))
+
+# Create the ggplot with the updated y-axis label and the sum of total_word_count in the legend
+plot <- ggplot(top10_filtered_long, aes(x = Percentage, y = String, color = media, shape = media, group = media)) +
+  geom_point(size = 2) +
+  scale_color_manual(values = source_colors2) +
+  scale_shape_manual(values = source_shapes2) +
+  labs(x = "Percentage", y = "Subjects", title = "Top 10 Subjects by Percentage from Different Sources") +
+  scale_y_discrete(limits = rev(levels(top10_filtered_long$String)))+  # Reverse the y-axis to have the highest percentage at the top
   theme_minimal() +
-  labs(title = "Counts of Strings Across Data Frames",
-       x = "String",
-       y = "Count",
-       color = "Data Frame") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(
+    panel.grid.major.x = element_blank(),  # Remove major vertical grid lines
+    panel.grid.minor.x = element_blank()   # Remove minor vertical grid lines
+  )
+# Convert the ggplot to an interactive plotly plot
+ggplotly(plot)
+```
+# Do the general frequency plot:
+
+```{r}
+# Define a function to arrange by publish_date and calculate the cumulative sum
+process_dataframe <- function(df) {
+  df <- df %>% 
+    arrange(publish_date) %>%
+    mutate(cum_killed = cumsum(killed.VVN.)) %>%
+    mutate(count_killed_max = max(cum_killed)) %>%
+  return(df)
+}
+
+# List of data frames
+data_frames <- list(en_DW = en_DW, en_BBCNews = en_BBCNews, en_CNN = en_CNN, en_AJ = en_AJ)
+
+# Apply the function to each data frame in the list
+processed_data_frames <- lapply(data_frames, process_dataframe)
+
+# Extract the processed data frames back into their original variables
+en_DW <- processed_data_frames$en_DW
+en_BBCNews <- processed_data_frames$en_BBCNews
+en_CNN <- processed_data_frames$en_CNN
+en_AJ <- processed_data_frames$en_AJ
 ```
 
 
+```{r}
+plot_lemma <- function(lemma, filtered_data, y1, y2, date_to_plot) {
+  plot1 <- filtered_data %>%
+    ggplot(aes(x = publish_date, y = y1/count_killed_max, color = media)) +
+    geom_line() +
+    theme_minimal() +
+    theme(panel.grid = element_blank(),
+          axis.text.x = element_blank()) +
+    #scale_y_log10() +
+    scale_color_manual(values = media_colors) +
+    xlab("") +
+    ylab("Relative accumulated frequency") +
+    geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
+    labs(title = expression(paste("Passive uses of ", italic("killed"), " in media")))
 
+  plot2 <- filtered_data %>%
+    ggplot(aes(x = publish_date, y = ((y2 / total_word_count) * 1e6), color = media)) +
+    geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
+    #geom_col(alpha = 0.7) +
+    geom_smooth(se=FALSE)+
+    theme_minimal() +
+    theme(panel.grid = element_blank()) +
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_manual(values = media_colors) +
+    xlab("") +
+    ylab("IPM")
+
+  # Align the plots by a common X axis
+  aligned_plots <- plot1 / plot2
+
+  # Display the aligned plots
+  print(aligned_plots)
+}
+
+
+```
+
+```{r}
+# Combine all processed data frames into one and calculate relative cum_killed
+combined_data <- bind_rows(
+  en_DW %>% mutate(media = "DW"),
+  en_BBCNews %>% mutate(media = "BBC"),
+  en_CNN %>% mutate(media = "CNN"),
+  en_AJ %>% mutate(media = "AJ")
+)
+
+# Calculate the relative cum_killed by dividing by the total sum for each source
+combined_data <- combined_data %>%
+  group_by(media) %>%
+  mutate(relative_cum_killed = cum_killed / max(cum_killed))
+
+# Create the ggplot
+plot <- ggplot(combined_data, aes(x = publish_date, y = relative_cum_killed, color = media, group = media)) +
+  geom_line(size = 1) +  # Line plot for relative cumulative values
+  theme_minimal() +
+  theme(panel.grid = element_blank()) +
+  labs(x = "Publish Date", y = "Relative Cumulative Killed", title = "Relative Cumulative Killed Over Time by Source") +
+  scale_color_manual(values = c("DW" = "#05b2fc", "BBC" = "#000000", "CNN" = "#cc0000", "AJ" = "#d69d10"))
+
+# Convert the ggplot to an interactive plotly plot
+#ggplotly(plot)
+```
+
+```{r}
+ plots <- plot_lemma("killed", combined_data, y1=combined_data$cum_killed, y2=combined_data$killed.VVN.,date_to_plot = c("2024-04-25", "2024-06-07"))
+```
+
+
+# Comparison casualties:
+based on intro: https://en.wikipedia.org/wiki/Casualties_of_the_Israel%E2%80%93Hamas_war
+```{r}
+
+# Create the dataframe based on the provided statement
+data <- data.frame(
+  Category = c("Total Killed", 
+               "Palestinian Killed", 
+               "Israeli Killed", 
+               "Journalists (Committee to Protect Journalists)", 
+               "Palestinian Journalists", 
+               "Israeli Journalists", 
+               "Lebanese Journalists",
+               "Journalists and Media Workers (International Federation of Journalists)", 
+               "Palestinian Journalists and Media Workers", 
+               "Israeli Journalists and Media Workers", 
+               "Lebanese Journalists and Media Workers", 
+               "Humanitarian Aid Workers", 
+               "UNRWA Employees"),
+  Count = c(43000, 41431, 1706, 116, 111, 2, 3, 134, 127, 4, 3, 224, 179)
+)
+
+
+```
+
+```{r}
+# Create the dataframe based on the updated summary table
+summary_data <- data.frame(
+  String = c("people", 
+               "palestinians", 
+               "civilians", 
+               "children", 
+               "workers", 
+               "israelis", 
+               "family", 
+               "soldiers", 
+               "journalists", 
+               "staff"),
+  Count = c(43000, 
+            41431, 
+            39000,  # Example estimate for 90% civilians
+            13000, 
+            224, 
+            1706, 
+            825, 
+            395, 
+            116, 
+            224) # Including humanitarian aid workers such as UNRWA staff
+)
+# Calculate the percentage for each category
+summary_data <- summary_data %>%
+  mutate(Percentage = (Count / sum(Count)) * 100)
+```
+
+
+| **Category**             | **Count**                                      |
+|--------------------------|------------------------------------------------|
+| People                   | 43,000                                         |
+| Palestinians             | 41,431                                         |
+| Civilians                | Estimated 90% (various reports), e.g., 815 civilians killed in October 7 attacks in Israel |
+| Children                 | 13,000 (Gaza), 7,797 (UN confirmed identities) |
+| Workers                  | 224 humanitarian aid workers, including 179 UNRWA employees |
+| Israelis                 | 1,706 overall; 1,139 killed in October 7 attacks |
+| Family                   | Over 60% of Gazans lost family members; 825 families killed entirely |
+| Soldiers                 | 395 IDF soldiers killed                        |
+| Journalist               | 116 (Committee to Protect Journalists), 134 (International Federation of Journalists) |
+| Staff                    | 224 humanitarian aid workers, including 179 UNRWA employees|
+
+
+
+```{r}
+# Assuming you have both data frames `top10_filtered_long` and `summary_data` already prepared
+# Adjust 'String' column to match the 'Category' for comparison purposes
+# Ensure that 'String' and 'Category' are factors ordered by the Percentage in descending order
+top10_filtered_long <- top10_filtered_long %>%
+  mutate(String = factor(String, levels = unique(String[order(-Percentage)])))
+
+summary_data <- summary_data %>%
+  mutate(String = factor(String, levels = unique(String[order(-Percentage)])))
+```
+
+
+```{r}
+# Add a DataType column to distinguish between the two datasets
+
+summary_data <- summary_data %>%
+  mutate(media = "Wikipedia")
+```
+
+```{r}
+temp <- top10_filtered_long %>% select(String, Count, Percentage, media) %>% relocate(media, .after = Percentage)
+top10_summary_combined <- rbind(temp
+                                ,summary_data)
+```
+
+
+```{r}
+plot <- ggplot() +
+  geom_col(data = temp, aes( x = Percentage, y = String, fill = media, shape = media, group = media), alpha = 1,position="dodge") +
+  geom_col(data = summary_data, aes(x = Percentage, y = String,color=media), alpha = 0.5)+
+  #scale_color_manual(values = source_colors2) +
+  scale_color_manual(values="darkgrey",
+                     labels = paste("Wikipedia"," (people=",summary_data$Count[summary_data$String=="people"],")",sep = ""))+
+  scale_fill_manual(values = source_colors2,
+                    labels = c(paste("AJ"," (n=",length(en_AJ_killed_subjects_counts_df$String),")",sep = ""),
+                              paste("BBC"," (n=",length(en_BBCNews_killed_subjects_counts_df$String),")",sep = ""),
+                              paste("CNN"," (n=",length(en_CNN_killed_subjects_counts_df$String),")",sep = ""),
+                              paste("DW"," (n=",length(en_DW_killed_subjects_counts_df$String),")",sep = ""))) +
+  scale_shape_manual(values = source_shapes2) +
+  labs(x = "Percentage", y = "Subjects", title = expression(paste("Most frequent Subjects of passive ", italic("killed")))) +
+  scale_y_discrete(limits = rev(levels(top10_summary_combined$String)))+  # Reverse the y-axis to have the highest percentage at the top
+  theme_minimal() +
+#  theme(
+#    panel.grid.major.x = element_blank(),  # Remove major vertical grid lines
+#    panel.grid.minor.x = element_blank()   # Remove minor vertical grid lines
+#  )# Add a legend
+  theme(panel.grid = element_blank())  
+plot <- plot+ guides(color = guide_legend(title = "relative reported casualties"))
+
+
+plot
+# Convert the ggplot to an interactive plotly plot
+#ggplotly(plot)
+```
+```{r}
+plot <- ggplot() +
+  geom_col(data = temp, aes( x = Percentage, y = String, fill = media, shape = media, group = media), alpha = 1,position="dodge") +
+  geom_col(data = summary_data, aes(x = Percentage, y = String,color=media), alpha = 0.5)+
+  geom_text(data = summary_data, aes(x = Percentage, y = String, label = Count), hjust=0,vjust = -1, size = 2.5)+
+  #scale_color_manual(values = source_colors2) +
+  scale_color_manual(values="darkgrey")+
+  scale_fill_manual(values = source_colors2,
+                    labels = c(paste("AJ"," (n=",length(en_AJ_killed_subjects_counts_df$String),")",sep = ""),
+                              paste("BBC"," (n=",length(en_BBCNews_killed_subjects_counts_df$String),")",sep = ""),
+                              paste("CNN"," (n=",length(en_CNN_killed_subjects_counts_df$String),")",sep = ""),
+                              paste("DW"," (n=",length(en_DW_killed_subjects_counts_df$String),")",sep = ""))) +
+  scale_shape_manual(values = source_shapes2) +
+  labs(x = "Percentage", y = "Subjects", title = expression(paste("Most frequent Subjects of passive ", italic("killed")))) +
+  scale_y_discrete(limits = rev(levels(top10_summary_combined$String)))+  # Reverse the y-axis to have the highest percentage at the top
+  theme_minimal() +
+#  theme(
+#    panel.grid.major.x = element_blank(),  # Remove major vertical grid lines
+#    panel.grid.minor.x = element_blank()   # Remove minor vertical grid lines
+#  )# Add a legend
+  theme(panel.grid = element_blank())  
+plot <- plot+ guides(color = guide_legend(title = "relative reported casualties"))
+
+
+plot
+# Convert the ggplot to an interactive plotly plot
+#ggplotly(plot)
+```
