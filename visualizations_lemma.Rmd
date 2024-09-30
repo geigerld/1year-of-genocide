@@ -10,6 +10,7 @@ rm(list = ls())
 library(tidyverse)
 library(plotly)
 library(patchwork)
+library(rlang)
 
 # Color palette
 media_colors <- c("#d69d10", "#000000", "#cc0000", "#05b2fc")
@@ -25,22 +26,11 @@ process_frequency_data <- function(file_path, media_name) {
   # Check the column names
   #print(colnames(df))
   
-  df %>%
+  df <- df %>%
     mutate(publish_date = as.Date(as.character(publish_date), format = "%Y%m%d")) %>%
-    pivot_longer(cols = starts_with(".."), names_to = "word_lemma", values_to = "count_lemma") %>%
-    pivot_longer(cols = ends_with(".."), names_to = "word_token", values_to = "count_token") %>%  # Adjusted to use ends_with("..")
-    mutate(
-      word_lemma = str_remove(word_lemma, "^\\.\\."),  # Remove the ".." prefix
-      word_token = str_remove(word_token, "\\.\\.$")   # Remove the ".." suffix
-    ) %>%
-    group_by(word_lemma) %>%
-    arrange(publish_date, .by_group = TRUE) %>%
-    mutate(count_lemma_acum = cumsum(count_lemma)) %>%
-    mutate(count_lemma_max = max(count_lemma_acum)) %>%
-    mutate(slope = (count_lemma_acum - lag(count_lemma_acum)) / as.numeric(publish_date - lag(publish_date)))%>%
-    ungroup() %>%
-    mutate(log_count_lemma_acum = log(count_lemma_acum + 1)) %>%
-    mutate(media = media_name)
+    mutate(publish_month = format(publish_date, "%Y-%m")) %>%
+    mutate(media = media_name) %>%
+    arrange(publish_date, .by_group = TRUE)
 }
 
 # Apply the function with the updated folder path
@@ -49,29 +39,41 @@ BBC <- process_frequency_data("frequency_data_new/en_BBCNews_frequency.csv", "BB
 CNN <- process_frequency_data("frequency_data_new/en_CNN_frequency.csv", "CNN")
 DW <- process_frequency_data("frequency_data_new/en_DW_frequency.csv", "DW")
 ```
-## filter data
-We only want the data after the 7th October
-```{r}
-AJ <- AJ %>% filter(publish_date > "2023-08-07")
-BBC <- BBC %>% filter(publish_date > "2023-08-07")
-CNN <- CNN %>% filter(publish_date > "2023-08-07")
-DW <- DW %>% filter(publish_date > "2023-08-07")
-
-```
-
-```{r}
-AJ <- AJ %>% filter(total_word_count > 20)
-BBC <- BBC %>% filter(total_word_count > 20)
-CNN <- CNN %>% filter(total_word_count > 20)
-DW <- DW %>% filter(total_word_count > 20)
-
-```
-
 ## combine data
 ```{r}
 combined_channels <- rbind(AJ, BBC, CNN, DW)
 ```
 
+
+## filter data
+We only want the data after the 7th October
+```{r}
+combined_channels <- combined_channels %>% filter(publish_date > "2023-08-07")
+```
+
+```{r}
+combined_channels <- combined_channels %>% filter(total_word_count > 20)
+```
+
+
+## function to filter calculate cumulative frequency
+```{r}
+add_accum <- function(Colname, df){
+  # Check if the column exists in the data
+  if (!(Colname %in% colnames(df))) {
+    stop(paste("Column", Colname, "not found in combined_channels"))
+  }
+
+  # Filter for lemma
+  combined_accum <- df %>%
+    group_by(media) %>%
+    mutate(acccum_freq = cumsum(.data[[Colname]])) %>%  # Use .data[[Colname]] to access the column by name
+    mutate(count_max = max(acccum_freq)) %>%
+    ungroup()
+  
+  return(combined_accum)
+}
+```
 
 ##creating function for plotting:
 I changed the frequency to IPM:
@@ -79,12 +81,9 @@ I changed the frequency to IPM:
 ```{r}
 plot_lemma <- function(lemma, date_to_plot) {
   # Plotting
-  filtered_data <- combined_channels %>%
-    filter(word_lemma == lemma) %>%
-    filter(as.Date(publish_date, format = "%Y-%m-%d") > as.Date("2023-10-07"))
-  
+  filtered_data <- add_accum(lemma, combined_channels)
   plot1 <- filtered_data %>%
-    ggplot(aes(x = publish_date, y = count_lemma_acum/count_lemma_max, color = media)) +
+    ggplot(aes(x = publish_date, y = acccum_freq/count_max, color = media)) +
     geom_line() +
     theme_minimal() +
     theme(panel.grid = element_blank(),
@@ -97,7 +96,7 @@ plot_lemma <- function(lemma, date_to_plot) {
     labs(title = paste0("Mentions of ", lemma," in media"))
 
   plot2 <- filtered_data %>%
-    ggplot(aes(x = publish_date, y = ((count_lemma / total_word_count) * 1e6), fill = media)) +
+    ggplot(aes(x = publish_date, y = ((.data[[lemma]] / total_word_count) * 1e6), fill = media)) +
     geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
     geom_col(alpha = 0.7) +
     theme_minimal() +
@@ -118,43 +117,85 @@ plot_lemma <- function(lemma, date_to_plot) {
 
 plotting lemmas
 ```{r}
-plot_lemma(lemma = "Palestine", 
+plot_lemma(lemma = "..genocide", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
+plot_lemma(lemma = "..Palestine", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
+plot_lemma(lemma = "..Israel", 
            date_to_plot = c("2024-04-25", "2024-06-07"))
 
-plot_lemma(lemma = "Israel", 
+plot_lemma(lemma = "..Hostage", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
+
+plot_lemma(lemma = "..Hamas", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
+
+plot_lemma(lemma = "..Terror", 
            date_to_plot = c("2024-04-25", "2024-06-07"))
 ```
+
+
 ```{r}
-  filtered_data <- combined_channels %>%
-    filter(word_lemma == "Israel")
- filtered_data   <- filtered_data %>%
-   mutate(rel.Freq = ((count_lemma / total_word_count) * 1e6) )
-   
-   
-plot1 <- ggplot(filtered_data, aes(x = publish_date, y = ((count_lemma / total_word_count) * 1e6), fill=media)) +
-  #geom_line(size = 1)+
-  labs(
-    title = "Mentions of Palestine in the media",
-    x = "Publish Date",
-    y = "Relative Frequency log10(IPM)",
-    color = "Word Lemma"
-  ) +
- geom_col(alpha = 0.7, position = "stack") +
-  #geom_point()+
+plot_lemma_month <- function(lemma, date_to_plot) {
+  # Plotting
+combined_channels_month <- combined_channels %>%
+  group_by(publish_month, media) %>%
+  summarise(
+    total_word_count = sum(ifelse(is.na(total_word_count), 0, total_word_count)),
+    !!lemma := sum(.data[[lemma]], na.rm = TRUE),  # Dynamically assign column name
+    #count_lemma = sum(count_lemma, na.rm = TRUE),  # Static column name
+    .groups = 'drop'  # Drop group structure after summarising
+  )
+combined_channels_month$publish_month <- as.character(combined_channels_month$publish_month)
+  filtered_data <- add_accum(lemma, combined_channels_month)
+  print(head(filtered_data))
+  plot1 <- filtered_data %>%
+    ggplot(aes(x = publish_month, y = acccum_freq/count_max, color = media)) +
+    #geom_point() +
+    geom_line(aes(group=media))+
+    theme_minimal() +
+    theme(panel.grid = element_blank(),
+          axis.text.x = element_blank()) +
+    #scale_y_log10() +
+    scale_color_manual(values = media_colors) +
+    xlab("") +
+    ylab("Relative accumulated frequency") +
+    #geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
+    labs(title = paste0("Mentions of ", lemma," in media"))
+
+  plot2 <- filtered_data %>%
+    ggplot(aes(x = publish_month, y = ((.data[[lemma]] / total_word_count) * 1e6), fill = media)) +
+   # geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
+    geom_col(position="dodge") +
     theme_minimal() +
     theme(panel.grid = element_blank()) +
-    scale_fill_manual(values = media_colors) 
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_manual(values = media_colors) +
+    xlab("") +
+    ylab("IPM")
 
-ggplotly(plot1)
+  # Align the plots by a common X axis
+  aligned_plots <- plot1 / plot2
+
+  # Display the aligned plots
+  print(aligned_plots)
+}
+
+```
+
+```{r}
+plot_lemma_month(lemma = "..Terror", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
 ```
 
 ```{r}
 
   filtered_data <- combined_channels %>%
-    filter(word_lemma == "genocide")
+    filter(word_lemma == "Hamas")
            
 ggplot(filtered_data, aes(x = publish_date, y = slope, color=media)) +
-  geom_smooth(size = 1) +
+  geom_point()+
+  #geom_smooth(size = 1) +
   #geom_line(size = 1)+
   labs(
     title = expression(paste("Slope of Cumulative Frequency of ",italic("Genocide")," Over Time")),
@@ -165,6 +206,7 @@ ggplot(filtered_data, aes(x = publish_date, y = slope, color=media)) +
     theme_minimal() +
     theme(panel.grid = element_blank()) +
     scale_color_manual(values = media_colors)
+
 ```
 
 
