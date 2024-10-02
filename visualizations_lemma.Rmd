@@ -14,6 +14,7 @@ library(rlang)
 
 # Color palette
 media_colors <- c("#d69d10", "#000000", "#cc0000", "#05b2fc")
+Sys.setlocale("LC_TIME", "en_US.UTF-8")
 ```
 
 
@@ -68,8 +69,10 @@ add_accum <- function(Colname, df){
   combined_accum <- df %>%
     group_by(media) %>%
     mutate(acccum_freq = cumsum(.data[[Colname]])) %>%  # Use .data[[Colname]] to access the column by name
+        mutate(rel_acccum_freq = cumsum(.data[[Colname]])/cumsum(total_word_count)* 1e6) %>%  # Use .data[[Colname]] to access the column by name
     mutate(count_max = max(acccum_freq)) %>%
     ungroup()
+    
   
   return(combined_accum)
 }
@@ -83,7 +86,7 @@ plot_lemma <- function(lemma, date_to_plot) {
   # Plotting
   filtered_data <- add_accum(lemma, combined_channels)
   plot1 <- filtered_data %>%
-    ggplot(aes(x = publish_date, y = acccum_freq/count_max, color = media)) +
+    ggplot(aes(x = publish_date, y = acccum_freq, color = media)) +
     geom_line() +
     theme_minimal() +
     theme(panel.grid = element_blank(),
@@ -91,20 +94,32 @@ plot_lemma <- function(lemma, date_to_plot) {
     #scale_y_log10() +
     scale_color_manual(values = media_colors) +
     xlab("") +
-    ylab("Relative accumulated frequency") +
+    ylab("cumulative frequency") +
     geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
     labs(title = paste0("Mentions of ", lemma," in media"))
 
   plot2 <- filtered_data %>%
-    ggplot(aes(x = publish_date, y = ((.data[[lemma]] / total_word_count) * 1e6), fill = media)) +
+    #Relative accumulated Frequency:
+    #ggplot(aes(x = publish_date, y = ((.data[[lemma]] / total_word_count) * 1e6), color=media, fill = media)) +
+    #accumulated frequency
+    #ggplot(aes(x = publish_date, y = (.data[[lemma]] ), color=media, group=media, fill = media)) +
+    #accumulated frequency in IPM
+    #ggplot(aes(x = publish_date, y = (.data[[lemma]] ), color=media, group=media, fill = media)) +
+    ggplot(aes(x = publish_date, y = rel_acccum_freq, color = media)) +
+    geom_line() +
     geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
-    geom_col(alpha = 0.7) +
+    scale_color_manual(values = media_colors) +
     theme_minimal() +
     theme(panel.grid = element_blank()) +
-    scale_y_continuous(labels = scales::comma) +
+    scale_x_date(date_labels = "%B %Y", date_breaks = "1 month")+
+    theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
+    #axis.line.x = element_line(color = "black"),        # Ensure x-axis line is drawn
+    axis.ticks.x = element_line(color = "black")        # Ensure x-axis ticks are shown
+    )+
     scale_fill_manual(values = media_colors) +
-    xlab("") +
-    ylab("IPM")
+    xlab("")+ 
+    ylab("relative \n cumulative frequency (ipm)")
 
   # Align the plots by a common X axis
   aligned_plots <- plot1 / plot2
@@ -132,6 +147,12 @@ plot_lemma(lemma = "..Hamas",
 
 plot_lemma(lemma = "..Terror", 
            date_to_plot = c("2024-04-25", "2024-06-07"))
+
+
+plot_lemma(lemma = "Israelis..", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
+plot_lemma(lemma = "Palestinians..", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
 ```
 
 
@@ -150,7 +171,7 @@ combined_channels_month$publish_month <- as.character(combined_channels_month$pu
   filtered_data <- add_accum(lemma, combined_channels_month)
   print(head(filtered_data))
   plot1 <- filtered_data %>%
-    ggplot(aes(x = publish_month, y = acccum_freq/count_max, color = media)) +
+    ggplot(aes(x = publish_month, y = acccum_freq, color = media)) +
     #geom_point() +
     geom_line(aes(group=media))+
     theme_minimal() +
@@ -159,9 +180,9 @@ combined_channels_month$publish_month <- as.character(combined_channels_month$pu
     #scale_y_log10() +
     scale_color_manual(values = media_colors) +
     xlab("") +
-    ylab("Relative accumulated frequency") +
+    ylab("cumulative frequency") +
     #geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
-    labs(title = paste0("Mentions of ", lemma," in media"))
+    labs(title = paste("Frequency of ", lemma," Mentions Across Various Media Outlets"))
 
   plot2 <- filtered_data %>%
     ggplot(aes(x = publish_month, y = ((.data[[lemma]] / total_word_count) * 1e6), fill = media)) +
@@ -172,7 +193,12 @@ combined_channels_month$publish_month <- as.character(combined_channels_month$pu
     scale_y_continuous(labels = scales::comma) +
     scale_fill_manual(values = media_colors) +
     xlab("") +
-    ylab("IPM")
+    ylab("relative frequency \n (ipm)")+
+            theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
+    #axis.line.x = element_line(color = "black"),        # Ensure x-axis line is drawn
+    axis.ticks.x = element_line(color = "black")        # Ensure x-axis ticks are shown
+    )
 
   # Align the plots by a common X axis
   aligned_plots <- plot1 / plot2
@@ -188,26 +214,6 @@ plot_lemma_month(lemma = "..Terror",
            date_to_plot = c("2024-04-25", "2024-06-07"))
 ```
 
-```{r}
-
-  filtered_data <- combined_channels %>%
-    filter(word_lemma == "Hamas")
-           
-ggplot(filtered_data, aes(x = publish_date, y = slope, color=media)) +
-  geom_point()+
-  #geom_smooth(size = 1) +
-  #geom_line(size = 1)+
-  labs(
-    title = expression(paste("Slope of Cumulative Frequency of ",italic("Genocide")," Over Time")),
-    x = "Publish Date",
-    y = "Slope (Rate of Change)",
-    color = "Word Lemma"
-  ) +
-    theme_minimal() +
-    theme(panel.grid = element_blank()) +
-    scale_color_manual(values = media_colors)
-
-```
 
 
 
