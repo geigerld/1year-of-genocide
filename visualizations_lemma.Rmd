@@ -1,5 +1,5 @@
 ---
-date: "2024-09-22"
+date: "2024-10-02"
 output: html_document
 ---
 
@@ -57,7 +57,7 @@ combined_channels <- combined_channels %>% filter(total_word_count > 20)
 ```
 
 
-## function to filter calculate cumulative frequency
+## function calculate cumulative frequency
 ```{r}
 add_accum <- function(Colname, df){
   # Check if the column exists in the data
@@ -213,9 +213,15 @@ combined_channels_month$publish_month <- as.character(combined_channels_month$pu
 plot_lemma_month(lemma = "..Terror", 
            date_to_plot = c("2024-04-25", "2024-06-07"))
 ```
+```{r}
+search_terms <- colnames(combined_channels[, 5:(ncol(combined_channels) - 2)])
 
 
+for (name in search_terms){
+  plot_lemma(lemma = name, 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
+  }
 
-
+```
 
 
