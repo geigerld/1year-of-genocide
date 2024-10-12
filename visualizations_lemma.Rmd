@@ -11,6 +11,7 @@ library(tidyverse)
 library(plotly)
 library(patchwork)
 library(rlang)
+library(reshape2)
 
 # Color palette
 media_colors <- c("#d69d10", "#000000", "#cc0000", "#05b2fc")
@@ -54,6 +55,7 @@ combined_channels <- combined_channels %>% filter(publish_date > "2023-08-07")
 
 ```{r}
 combined_channels <- combined_channels %>% filter(total_word_count > 20)
+colnames(combined_channels) <- gsub(" ", "_", colnames(combined_channels))
 ```
 
 
@@ -223,7 +225,7 @@ for (name in search_terms){
 ```
 
 ```{r}
-library(reshape2)
+plot_outlet <- function(keywords) {
 filtered_data <- combined_channels
 id_vars <- setdiff(colnames(filtered_data), search_terms)
 # Melt the data for ggplot (converts wide format to long format)
@@ -240,71 +242,47 @@ data_long <- data_long %>%
   ungroup()
   
 
-  
-
-ggplotly(data_long %>% filter(variable==c("..Israel","..Palestine","..Israeli","..Palestinian")) %>%  ggplot(aes(x = publish_date, y = rel_acccum_freq, color = variable)) +
+data_long %>% filter(variable==keywords) %>%  ggplot(aes(x = publish_date, y = rel_acccum_freq, color = variable)) +
     geom_line()+
         theme(axis.text.x = element_text(angle = 90, hjust = 1))+
-        facet_grid(cols = vars(media)))
-
-
-
-
-data_cor <- cor(use = "complete.obs", method = "pearson", x=data_long$publish_date,y=data_long$rel_acccum_freq)
-
-cor(AJ$..Israeli, BBC$..Israeli)
-```
-
-
-
-```{r}
-plot_outlet <- function(outlet, date_to_plot) {
-  filtered_data <- combined_channels %>% filter(media==outlet)
-  for (name in search_terms){
-    filtered_data <-  add_accum(name, combined_channels)
-    }
-  plot1 <- filtered_data %>%
-    ggplot(aes(x = publish_date, y = acccum_freq, color = media)) +
-    geom_line() +
-    theme_minimal() +
-    theme(panel.grid = element_blank(),
-          axis.text.x = element_blank()) +
-    #scale_y_log10() +
-    scale_color_manual(values = media_colors) +
-    xlab("") +
-    ylab("cumulative frequency") +
-    geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
-    labs(title = paste0("Mentions of ", lemma," in media"))
-
-  plot2 <- filtered_data %>%
-    #Relative accumulated Frequency:
-    #ggplot(aes(x = publish_date, y = ((.data[[lemma]] / total_word_count) * 1e6), color=media, fill = media)) +
-    #accumulated frequency
-    #ggplot(aes(x = publish_date, y = (.data[[lemma]] ), color=media, group=media, fill = media)) +
-    #accumulated frequency in IPM
-    #ggplot(aes(x = publish_date, y = (.data[[lemma]] ), color=media, group=media, fill = media)) +
-    ggplot(aes(x = publish_date, y = rel_acccum_freq, color = media)) +
-    geom_line() +
-    geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
-    scale_color_manual(values = media_colors) +
-    theme_minimal() +
-    theme(panel.grid = element_blank()) +
-    scale_x_date(date_labels = "%B %Y", date_breaks = "1 month")+
-    theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
-    #axis.line.x = element_line(color = "black"),        # Ensure x-axis line is drawn
-    axis.ticks.x = element_line(color = "black")        # Ensure x-axis ticks are shown
-    )+
-    scale_fill_manual(values = media_colors) +
-    xlab("")+ 
-    ylab("relative \n cumulative frequency (ipm)")
-
-  # Align the plots by a common X axis
-  aligned_plots <- plot1 / plot2
-
-  # Display the aligned plots
-  print(aligned_plots)
+        facet_grid(cols = vars(media))
 }
 
 ```
 
+
+plot Regions and Countries:
+
+```{r}
+plot_outlet(c("..Israel","..Gaza","..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+
+#without Israel and Gaza
+plot_outlet(c("..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+```
+
+
+
+plot Operations of War:
+```{r}
+plot_outlet(c("..War","..Ceasefire","..Support","..Pressure","..Negotiations","..Protest","..Suffering","..Release_hostage","..Escalation","..Terror_attack"))
+```
+
+Directly Involved Parties:
+```{r}
+plot_outlet(c("..Hamas","..Israeli_military","..Israeli_Government", "Palestinians.." ,"Israelis..","..Hezbollah","..idf"))
+
+
+
+```
+
+Human Rights
+```{r}
+plot_outlet(c("..Aid","..Humanitarian","..Human_right","..Hospital","..Food","..Water","..Electricity","..Fuel","..Supplies"))
+```
+Actions
+```{r}
+
+print(colnames(combined_channels))
+
+plot_outlet(c("..Attack","..Kill","..Terror","..Displace"))
+```
