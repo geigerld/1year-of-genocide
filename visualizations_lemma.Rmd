@@ -244,8 +244,25 @@ data_long <- data_long %>%
 
 data_long %>% filter(variable==keywords) %>%  ggplot(aes(x = publish_date, y = rel_acccum_freq, color = variable)) +
     geom_line()+
-        theme(axis.text.x = element_text(angle = 90, hjust = 1))+
-        facet_grid(cols = vars(media))
+scale_x_date(
+    date_labels = "%b",           # Format the x-axis labels
+    date_breaks = "1 months",        # Major breaks every 3 months
+    date_minor_breaks = "1 month"    # Minor breaks every 1 month
+  ) +
+  theme_minimal() +
+  theme(
+    panel.border = element_rect(color = "grey95", fill = NA),  # Draw panel borders
+    strip.background = element_rect(fill = "grey95", color = "grey95"),  # Facet label box
+    panel.grid.major = element_blank(),        # Remove major gridlines
+    panel.grid.minor = element_blank(),        # Remove minor gridlines (if unwanted)
+    axis.ticks.length = unit(5, "pt"),         # Adjust tick length
+    axis.text.x = element_text(
+      #angle = 45,
+      hjust = 0.5),  # Rotate x-axis labels
+    axis.ticks.x = element_line(color = "black")  # Show x-axis ticks
+  ) +
+  scale_fill_manual(values = media_colors) +
+  facet_grid(cols = vars(media))
 }
 
 ```
@@ -282,7 +299,11 @@ plot_outlet(c("..Aid","..Humanitarian","..Human_right","..Hospital","..Food","..
 Actions
 ```{r}
 
-print(colnames(combined_channels))
+#print(colnames(combined_channels))
 
-plot_outlet(c("..Attack","..Kill","..Terror","..Displace"))
+plot <- plot_outlet(c("..Attack","..Kill","..Terror","..Displace"))
+
+
+ggsave("plots/Actions.pdf", scale = 0.6, plot,  width = 60,
+  height = 29.7, units="cm")
 ```
