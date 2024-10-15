@@ -9,9 +9,11 @@ rm(list = ls())
 
 library(tidyverse)
 library(plotly)
+library(cowplot)   # For get_legend()
 library(patchwork)
 library(rlang)
 library(reshape2)
+library(scales)
 
 # Color palette
 media_colors <- c("#d69d10", "#000000", "#cc0000", "#05b2fc")
@@ -92,42 +94,39 @@ plot_lemma <- function(lemma, date_to_plot) {
     geom_line() +
     theme_minimal() +
     theme(panel.grid = element_blank(),
-          axis.text.x = element_blank()) +
+          axis.text.x = element_blank(),
+          legend.position = "none"  # Remove legend from plot1
+          ) +
     #scale_y_log10() +
     scale_color_manual(values = media_colors) +
     xlab("") +
     ylab("cumulative frequency") +
+    scale_y_continuous(labels = comma)+
     geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
     labs(title = paste0("Mentions of ", lemma," in media"))
 
   plot2 <- filtered_data %>%
-    #Relative accumulated Frequency:
-    #ggplot(aes(x = publish_date, y = ((.data[[lemma]] / total_word_count) * 1e6), color=media, fill = media)) +
-    #accumulated frequency
-    #ggplot(aes(x = publish_date, y = (.data[[lemma]] ), color=media, group=media, fill = media)) +
-    #accumulated frequency in IPM
-    #ggplot(aes(x = publish_date, y = (.data[[lemma]] ), color=media, group=media, fill = media)) +
     ggplot(aes(x = publish_date, y = rel_acccum_freq, color = media)) +
     geom_line() +
     geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
     scale_color_manual(values = media_colors) +
     theme_minimal() +
-    theme(panel.grid = element_blank()) +
-    scale_x_date(date_labels = "%B %Y", date_breaks = "1 month")+
-    theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
-    #axis.line.x = element_line(color = "black"),        # Ensure x-axis line is drawn
-    axis.ticks.x = element_line(color = "black")        # Ensure x-axis ticks are shown
-    )+
+    theme(panel.grid = element_blank(),
+          axis.text.x = element_text(hjust = 0.5),
+          legend.position = "none"  # Remove legend from plot1
+        ) +
+    scale_x_date(date_labels = "%b", date_breaks = "1 month")+
     scale_fill_manual(values = media_colors) +
+    scale_y_continuous(labels = comma)+
     xlab("")+ 
     ylab("relative \n cumulative frequency (ipm)")
+  
 
-  # Align the plots by a common X axis
-  aligned_plots <- plot1 / plot2
-
-  # Display the aligned plots
-  print(aligned_plots)
+  aligned_plots <- (plot1 / plot2) + 
+  plot_layout(guides = "collect") +  # Collect legends from both plots
+  theme(legend.position = "right")    # Place the legend all the way to the right
+  
+  aligned_plots
 }
 
 ```
@@ -187,13 +186,14 @@ combined_channels_month$publish_month <- as.character(combined_channels_month$pu
     labs(title = paste("Frequency of ", lemma," Mentions Across Various Media Outlets"))
 
   plot2 <- filtered_data %>%
-    ggplot(aes(x = publish_month, y = ((.data[[lemma]] / total_word_count) * 1e6), fill = media)) +
+    ggplot(aes(x = publish_month, y = ((.data[[lemma]] / total_word_count) * 1e6), color = media, group=media)) +
    # geom_vline(xintercept = as.Date(date_to_plot), linetype = "dashed") +
-    geom_col(position="dodge") +
+    #geom_col(position="dodge") +
+    geom_line()+
     theme_minimal() +
     theme(panel.grid = element_blank()) +
     scale_y_continuous(labels = scales::comma) +
-    scale_fill_manual(values = media_colors) +
+    scale_color_manual(values = media_colors) +
     xlab("") +
     ylab("relative frequency \n (ipm)")+
             theme(
@@ -214,9 +214,12 @@ combined_channels_month$publish_month <- as.character(combined_channels_month$pu
 ```{r}
 plot_lemma_month(lemma = "..Terror", 
            date_to_plot = c("2024-04-25", "2024-06-07"))
+plot_lemma_month(lemma = "..genocide", 
+           date_to_plot = c("2024-04-25", "2024-06-07"))
 ```
 ```{r}
 search_terms <- colnames(combined_channels[, 5:(ncol(combined_channels) - 2)])
+print(search_terms)
 for (name in search_terms){
   plot_lemma(lemma = name, 
            date_to_plot = c("2024-04-25", "2024-06-07"))
