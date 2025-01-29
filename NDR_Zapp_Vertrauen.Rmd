@@ -1,0 +1,60 @@
+---
+title: "Genocide cumulative and so on"
+author: "Lorenz Geiger, Camilo Maliqueo"
+date: "2024-09-22"
+output: html_document
+---
+
+```{r clean_start}
+rm(list = ls())
+
+## Load required libraries 
+require(tidyverse)
+require(plotly)
+```
+# Studie von NDR ZAPP
+https://app.23degrees.io/view/maUSbjQT9sqU8BVP-bar-horizontal-bewertung
+https://www.tagesschau.de/inland/gesellschaft/berichterstattung-gaza-100.html
+https://www.ardmediathek.de/video/zapp/vertrauen-verloren-deutsche-medien-und-der-gaza-israel-krieg/ndr/Y3JpZDovL25kci5kZS9wcm9wbGFuXzE5NjM1MDcyOV9nYW56ZVNlbmR1bmc
+
+
+```{r}
+# Creating the data frame
+vertrauen_df <- data.frame(
+  Vertrauen = c("sehr viel", "viel", "wenig", "gar kein", "weiß nicht/keine Angabe"),
+  Prozent = c(7, 33, 33, 15, 12)
+)
+
+# Display the data frame
+print(vertrauen_df)
+```
+Quelle: infratest dimap für ZAPP / Juli 2024
+
+```{r}
+# Creating the data frame
+study_info_df <- data.frame(
+  Variable = c(
+    "Grundgesamtheit", 
+    "Erhebungsmethode", 
+    "Erhebungszeitraum", 
+    "Fallzahl", 
+    "Gewichtung", 
+    "Schwankungsbreite"
+  ),
+  Details = c(
+    "Wahlberechtigte in Deutschland", 
+    "Zufallsbasierte Telefon- (davon 60 Prozent Festnetz, 40 Prozent Mobilfunk) und Online-Befragung", 
+    "01. bis 03. Juli 2024", 
+    "1.294 Befragte (770 Telefoninterviews und 524 Online-Interviews)", 
+    "Nach soziodemographischen Merkmalen und Rückerinnerung Wahlverhalten", 
+    "2 Prozentpunkte bei einem Anteilswert von 10 Prozent, 3 Prozentpunkte bei einem Anteilswert von 50 Prozent"
+  )
+)
+
+# Display the data frame
+print(study_info_df)
+
+```
+
+
+
