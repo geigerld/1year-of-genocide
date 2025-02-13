@@ -274,23 +274,58 @@ scale_x_date(
 plot Regions and Countries:
 
 ```{r}
-plot_outlet(c("..Israel","..Gaza","..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+plot_regions <- plot_outlet(c("..Israel","..Gaza","..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
 
 #without Israel and Gaza
-plot_outlet(c("..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+plot_other_regions <- plot_outlet(c("..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+
+plot_israel_gaza <- plot_outlet(c("..Israel","..Gaza"))
+
+plot_regions
+plot_israel_gaza
+plot_other_regions
+
+
+ggsave("plots/regions.pdf", scale = 0.6, plot_regions,  width = 60,
+  height = 29.7, units="cm")
+ggsave("plots/israel_gaza.pdf", scale = 0.6, plot_israel_gaza,  width = 60,
+  height = 29.7, units="cm")
+ggsave("plots/other_regions.pdf", scale = 0.6, plot_other_regions,  width = 60,
+  height = 29.7, units="cm")
+
 ```
 
 
 
 plot Operations of War:
 ```{r}
-plot_outlet(c("..War","..Ceasefire","..Support","..Pressure","..Negotiations","..Protest","..Suffering","..Release_hostage","..Escalation","..Terror_attack"))
+plot_operations <- plot_outlet(c("..War","..Ceasefire","..Support","..Pressure","..Negotiations","..Protest","..Suffering","..Release_hostage","..Escalation","..Terror_attack"))
+
+plot_operations
+
+plot_ceasefire_support <- plot_outlet(c("..Ceasefire","..Support"))
+plot_ceasefire_support
+
+
+
+ggsave("plots/operations.pdf", scale = 0.6, plot_operations,  width = 60,
+  height = 29.7, units="cm")
+
+ggsave("plots/ceasefire_support.pdf", scale = 0.6, plot_ceasefire_support,  width = 60,
+  height = 29.7, units="cm")
+
+
 ```
 
 Directly Involved Parties:
 ```{r}
-plot_outlet(c("..Hamas","..Israeli_military","..Israeli_Government", "Palestinians.." ,"Israelis..","..Hezbollah","..idf"))
+plot_parties <- plot_outlet(c("..Hamas","..Israeli_military","..Israeli_Government", "Palestinians.." ,"Israelis..","..Hezbollah","..idf"))
 
+plot_parties
+
+
+ggsave("plots/parties.pdf", scale = 0.6, plot_parties,  width = 60,
+  height = 29.7, units="cm")
 
 
 ```
@@ -304,9 +339,11 @@ Actions
 
 #print(colnames(combined_channels))
 
-plot <- plot_outlet(c("..Attack","..Kill","..Terror","..Displace"))
+actions <- plot_outlet(c("..Attack","..Kill","..Terror","..Displace"))
+
+actions
 
 
-ggsave("plots/Actions.pdf", scale = 0.6, plot,  width = 60,
+ggsave("plots/actions.pdf", scale = 0.6, actions,  width = 60,
   height = 29.7, units="cm")
 ```
