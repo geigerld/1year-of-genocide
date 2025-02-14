@@ -35,6 +35,14 @@ process_frequency_data <- function(file_path, media_name) {
     mutate(publish_month = format(publish_date, "%Y-%m")) %>%
     mutate(media = media_name) %>%
     arrange(publish_date, .by_group = TRUE)
+  
+  ## combine cease fire and ceasefire and similar cases:
+  df$..Ceasefire <- df$..Ceasefire+df$`..Cease\ fire`
+  rm
+  df$`..West\ bank` <- df$..Westbank+df$`..West\ bank`
+
+  # Remove column "b"
+  df <- df %>% select(-`..Cease\ fire`,-..Westbank)
 }
 
 # Apply the function with the updated folder path
@@ -274,10 +282,10 @@ scale_x_date(
 plot Regions and Countries:
 
 ```{r}
-plot_regions <- plot_outlet(c("..Israel","..Gaza","..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+plot_regions <- plot_outlet(c("..Israel","..Gaza","..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..West_bank","..United_states","..United_Nations","..UN"))
 
 #without Israel and Gaza
-plot_other_regions <- plot_outlet(c("..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..Westbank","..West_bank","..United_states","..United_Nations","..UN"))
+plot_other_regions <- plot_outlet(c("..Palestine","..Iran","..Rafa","..Lebanon","..Egypt","..West_bank","..United_states","..United_Nations","..UN"))
 
 plot_israel_gaza <- plot_outlet(c("..Israel","..Gaza"))
 
